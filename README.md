@@ -11,7 +11,9 @@ gehostet über GitHub Pages unter <https://crygreg.github.io/>.
 - `style.css` – gemeinsames Stylesheet für alle Seiten
 - `i18n.js` – Übersetzungen (DE/EN/PL/RU), Sprachwahl und mobile Navigation
 - `images/` – Logos, Hintergrundbilder, Favicon
-- `fonts/` – Schriftart „Anniversary"
+- `fonts/` – Schriftarten (Cormorant für Überschriften, Lora für Fließtext,
+  jeweils mit Latin-, Latin-Ext- und Cyrillic-Subsets für DE/EN/PL/RU)
+- `fonts.css` – `@font-face`-Regeln mit `unicode-range`, lädt nur benötigte Subsets
 
 ## Sprachen
 
