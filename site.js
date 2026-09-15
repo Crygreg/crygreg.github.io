@@ -822,13 +822,30 @@
     function fitMedia() {
       var vw = window.innerWidth;
       var h = Math.max(160, window.innerHeight - 48 - (cap.offsetHeight || 0) - 12);
+      var stageW = vw * 0.96;
       img.style.maxHeight = h + 'px';
-      if (vid.classList.contains('portrait')) {
-        vid.style.width = Math.min(vw * 0.96, h * 9 / 16) + 'px';
+      /* Explizite Zielgroesse statt width:auto: Bilder duerfen ueber
+         ihre native Aufloesung hinaus auf die Buehne hochskaliert
+         werden – sonst bleiben niedriger aufgeloeste Bilder auf
+         grossen Monitoren sichtbar kleiner als hochaufloesende. */
+      var ar = img.naturalWidth && img.naturalHeight
+        ? img.naturalWidth / img.naturalHeight : 0;
+      if (ar > 0) {
+        var w = Math.min(stageW, h * ar);
+        img.style.width = w + 'px';
+        img.style.height = (w / ar) + 'px';
       } else {
-        vid.style.width = Math.min(vw * 0.96, h * 16 / 9) + 'px';
+        img.style.width = '';
+        img.style.height = '';
+      }
+      if (vid.classList.contains('portrait')) {
+        vid.style.width = Math.min(stageW, h * 9 / 16) + 'px';
+      } else {
+        vid.style.width = Math.min(stageW, h * 16 / 9) + 'px';
       }
     }
+    /* naturalWidth ist vor dem Laden 0 -> nach dem Laden neu fitten. */
+    img.addEventListener('load', fitMedia);
     function showVideo(a) {
       resetZoom();
       box.classList.add('video');
