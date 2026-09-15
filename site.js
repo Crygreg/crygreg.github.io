@@ -708,9 +708,9 @@
       var h = Math.max(160, window.innerHeight - 48 - (cap.offsetHeight || 0) - 12);
       img.style.maxHeight = h + 'px';
       if (vid.classList.contains('portrait')) {
-        vid.style.width = Math.min(vw * 0.92, h * 9 / 16) + 'px';
+        vid.style.width = Math.min(vw * 0.96, h * 9 / 16) + 'px';
       } else {
-        vid.style.width = Math.min(vw * 0.92, h * 16 / 9) + 'px';
+        vid.style.width = Math.min(vw * 0.96, h * 16 / 9) + 'px';
       }
     }
     function showVideo(a) {
