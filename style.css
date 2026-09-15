@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap');
+@font-face {
+    font-family: "Anniversary";
+    src: url("fonts/anniversary.tff") format("tff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
   --bg: #070707;
@@ -19,7 +25,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Libre Baskerville', Georgia, serif;
+  font-family: 'Anniversary', Georgia, serif;
 }
 
 a { color: inherit; text-decoration: none; }
