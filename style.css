@@ -376,11 +376,20 @@ h1 span {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  min-height: 290px;
 }
 
 .card-logo img {
   max-width: 200px;
   height: auto;
+}
+
+.card-description {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: center;
+  margin: 15px 0;
 }
 
 .game-number {
@@ -408,22 +417,6 @@ h1 span {
   letter-spacing: 1px;
 }
 
-.card-content p:not(.game-number) {
-  color: var(--muted);
-
-  font-size: 13px;
-
-  line-height: 1.8;
-
-  min-height: 92px;
-}
-
-.secret .card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 290px;
-}
 
 
 /* =========================================================
