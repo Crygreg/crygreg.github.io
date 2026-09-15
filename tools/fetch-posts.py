@@ -41,6 +41,15 @@ YT_RE = re.compile(
 IMG_EXT = (".png", ".jpg", ".jpeg", ".webp", ".gif")
 DISCORD_EMOJI = re.compile(r"<a?:[A-Za-z0-9_]+:\d+>")   # <:name:id>
 TEXT_EMOJI = re.compile(r":[A-Za-z0-9_]+:")             # :milten: etc.
+MENTION = re.compile(r"<@!?\d+>")
+
+# Bekannte User-IDs -> Anzeigename (synchron mit fetch-avatars.py)
+USER_NAMES = {
+    "319521590180184085": "Crygreg",
+    "1120503192183119923": "Alistair Afton",
+    "810877335300472852": "Ben",
+    "413753477110431746": "Midgard",
+}
 
 
 def get(url, token=None):
@@ -73,9 +82,16 @@ def fetch_messages(channel_id, token, after_id=None, limit=100):
 
 
 def clean_text(content):
-    """Discord-Markup entfernen: Custom-Emoji, :shortcode:, Mentions-Syntax."""
-    text = DISCORD_EMOJI.sub("", content)
+    """Discord-Markup entfernen: Custom-Emoji, :shortcode:, Mentions."""
+    def _mention(mo):
+        uid = mo.group(0).strip("<@!>")
+        return "@" + USER_NAMES.get(uid, "user-" + uid)
+
+    text = MENTION.sub(_mention, content)
+    text = DISCORD_EMOJI.sub("", text)
     text = TEXT_EMOJI.sub("", text)
+    # Crygreg trennt Sprachversionen oft mit ==== ab – als Absatzgrenze werten
+    text = re.sub(r"\n\s*={5,}\s*\n", "\n\n---\n\n", text)
     # Zeilen zu Absaetzen buendeln (doppelte Zeilenumbrueche = neuer Absatz)
     paras = [p.strip().replace("\n", "<br>") for p in
              re.split(r"\n\s*\n", text) if p.strip()]
@@ -166,7 +182,7 @@ def main():
             m["id"], m.get("type"), m["author"]["username"],
             len(content), len(atts), len(m.get("embeds") or [])))
         if os.environ.get("DEBUG_DUMP"):
-            print("    >>> " + content[:300].replace("\n", " | "))
+            print("    >>> " + content.replace("\n", " | "))
         yt = [m2.group(1) for m2 in YT_RE.finditer(content)]
         # interessant = Text, Bilder oder Links; leere System-Posts raus
         if not content and not atts:
