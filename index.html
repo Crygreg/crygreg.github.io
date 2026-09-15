@@ -96,15 +96,9 @@
 
           <div class="card-content">
 
-            <p class="game-number"></p>
-
-            <h3>Gothic I</h3>
-
-            <h4>Anniversary Edition</h4>
-
-            <p>
-              Willkommen in der Kolonie, Baby!
-            </p>
+            <div class="card-logo">
+              <img src="images/G1AE-logo.png" alt="Gothic I Anniversary Edition">
+            </div>
 
             <a class="button" href="gothic1.html">
               MEHR ERFAHREN
@@ -123,15 +117,9 @@
 
           <div class="card-content">
 
-            <p class="game-number"></p>
-
-            <h3>Gothic II</h3>
-
-            <h4>Anniversary Edition</h4>
-
-            <p>
-              Ein einzelner Gefangener hatte das Schicksal von Hunderten geändert ...
-            </p>
+            <div class="card-logo">
+              <img src="images/G2AE-logo.png" alt="Gothic II Anniversary Edition">
+            </div>
 
             <a class="button" href="gothic2.html">
               MEHR ERFAHREN
@@ -217,8 +205,6 @@
           'aboutAnniversary': 'ÜBER DIE ANNIVERSARY EDITION',
           'goal': 'Was ist das Ziel?',
           'viewProjects': 'PROJEKTE ANSEHEN',
-          'gothic1Desc': 'Willkommen in der Kolonie, Baby!',
-          'gothic2Desc': 'Ein einzelner Gefangener hatte das Schicksal von Hunderten geändert ...',
           'secretQuestion': 'Was haben wir denn da?',
           'footer1': 'ANNIVERSARY EDITION',
           'footer2': 'Nichtkommerzielle Fanprojekte'
@@ -233,8 +219,6 @@
           'aboutAnniversary': 'ABOUT THE ANNIVERSARY EDITION',
           'goal': 'What is the goal?',
           'viewProjects': 'VIEW PROJECTS',
-          'gothic1Desc': 'Welcome to the colony, baby!',
-          'gothic2Desc': 'A single prisoner changed the fate of hundreds...',
           'secretQuestion': 'What do we have here?',
           'footer1': 'ANNIVERSARY EDITION',
           'footer2': 'Non-commercial fan projects'
@@ -249,8 +233,6 @@
           'aboutAnniversary': 'O EDYCJI ROCZNICY',
           'goal': 'Jaki jest cel?',
           'viewProjects': 'ZOBACZ PROJEKTY',
-          'gothic1Desc': 'Witaj w kolonii, dziecko!',
-          'gothic2Desc': 'Pojedynczy więzień zmienił los setek...',
           'secretQuestion': 'Co mamy tutaj?',
           'footer1': 'EDYCJA ROCZNICY',
           'footer2': 'Niekomercyjne projekty fanowskie'
@@ -265,8 +247,6 @@
           'aboutAnniversary': 'О ЮБИЛЕЙНОМ ИЗДАНИИ',
           'goal': 'Какова цель?',
           'viewProjects': 'СМОТРЕТЬ ПРОЕКТЫ',
-          'gothic1Desc': 'Добро пожаловать в колонию, малыш!',
-          'gothic2Desc': 'Один заключенный изменил судьбу сотен...',
           'secretQuestion': 'Что у нас тут?',
           'footer1': 'ЮБИЛЕЙНОЕ ИЗДАНИЕ',
           'footer2': 'Некоммерческие фанатские проекты'
@@ -290,8 +270,6 @@
         document.querySelector('.scroll-button').childNodes[0].textContent = t.viewProjects + ' ';
 
         // Card descriptions
-        document.querySelector('.gothic1 .card-content p:not(.game-number)').textContent = t.gothic1Desc;
-        document.querySelector('.gothic2 .card-content p:not(.game-number)').textContent = t.gothic2Desc;
         document.querySelector('.secret .question').textContent = t.secretQuestion;
 
         // Footer

@@ -372,6 +372,15 @@ h1 span {
 
 .card-content {
   padding: 28px 30px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-logo img {
+  max-width: 200px;
+  height: auto;
 }
 
 .game-number {
