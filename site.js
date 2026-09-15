@@ -329,6 +329,25 @@
     });
   }
 
+  function initScrollSpy() {
+    var links = document.querySelectorAll('.nav-links a[href^="#"]');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && map[entry.target.id]) {
+          links.forEach(function (a) { a.removeAttribute('aria-current'); });
+          map[entry.target.id].setAttribute('aria-current', 'true');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(map).forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s) spy.observe(s);
+    });
+  }
+
   function initDownloads() {
     document.querySelectorAll('.button.download[aria-disabled="true"]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
@@ -350,5 +369,6 @@
     initNav();
     initDownloads();
     initReveal();
+    initScrollSpy();
   });
 })();

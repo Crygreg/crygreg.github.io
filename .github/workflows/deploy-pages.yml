@@ -34,6 +34,21 @@ jobs:
           V="${GITHUB_SHA:0:8}"
           sed -i -E "s/\.(css|js|png|jpg|woff2)([\"')])/.\1?v=$V\2/g" ./_site/*.html ./_site/style.css ./_site/fonts.css
           sed -i "s|</head>|  <meta name=\"build\" content=\"$GITHUB_SHA\">\n</head>|" ./_site/*.html
+          sed -i "s|</loc>|</loc><lastmod>$(date -u +%Y-%m-%d)</lastmod>|g" ./_site/sitemap.xml
+      - name: Verify local asset references
+        run: |
+          cd _site
+          refs=$( { grep -ohE '(src|href)="[^"#]+"' ./*.html | sed -E 's/^[a-z]+="//; s/"$//'; \
+                    grep -ohE 'url\("?[^")]+"?\)' ./*.css | sed -E 's/^url\("?//; s/"?\)$//'; } \
+            | sed -E 's/[?#].*$//' | grep -vE '^https?://' | grep -v '^$' | sort -u )
+          status=0
+          for f in $refs; do
+            if [ ! -f "$f" ]; then
+              echo "::error::Missing referenced asset: $f"
+              status=1
+            fi
+          done
+          exit $status
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

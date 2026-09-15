@@ -1008,12 +1008,18 @@ footer {
   animation: sink .8s ease both;
 }
 
-.project-grid [data-reveal]:nth-child(2).in {
+.project-grid [data-reveal]:nth-child(2).in,
+.team-grid [data-reveal]:nth-child(2).in {
   animation-delay: .12s;
 }
 
-.project-grid [data-reveal]:nth-child(3).in {
+.project-grid [data-reveal]:nth-child(3).in,
+.team-grid [data-reveal]:nth-child(3).in {
   animation-delay: .24s;
+}
+
+.team-grid [data-reveal]:nth-child(4).in {
+  animation-delay: .36s;
 }
 
 @media (prefers-reduced-motion: reduce) {
