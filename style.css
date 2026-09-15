@@ -128,6 +128,22 @@ a {
 
   font-size: 12px;
   letter-spacing: 2px;
+  align-items: center;
+}
+
+.lang-selector select {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  padding: 5px 10px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: "Anniversary", Georgia, serif;
+}
+
+.lang-selector select:hover {
+  border-color: var(--accent);
 }
 
 .nav-links a {
