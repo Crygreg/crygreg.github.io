@@ -46,9 +46,11 @@
 
     <div class="hero-content">
 
+      <div class="hero-logo">
+        <img src="images/gothic-logo.jpg" alt="GOTHIC Logo">
+      </div>
 
       <h1>
-        GOTHIC<br>
         <span>REVAMPED</span>
       </h1>
 
@@ -182,13 +184,6 @@
 
         <h2>Was ist das Ziel?</h2>
 
-        <p>
-          Die Anniversary Edition ist eine Reihe nichtkommerzieller Fanprojekte,
-          die die Gothic-Welt mit neuen Quests, Charakteren, Geschichten und Ideen
-          erweitern möchte – ohne den ursprünglichen Charakter der Spiele aus den
-          Augen zu verlieren.
-        </p>
-
       </div>
 
     </section>
@@ -221,8 +216,12 @@
           'moreInfo': 'MEHR ERFAHREN',
           'aboutAnniversary': 'ÜBER DIE ANNIVERSARY EDITION',
           'goal': 'Was ist das Ziel?',
-          'description': 'Die Anniversary Edition ist eine Reihe nichtkommerzieller Fanprojekte, die die Gothic-Welt mit neuen Quests, Charakteren, Geschichten und Ideen erweitern möchte – ohne den ursprünglichen Charakter der Spiele aus den Augen zu verlieren.',
-          'viewProjects': 'PROJEKTE ANSEHEN'
+          'viewProjects': 'PROJEKTE ANSEHEN',
+          'gothic1Desc': 'Willkommen in der Kolonie, Baby!',
+          'gothic2Desc': 'Ein einzelner Gefangener hatte das Schicksal von Hunderten geändert ...',
+          'secretQuestion': 'Was haben wir denn da?',
+          'footer1': 'ANNIVERSARY EDITION',
+          'footer2': 'Nichtkommerzielle Fanprojekte'
         },
         'en': {
           'projects': 'Projects',
@@ -233,8 +232,12 @@
           'moreInfo': 'LEARN MORE',
           'aboutAnniversary': 'ABOUT THE ANNIVERSARY EDITION',
           'goal': 'What is the goal?',
-          'description': 'The Anniversary Edition is a series of non-commercial fan projects that aims to expand the Gothic world with new quests, characters, stories and ideas – without losing sight of the original character of the games.',
-          'viewProjects': 'VIEW PROJECTS'
+          'viewProjects': 'VIEW PROJECTS',
+          'gothic1Desc': 'Welcome to the colony, baby!',
+          'gothic2Desc': 'A single prisoner changed the fate of hundreds...',
+          'secretQuestion': 'What do we have here?',
+          'footer1': 'ANNIVERSARY EDITION',
+          'footer2': 'Non-commercial fan projects'
         },
         'pl': {
           'projects': 'Projekty',
@@ -245,8 +248,12 @@
           'moreInfo': 'DOWIEDZ SIĘ WIĘCEJ',
           'aboutAnniversary': 'O EDYCJI ROCZNICY',
           'goal': 'Jaki jest cel?',
-          'description': 'Edycja Rocznicy to seria niekomercyjnych projektów fanowskich, które mają na celu rozszerzenie świata Gothic o nowe zadania, postacie, historie i pomysły – nie tracąc z oczu oryginalnego charakteru gier.',
-          'viewProjects': 'ZOBACZ PROJEKTY'
+          'viewProjects': 'ZOBACZ PROJEKTY',
+          'gothic1Desc': 'Witaj w kolonii, dziecko!',
+          'gothic2Desc': 'Pojedynczy więzień zmienił los setek...',
+          'secretQuestion': 'Co mamy tutaj?',
+          'footer1': 'EDYCJA ROCZNICY',
+          'footer2': 'Niekomercyjne projekty fanowskie'
         },
         'ru': {
           'projects': 'Проекты',
@@ -257,8 +264,12 @@
           'moreInfo': 'УЗНАТЬ БОЛЬШЕ',
           'aboutAnniversary': 'О ЮБИЛЕЙНОМ ИЗДАНИИ',
           'goal': 'Какова цель?',
-          'description': 'Юбилейное издание — это серия некоммерческих фанатских проектов, направленных на расширение мира Gothic новыми квестами, персонажами, историями и идеями, не теряя при этом оригинального характера игр.',
-          'viewProjects': 'СМОТРЕТЬ ПРОЕКТЫ'
+          'viewProjects': 'СМОТРЕТЬ ПРОЕКТЫ',
+          'gothic1Desc': 'Добро пожаловать в колонию, малыш!',
+          'gothic2Desc': 'Один заключенный изменил судьбу сотен...',
+          'secretQuestion': 'Что у нас тут?',
+          'footer1': 'ЮБИЛЕЙНОЕ ИЗДАНИЕ',
+          'footer2': 'Некоммерческие фанатские проекты'
         }
       };
 
@@ -276,8 +287,16 @@
         });
         document.querySelector('.about-section .eyebrow').textContent = t.aboutAnniversary;
         document.querySelector('.about-section h2').textContent = t.goal;
-        document.querySelector('.about-section p').textContent = t.description;
         document.querySelector('.scroll-button').childNodes[0].textContent = t.viewProjects + ' ';
+
+        // Card descriptions
+        document.querySelector('.gothic1 .card-content p:not(.game-number)').textContent = t.gothic1Desc;
+        document.querySelector('.gothic2 .card-content p:not(.game-number)').textContent = t.gothic2Desc;
+        document.querySelector('.secret .question').textContent = t.secretQuestion;
+
+        // Footer
+        document.querySelector('footer div:first-child').textContent = t.footer1;
+        document.querySelector('footer div:last-child').textContent = t.footer2;
       }
     }
   </script>

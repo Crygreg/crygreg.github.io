@@ -170,6 +170,15 @@ a {
   padding: 15vh 6vw 12vh;
 }
 
+.hero-logo {
+  margin-bottom: 20px;
+}
+
+.hero-logo img {
+  max-width: 400px;
+  height: auto;
+}
+
 .eyebrow {
   color: var(--accent-light);
 
