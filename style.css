@@ -337,6 +337,7 @@ h1 span {
 /* Geheimprojekt */
 .secret .card-image {
   background-image: url("images/secret-wallpaper.jpg");
+  filter: blur(8px) saturate(.75);
 }
 
 
