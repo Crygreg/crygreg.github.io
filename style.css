@@ -1024,6 +1024,27 @@ footer {
   line-height: 1.5;
 }
 
+.media-gallery a {
+  display: block;
+
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+}
+
+.media-gallery img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  transition: .4s;
+}
+
+.media-gallery a:hover img {
+  transform: scale(1.03);
+}
+
 .download {
   margin-top: 35px;
 }

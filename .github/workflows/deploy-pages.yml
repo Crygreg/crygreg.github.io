@@ -29,6 +29,8 @@ jobs:
           mkdir _site
           cp ./*.html ./style.css ./fonts.css ./site.js ./sitemap.xml ./robots.txt _site/
           cp -r ./images ./fonts _site/
+          # Roh-Screenshots bleiben im Repo als Archiv, aber nicht im Deploy
+          rm -f _site/images/G2AE/*.png
       - name: Cache-bust assets with commit SHA
         run: |
           V="${GITHUB_SHA:0:8}"
