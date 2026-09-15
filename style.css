@@ -1071,12 +1071,12 @@ details.media-entry {
 }
 
 .media-post-body {
-  padding: 0 20px 18px;
+  padding: 6px 26px 24px;
 
   color: var(--muted);
 
-  font-size: 14px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.85;
 }
 
 .media-post-body p {
@@ -1132,14 +1132,40 @@ details.media-entry {
   letter-spacing: 1px;
 }
 
-.media-gallery-caption {
-  color: var(--accent-light);
+.media-subdetails > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
+  margin: 22px 0 14px;
+
+  cursor: pointer;
+  list-style: none;
+
+  color: var(--accent-light);
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
 
-  margin: 18px 0 12px;
+  transition: color .3s;
+}
+
+.media-subdetails > summary:hover {
+  color: #fff;
+}
+
+.media-subdetails > summary::-webkit-details-marker {
+  display: none;
+}
+
+.media-subdetails > summary .arrow {
+  color: var(--accent);
+
+  transition: transform .3s;
+}
+
+.media-subdetails[open] > summary .arrow {
+  transform: rotate(180deg);
 }
 
 .download {
