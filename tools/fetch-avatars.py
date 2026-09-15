@@ -70,9 +70,21 @@ def main():
 
     manifest = {}
     changed = False
+    failures = 0
 
     for uid in USER_IDS:
-        user = json.loads(get("{}/users/{}".format(API, uid), token))
+        old = old_manifest.get(uid) or {}
+        if isinstance(old, str):  # Legacy-Format: {"id": "datei.png"}
+            old = {"file": old}
+        try:
+            user = json.loads(get("{}/users/{}".format(API, uid), token))
+        except Exception as e:
+            # Einzelner User fehlgeschlagen -> alten Stand beibehalten
+            print("{}: API error ({}), keeping previous avatar".format(uid, e))
+            failures += 1
+            if old.get("file") and os.path.exists(os.path.join(OUT, old["file"])):
+                manifest[uid] = old
+            continue
         avatar = user.get("avatar")
         if not avatar:
             print("{}: no custom avatar, skipping".format(uid))
@@ -80,9 +92,6 @@ def main():
         ext = "gif" if avatar.startswith("a_") else "webp"
         fname = "{}.{}".format(uid, ext)
         path = os.path.join(OUT, fname)
-        old = old_manifest.get(uid) or {}
-        if isinstance(old, str):  # Legacy-Format: {"id": "datei.png"}
-            old = {"file": old}
         # Avatar-Hash unveraendert und Datei vorhanden -> Download ueberspringen
         if old.get("avatar") == avatar and old.get("file") == fname \
                 and os.path.exists(path):
@@ -109,6 +118,12 @@ def main():
             os.remove(os.path.join(OUT, fname))
             changed = True
             print("removed stale {}".format(fname))
+
+    # Alle User fehlgeschlagen -> Lauf als fehlerhaft markieren,
+    # damit ein toter Token/Discord-Ausfall sichtbar wird statt
+    # still veraltete Avatare zu servieren
+    if failures == len(USER_IDS):
+        sys.exit("All {} user lookups failed".format(failures))
 
     mdata = json.dumps(manifest, indent=2, sort_keys=True).encode()
     if write_if_changed(mpath, mdata):
