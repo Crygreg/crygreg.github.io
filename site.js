@@ -567,7 +567,8 @@
       .then(function (manifest) {
         els.forEach(function (el) {
           var id = el.getAttribute('data-discord-id');
-          var file = manifest && manifest[id];
+          var entry = manifest && manifest[id];
+          var file = entry && (entry.file || entry);
           if (file) addImg(el, 'images/avatars/' + file);
           else lanyard(el, id);
         });

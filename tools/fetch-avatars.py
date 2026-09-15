@@ -51,6 +51,13 @@ def main():
         sys.exit("DISCORD_BOT_TOKEN is not set")
 
     os.makedirs(OUT, exist_ok=True)
+
+    mpath = os.path.join(OUT, "manifest.json")
+    old_manifest = {}
+    if os.path.exists(mpath):
+        with open(mpath, "r", encoding="utf-8") as f:
+            old_manifest = json.load(f)
+
     manifest = {}
     changed = False
 
@@ -62,26 +69,36 @@ def main():
             continue
         ext = "gif" if avatar.startswith("a_") else "png"
         fname = "{}.{}".format(uid, ext)
-        data = get("{}/avatars/{}/{}.{}?size=256".format(CDN, uid, avatar, ext))
-        if write_if_changed(os.path.join(OUT, fname), data):
-            changed = True
-            print("{}: updated {} ({} bytes)".format(uid, fname, len(data)))
+        path = os.path.join(OUT, fname)
+        old = old_manifest.get(uid) or {}
+        if isinstance(old, str):  # Legacy-Format: {"id": "datei.png"}
+            old = {"file": old}
+        # Avatar-Hash unveraendert und Datei vorhanden -> Download ueberspringen
+        if old.get("avatar") == avatar and old.get("file") == fname \
+                and os.path.exists(path):
+            print("{}: unchanged (hash match)".format(uid))
         else:
-            print("{}: unchanged".format(uid))
-        manifest[uid] = fname
+            data = get("{}/avatars/{}/{}.{}?size=256".format(CDN, uid, avatar, ext))
+            if write_if_changed(path, data):
+                changed = True
+                print("{}: updated {} ({} bytes)".format(uid, fname, len(data)))
+            else:
+                print("{}: unchanged".format(uid))
+        manifest[uid] = {"file": fname, "avatar": avatar}
 
     # Dateien entfernen, die nicht mehr im Manifest stehen (z. B. gif -> png)
     for fname in os.listdir(OUT):
         if fname == "manifest.json":
             continue
         uid = fname.split(".")[0]
-        if manifest.get(uid) != fname:
+        entry = manifest.get(uid) or {}
+        if entry.get("file") != fname:
             os.remove(os.path.join(OUT, fname))
             changed = True
             print("removed stale {}".format(fname))
 
     mdata = json.dumps(manifest, indent=2, sort_keys=True).encode()
-    if write_if_changed(os.path.join(OUT, "manifest.json"), mdata):
+    if write_if_changed(mpath, mdata):
         changed = True
 
     print("changed:", changed)
