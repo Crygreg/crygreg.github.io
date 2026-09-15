@@ -40,7 +40,9 @@ standardmäßig eingeklappt. Header: Datum, Typ · Autor, Titel. Inhalt je nach 
   das Video in der Lightbox; ohne JS geht der Link direkt zu YouTube.
   `.media-video-short` = Hochformat-Karte, `.media-videolist` = 3-spaltiges Grid
   für mehrere Videos in einem Eintrag. Fällt ein lokaler Thumb aus, probiert
-  `site.js` automatisch die i.ytimg.com-Tiers durch.
+  `site.js` automatisch die i.ytimg.com-Tiers durch. Neue Thumbs holt
+  `python tools/fetch-yt-thumbs.py --all` (liest die verlinkten IDs aus dem
+  HTML und lädt den besten verfügbaren Tier).
 - **Dev-Post + Galerie:** Text über `data-i18n-html`, danach
   `.media-gallery` mit Links auf `images/G2AE/full/*.webp` und Thumbs aus
   `images/G2AE/thumbs|mid/*.webp`. Einzelbilder als `<a class="media-post-image">`.
