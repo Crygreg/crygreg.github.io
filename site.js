@@ -618,8 +618,8 @@
       img.classList.toggle('zoomed', zoom.s > 1);
     }
     function resetZoom() { zoom.s = 1; zoom.tx = 0; zoom.ty = 0; applyZoom(); }
-    function zoomAt(cx, cy, factor) {
-      var s2 = Math.min(8, Math.max(1, zoom.s * factor));
+    function zoomTo(cx, cy, s2) {
+      s2 = Math.min(8, Math.max(1, s2));
       if (s2 === zoom.s) return;
       var r = img.getBoundingClientRect();
       var dx = cx - (r.left + r.width / 2 - zoom.tx);
@@ -631,20 +631,27 @@
       if (s2 === 1) { zoom.tx = 0; zoom.ty = 0; }
       applyZoom();
     }
+    function zoomAt(cx, cy, factor) { zoomTo(cx, cy, zoom.s * factor); }
     img.addEventListener('wheel', function (e) {
       e.preventDefault();
       zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.3 : 1 / 1.3);
     }, { passive: false });
-    img.addEventListener('dblclick', function (e) {
-      if (zoom.s > 1) resetZoom(); else zoomAt(e.clientX, e.clientY, 2.5);
-    });
-    var pts = {}, downs = {}, dragDist = 0, dragMid = null;
+    /* Einzelklick zoomt auf die Stelle: Ziel = native Pixel (1:1), bei
+       bereits gezoomtem Bild zurueck auf 1. */
+    function clickZoom(cx, cy) {
+      if (zoom.s > 1) { resetZoom(); return; }
+      var w0 = img.getBoundingClientRect().width;
+      var s2 = img.naturalWidth ? img.naturalWidth / w0 : 2.5;
+      zoomTo(cx, cy, Math.min(Math.max(s2, 1.15), 4));
+    }
+    var pts = {}, downs = {}, dragDist = 0, dragMid = null, multi = false;
     img.addEventListener('pointerdown', function (e) {
       pts[e.pointerId] = { x: e.clientX, y: e.clientY };
       downs[e.pointerId] = { x: e.clientX, y: e.clientY };
       img.setPointerCapture(e.pointerId);
       img.classList.add('dragging');
       var keys = Object.keys(pts);
+      if (keys.length > 1) multi = true;
       if (keys.length === 2) {
         var p0 = pts[keys[0]], p1 = pts[keys[1]];
         dragDist = Math.hypot(p0.x - p1.x, p0.y - p1.y);
@@ -684,16 +691,19 @@
       delete pts[e.pointerId];
       delete downs[e.pointerId];
       dragDist = 0;
-      /* Wischen ohne Zoom blättert (Touch & Maus-Drag). */
-      if (down && zoom.s === 1 && Object.keys(pts).length === 0) {
+      if (down && Object.keys(pts).length === 0) {
         var dx = e.clientX - down.x, dy = e.clientY - down.y;
-        if (Math.abs(dx) >= 70 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        if (!multi && Math.abs(dx) < 8 && Math.abs(dy) < 8) {
+          clickZoom(e.clientX, e.clientY);
+        } else if (zoom.s === 1 && Math.abs(dx) >= 70 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          /* Wischen ohne Zoom blättert (Touch & Maus-Drag). */
           nav(dx > 0 ? -1 : 1);
         }
       }
       if (!Object.keys(pts).length) {
         img.classList.remove('dragging');
         dragMid = null;
+        multi = false;
       }
     }
     img.addEventListener('pointerup', endPointer);
