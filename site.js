@@ -540,6 +540,27 @@
     });
   }
 
+  /* YouTube-Thumbnails: je nach Video/CDN fehlen einzelne Tiers oder es
+     kommt ein 120x90-Platzhalter mit Status 200 (onerror feuert nicht).
+     Deshalb Kette runtergehen, bis ein echtes Bild kommt. */
+  function initVideoThumbs() {
+    document.querySelectorAll('.media-video img').forEach(function (im) {
+      var m = /vi\/([A-Za-z0-9_-]+)\//.exec(im.getAttribute('src') || '');
+      if (!m) return;
+      var base = 'https://i.ytimg.com/vi/' + m[1] + '/';
+      var tiers = im.closest('.media-video-short')
+        ? ['oar2.jpg', 'maxresdefault.jpg', 'sddefault.jpg', 'hqdefault.jpg', 'mqdefault.jpg']
+        : ['maxresdefault.jpg', 'sddefault.jpg', 'hqdefault.jpg', 'mqdefault.jpg'];
+      var i = tiers.indexOf(im.getAttribute('src').split('/').pop());
+      if (i < 0) i = 0;
+      function next() { if (i + 1 < tiers.length) { i++; im.src = base + tiers[i]; } }
+      function check() { if (im.naturalWidth && im.naturalWidth <= 120) next(); }
+      im.addEventListener('error', next);
+      im.addEventListener('load', check);
+      if (im.complete) check();
+    });
+  }
+
   /* Lightbox fuer Bild-Links (Galerie + Artwork im Post): grosses Vorschaubild
      direkt auf der Seite. Delegierter Click-Handler, damit per data-i18n-html
      neu gesetzte Post-Links ohne Re-Bind funktionieren.
@@ -760,6 +781,7 @@
       });
     }
     initLightbox();
+    initVideoThumbs();
     initAvatars();
     applyLanguage(getInitialLang());
     initNav();
