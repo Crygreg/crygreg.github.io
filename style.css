@@ -1089,6 +1089,8 @@ details.media-entry {
 
 .support-links {
   display: flex;
+
+  margin-top: 25px;
   gap: 15px;
   flex-wrap: wrap;
 }
