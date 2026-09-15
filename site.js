@@ -72,6 +72,7 @@
       download_note: 'Hier kann später der finale Download, ein GitHub-Release oder ein externer Download-Link eingetragen werden.',
       download_btn: 'DOWNLOAD',
       download_soon: 'Der Download ist noch nicht verfügbar.',
+      lb_label: 'Bildvorschau',
       lb_close: 'Schließen',
       lb_prev: 'Vorheriges Bild',
       lb_next: 'Nächstes Bild',
@@ -154,6 +155,7 @@
       download_note: 'The final download, a GitHub release or an external download link can be added here later.',
       download_btn: 'DOWNLOAD',
       download_soon: 'The download is not available yet.',
+      lb_label: 'Image preview',
       lb_close: 'Close',
       lb_prev: 'Previous image',
       lb_next: 'Next image',
@@ -236,6 +238,7 @@
       download_note: 'Ostateczny link do pobrania, wydanie na GitHubie lub zewnętrzny link można dodać tutaj później.',
       download_btn: 'POBIERZ',
       download_soon: 'Pobieranie nie jest jeszcze dostępne.',
+      lb_label: 'Podgląd obrazu',
       lb_close: 'Zamknij',
       lb_prev: 'Poprzedni obraz',
       lb_next: 'Następny obraz',
@@ -318,6 +321,7 @@
       download_note: 'Финальная ссылка на скачивание, релиз на GitHub или внешняя ссылка могут быть добавлены здесь позже.',
       download_btn: 'СКАЧАТЬ',
       download_soon: 'Скачивание пока недоступно.',
+      lb_label: 'Просмотр изображения',
       lb_close: 'Закрыть',
       lb_prev: 'Предыдущее изображение',
       lb_next: 'Следующее изображение',
@@ -481,8 +485,10 @@
     box.innerHTML =
       '<button type="button" class="lb-close" data-i18n-aria="lb_close" aria-label="Schließen">&times;</button>' +
       '<button type="button" class="lb-prev" data-i18n-aria="lb_prev" aria-label="Vorheriges Bild">&lsaquo;</button>' +
-      '<img alt="">' +
+      '<img alt="" aria-live="polite">' +
       '<button type="button" class="lb-next" data-i18n-aria="lb_next" aria-label="Nächstes Bild">&rsaquo;</button>';
+    box.setAttribute('aria-label', 'Bildvorschau');
+    box.setAttribute('data-i18n-aria', 'lb_label');
     document.body.appendChild(box);
     var img = box.querySelector('img');
     var current = 0;
@@ -495,16 +501,27 @@
       var thumb = a.querySelector('img');
       img.alt = thumb ? thumb.alt : a.textContent.trim();
     }
+    /* Seite hinter dem Dialog fuer Tastatur/Screenreader sperren (inert),
+       statt Fokus manuell zu trappen. */
+    function setPageInert(on) {
+      Array.prototype.forEach.call(document.body.children, function (el) {
+        if (el === box) return;
+        if (on) el.setAttribute('inert', '');
+        else el.removeAttribute('inert');
+      });
+    }
     function openAt(i) {
       lastFocus = document.activeElement;
       show(i);
       box.classList.add('open');
       document.body.style.overflow = 'hidden';
+      setPageInert(true);
       box.querySelector('.lb-close').focus();
     }
     function close() {
       box.classList.remove('open');
       document.body.style.overflow = '';
+      setPageInert(false);
       img.removeAttribute('src');
       if (lastFocus) lastFocus.focus();
     }
