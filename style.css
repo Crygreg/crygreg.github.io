@@ -471,8 +471,9 @@ h1 span {
 }
 
 .card-logo img {
-  max-width: 200px;
-  height: auto;
+  height: 72px;
+  width: auto;
+  max-width: 100%;
 }
 
 .card-description {
