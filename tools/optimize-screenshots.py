@@ -25,7 +25,7 @@ except ImportError:
 SRC = Path(__file__).resolve().parent.parent / "images" / "G2AE"
 THUMBS = SRC / "thumbs"
 FULL = SRC / "full"
-THUMB_W, FULL_W, QUALITY = 800, 1920, 82
+THUMB_W, FULL_W, QUALITY = 800, 3840, 90
 
 
 def convert(src: Path, dst: Path, max_w: int) -> bool:

@@ -45,13 +45,12 @@ standardmäßig eingeklappt. Header: Datum, Typ · Autor, Titel. Inhalt je nach 
 Original-PNGs in `images/G2AE/` bleiben im Repo als Archiv, werden aber beim
 Deploy ausgeschlossen. Neue Rohbilder in `images/G2AE/` ablegen und
 `python tools/optimize-screenshots.py` ausführen – das Skript erzeugt fehlende
-thumbs/full-Varianten (800/1920 px WebP); danach die `<a>`-Zeilen in der
-`.media-gallery` ergänzen.
+thumbs/full-Varianten (800 px bzw. native Quellauflösung bis 3840 px WebP, q90);
+danach die `<a>`-Zeilen in der `.media-gallery` ergänzen.
 
-Hinweis: In `.media-gallery` (Mehrspalten-Raster) reicht `thumbs/`. Bilder in
-`media-post-body` (`media-post-image`) werden über die volle Inhaltsbreite
-(~1170 px) dargestellt – dort `full/` direkt einbinden, sonst wird das
-800-px-Thumb hochskaliert und wirkt unscharf.
+Hinweis: Alle Inline-Bilder verlinken `full/` in Originalauflösung – die Seite
+zeigt nie hochskalierte oder heruntergerechnete Varianten. `thumbs/` (800 px)
+bleibt als Reserve für künftige kompaktere Raster erhalten.
 
 ## Deployment
 
