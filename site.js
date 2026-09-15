@@ -759,6 +759,16 @@
       var a = items[current];
       if (a.hasAttribute('data-embed')) showVideo(a); else show(a);
       count.textContent = items.length > 1 ? (current + 1) + ' / ' + items.length : '';
+      /* Benachbarte Bilder vorladen -> Blaettern wirkt sofort. */
+      if (items.length > 1) {
+        [-1, 1].forEach(function (d) {
+          var n = items[(current + d + items.length) % items.length];
+          if (n && !n.hasAttribute('data-embed')) {
+            var pre = new Image();
+            pre.src = n.getAttribute('href');
+          }
+        });
+      }
     }
     function nav(d) {
       if (items.length < 2) return;
