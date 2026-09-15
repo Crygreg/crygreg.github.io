@@ -1414,6 +1414,11 @@ details.media-entry {
   margin: 0 0 6px;
 }
 
+.lightbox.single .lb-prev,
+.lightbox.single .lb-next {
+  display: none;
+}
+
 .lightbox button {
   position: absolute;
   z-index: 1;

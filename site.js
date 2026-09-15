@@ -571,12 +571,16 @@
      schliesst. Ohne JS funktionieren die Links weiterhin (neuer Tab). */
   function initLightbox() {
     var imgRe = /\.(jpe?g|png|webp|gif|avif)($|\?)/i;
-    function getLinks() {
-      return Array.prototype.slice.call(
-        document.querySelectorAll('.media-gallery a[href], .media-post-body a[href]')
-      ).filter(function (a) { return imgRe.test(a.getAttribute('href')); });
+    /* Alle Medien eines Eintrags (Bilder + Videos gemischt) bilden eine
+       gemeinsame Blaetter-Sequenz. */
+    function itemsFor(a) {
+      var scope = a.closest('.media-post-body') || document;
+      return Array.prototype.slice.call(scope.querySelectorAll('a[href]'))
+        .filter(function (x) {
+          return x.hasAttribute('data-embed') || imgRe.test(x.getAttribute('href'));
+        });
     }
-    if (!getLinks().length) return;
+    if (!document.querySelector('.media-post-body')) return;
     var box = document.createElement('div');
     box.className = 'lightbox';
     box.setAttribute('role', 'dialog');
@@ -594,6 +598,7 @@
     var img = box.querySelector('img');
     var vid = box.querySelector('.lb-video');
     var cap = box.querySelector('.lb-caption');
+    var items = [];
     var current = 0;
     var lastFocus = null;
     function t(key) {
@@ -681,10 +686,7 @@
     img.addEventListener('pointerup', endPointer);
     img.addEventListener('pointercancel', endPointer);
 
-    function show(i) {
-      var links = getLinks();
-      current = (i + links.length) % links.length;
-      var a = links[current];
+    function show(a) {
       box.classList.remove('video');
       box.setAttribute('aria-label', t('lb_label'));
       resetZoom();
@@ -740,17 +742,21 @@
         else el.removeAttribute('inert');
       });
     }
-    function openAt(i) {
-      lastFocus = document.activeElement;
-      show(i);
-      box.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      setPageInert(true);
-      box.querySelector('.lb-close').focus();
+    function renderItem() {
+      var a = items[current];
+      if (a.hasAttribute('data-embed')) showVideo(a); else show(a);
     }
-    function openVideo(a) {
+    function nav(d) {
+      if (items.length < 2) return;
+      current = (current + d + items.length) % items.length;
+      renderItem();
+    }
+    function open(a) {
       lastFocus = document.activeElement;
-      showVideo(a);
+      items = itemsFor(a);
+      current = items.indexOf(a);
+      box.classList.toggle('single', items.length < 2);
+      renderItem();
       box.classList.add('open');
       document.body.style.overflow = 'hidden';
       setPageInert(true);
@@ -769,22 +775,14 @@
     }
     document.addEventListener('click', function (e) {
       var a = e.target.closest ? e.target.closest('a[href]') : null;
-      if (!a) return;
-      if (a.hasAttribute('data-embed') && a.closest('.media-post-body')) {
-        e.preventDefault();
-        openVideo(a);
-        return;
-      }
-      if (!imgRe.test(a.getAttribute('href'))) return;
-      if (!a.closest('.media-gallery') && !a.closest('.media-post-body')) return;
-      var i = getLinks().indexOf(a);
-      if (i === -1) return;
+      if (!a || !a.closest('.media-post-body')) return;
+      if (!a.hasAttribute('data-embed') && !imgRe.test(a.getAttribute('href'))) return;
       e.preventDefault();
-      openAt(i);
+      open(a);
     });
     box.querySelector('.lb-close').addEventListener('click', close);
-    box.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
-    box.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
+    box.querySelector('.lb-prev').addEventListener('click', function () { nav(-1); });
+    box.querySelector('.lb-next').addEventListener('click', function () { nav(1); });
     box.addEventListener('click', function (e) {
       if (e.target === box) close();
     });
@@ -794,9 +792,8 @@
     document.addEventListener('keydown', function (e) {
       if (!box.classList.contains('open')) return;
       if (e.key === 'Escape') close();
-      else if (box.classList.contains('video')) return;
-      else if (e.key === 'ArrowLeft') show(current - 1);
-      else if (e.key === 'ArrowRight') show(current + 1);
+      else if (e.key === 'ArrowLeft') nav(-1);
+      else if (e.key === 'ArrowRight') nav(1);
     });
   }
 
