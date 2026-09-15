@@ -287,8 +287,11 @@
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
+          entry.target.classList.remove('out');
           entry.target.classList.add('in');
-          io.unobserve(entry.target);
+        } else if (entry.target.classList.contains('in')) {
+          entry.target.classList.remove('in');
+          entry.target.classList.add('out');
         }
       });
     }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });

@@ -991,6 +991,12 @@ footer {
   animation: rise .7s ease both;
 }
 
+.js [data-reveal].out,
+.js .detail-content.out,
+.js .detail-body > .out {
+  animation: sink .5s ease both;
+}
+
 .project-grid [data-reveal]:nth-child(2).in {
   animation-delay: .12s;
 }
@@ -1009,7 +1015,10 @@ footer {
 
   .js [data-reveal].in,
   .js .detail-content.in,
-  .js .detail-body > .in {
+  .js .detail-body > .in,
+  .js [data-reveal].out,
+  .js .detail-content.out,
+  .js .detail-body > .out {
     animation: none;
   }
 
