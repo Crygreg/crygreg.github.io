@@ -6,34 +6,47 @@
 
   <title>Gothic Revamped</title>
 
-  <meta
-    name="description"
-    content="Fan-Modifikationen für die Gothic-Reihe."
-  >
+  <meta name="description" content="Fan-Modifikationen für die Gothic-Reihe.">
+  <meta name="theme-color" content="#070707">
 
+  <meta property="og:title" content="Gothic Revamped – Anniversary Edition">
+  <meta property="og:description" content="Nichtkommerzielle Fan-Modifikationen für die Gothic-Reihe.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://crygreg.github.io/">
+  <meta property="og:image" content="https://crygreg.github.io/images/gothic-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preload" href="fonts/Anniversary.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="style.css">
+  <script src="i18n.js" defer></script>
 </head>
 
 <body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
 
   <!-- STARTSEITE -->
   <header class="hero" id="home">
 
     <div class="hero-overlay"></div>
 
-    <nav class="nav">
+    <nav class="nav" data-i18n-aria="aria_nav" aria-label="Hauptnavigation">
 
-      <a class="brand" href="#home">
-        <br>
+      <a class="brand" href="#home" data-i18n-aria="aria_home" aria-label="Zur Startseite"></a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-i18n-aria="aria_menu" aria-label="Menü">
         <span></span>
-      </a>
+        <span></span>
+        <span></span>
+      </button>
 
-      <div class="nav-links">
-        <a href="#projects">Projekte</a>
-        <a href="#about">Über das Projekt</a>
-        <a href="#team">Team</a>
+      <div class="nav-links" id="nav-links">
+        <a href="#projects" data-i18n="nav_projects">Projekte</a>
+        <a href="#about" data-i18n="nav_about">Über das Projekt</a>
+        <a href="#team" data-i18n="nav_team">Team</a>
         <div class="lang-selector">
-          <select id="lang-select" onchange="changeLanguage()">
+          <select id="lang-select" data-i18n-aria="aria_lang" aria-label="Sprache wählen">
             <option value="de">DE</option>
             <option value="en">EN</option>
             <option value="pl">PL</option>
@@ -48,20 +61,16 @@
     <div class="hero-content">
 
       <a class="hero-logo" href="https://crygreg.github.io/">
-        <img src="images/gothic-logo.png" alt="GOTHIC Logo">
+        <img src="images/gothic-logo.png" alt="GOTHIC Logo" width="730" height="256" fetchpriority="high">
       </a>
 
       <h1>
         <span>REVAMPED</span>
       </h1>
 
-      <p class="intro">
-        <!-- Einführungstext kann hier später eingefügt werden -->
-      </p>
-
       <a class="scroll-button" href="#projects">
-        PROJEKTE ANSEHEN
-        <span>↓</span>
+        <span data-i18n="view_projects">PROJEKTE ANSEHEN</span>
+        <span class="arrow" aria-hidden="true">↓</span>
       </a>
 
     </div>
@@ -69,18 +78,18 @@
   </header>
 
 
-  <main>
+  <main id="main">
 
     <!-- PROJEKTE -->
     <section class="projects-section" id="projects">
 
       <div class="section-heading">
 
-        <p class="eyebrow">UNSERE</p>
+        <p class="eyebrow" data-i18n="eyebrow_projects">UNSERE</p>
 
-        <h2>Mod-Projekte</h2>
+        <h2 data-i18n="projects_title">Mod-Projekte</h2>
 
-        <p>
+        <p data-i18n="projects_intro">
           Um mehr zu erfahren, wähle das gewünschte Projekt aus.
         </p>
 
@@ -98,16 +107,16 @@
           <div class="card-content">
 
             <div class="card-logo">
-              <img src="images/G1AE-logo.png" alt="Gothic I Anniversary Edition">
+              <img src="images/G1AE-logo.png" alt="Gothic I Anniversary Edition" width="130" height="146" loading="lazy">
             </div>
 
-            <p class="card-description">
+            <p class="card-description" data-i18n="g1_desc">
               Willkommen in der Kolonie, Baby!
             </p>
 
             <a class="button" href="gothic1.html">
-              MEHR ERFAHREN
-              <span>→</span>
+              <span data-i18n="more_info">MEHR ERFAHREN</span>
+              <span class="arrow" aria-hidden="true">→</span>
             </a>
 
           </div>
@@ -123,16 +132,16 @@
           <div class="card-content">
 
             <div class="card-logo">
-              <img src="images/G2AE-logo.png" alt="Gothic II Anniversary Edition">
+              <img src="images/G2AE-logo.png" alt="Gothic II Anniversary Edition" width="64" height="64" loading="lazy">
             </div>
 
-            <p class="card-description">
+            <p class="card-description" data-i18n="g2_desc">
               Ein einzelner Gefangener hatte das Schicksal von Hunderten geändert ...
             </p>
 
             <a class="button" href="gothic2.html">
-              MEHR ERFAHREN
-              <span>→</span>
+              <span data-i18n="more_info">MEHR ERFAHREN</span>
+              <span class="arrow" aria-hidden="true">→</span>
             </a>
 
           </div>
@@ -147,21 +156,21 @@
 
           <div class="card-content">
 
-            <h3 class="mystery-title">?</h3>
+            <h3 class="mystery-title" aria-hidden="true">?</h3>
 
             <h4>
-              <span class="question">
+              <span class="question" data-i18n="secret_question">
                 Was haben wir denn da?
               </span>
             </h4>
 
-            <p class="card-description">
+            <p class="card-description" data-i18n="secret_desc">
               Ein geheimes Projekt ist in Arbeit...
             </p>
 
             <a class="button" href="secret.html">
-              MEHR ERFAHREN
-              <span>→</span>
+              <span data-i18n="more_info">MEHR ERFAHREN</span>
+              <span class="arrow" aria-hidden="true">→</span>
             </a>
 
           </div>
@@ -179,13 +188,13 @@
 
       <div class="about-inner">
 
-        <p class="eyebrow">
+        <p class="eyebrow" data-i18n="eyebrow_about">
           ÜBER DIE ANNIVERSARY EDITION
         </p>
 
-        <h2>Was ist das Ziel?</h2>
+        <h2 data-i18n="about_title">Was ist das Ziel?</h2>
 
-        <p>
+        <p data-i18n="about_text">
           Die Anniversary Edition ist eine Reihe nichtkommerzieller Fanprojekte,
           die die Gothic-Welt mit neuen Quests, Charakteren, Geschichten und Ideen
           erweitern möchte – ohne den ursprünglichen Charakter der Spiele aus den
@@ -202,11 +211,11 @@
 
       <div class="section-heading">
 
-        <p class="eyebrow">UNSER</p>
+        <p class="eyebrow" data-i18n="eyebrow_team">UNSER</p>
 
-        <h2>Team</h2>
+        <h2 data-i18n="team_title">Team</h2>
 
-        <p>
+        <p data-i18n="team_intro">
           Die kreativen Köpfe hinter den Projekten.
         </p>
 
@@ -216,20 +225,20 @@
 
         <div class="team-member">
           <div class="member-avatar"></div>
-          <h3>Projektleitung</h3>
-          <p>Name hier eintragen</p>
+          <h3 data-i18n="role_lead">Projektleitung</h3>
+          <p data-i18n="team_name">Name hier eintragen</p>
         </div>
 
         <div class="team-member">
           <div class="member-avatar"></div>
-          <h3>Modeller</h3>
-          <p>Name hier eintragen</p>
+          <h3 data-i18n="role_model">Modeller</h3>
+          <p data-i18n="team_name">Name hier eintragen</p>
         </div>
 
         <div class="team-member">
           <div class="member-avatar"></div>
-          <h3>Scripter</h3>
-          <p>Name hier eintragen</p>
+          <h3 data-i18n="role_script">Scripter</h3>
+          <p data-i18n="team_name">Name hier eintragen</p>
         </div>
 
       </div>
@@ -241,128 +250,15 @@
 
   <footer>
 
-    <div>
+    <div data-i18n="footer1">
       ANNIVERSARY EDITION
     </div>
 
-    <div>
+    <div data-i18n="footer2">
       Nichtkommerzielle Fanprojekte
     </div>
 
   </footer>
-
-  <script>
-    function changeLanguage() {
-      const lang = document.getElementById('lang-select').value;
-      const translations = {
-        'de': {
-          'projects': 'Projekte',
-          'about': 'Über das Projekt',
-          'team': 'Team',
-          'our': 'UNSERE',
-          'modProjects': 'Mod-Projekte',
-          'selectProject': 'Um mehr zu erfahren, wähle das gewünschte Projekt aus.',
-          'moreInfo': 'MEHR ERFAHREN',
-          'aboutAnniversary': 'ÜBER DIE ANNIVERSARY EDITION',
-          'goal': 'Was ist das Ziel?',
-          'description': 'Die Anniversary Edition ist eine Reihe nichtkommerzieller Fanprojekte, die die Gothic-Welt mit neuen Quests, Charakteren, Geschichten und Ideen erweitern möchte – ohne den ursprünglichen Charakter der Spiele aus den Augen zu verlieren.',
-          'viewProjects': 'PROJEKTE ANSEHEN',
-          'gothic1Desc': 'Willkommen in der Kolonie, Baby!',
-          'gothic2Desc': 'Ein einzelner Gefangener hatte das Schicksal von Hunderten geändert ...',
-          'secretDesc': 'Ein geheimes Projekt ist in Arbeit...',
-          'secretQuestion': 'Was haben wir denn da?',
-          'footer1': 'ANNIVERSARY EDITION',
-          'footer2': 'Nichtkommerzielle Fanprojekte'
-        },
-        'en': {
-          'projects': 'Projects',
-          'about': 'About',
-          'team': 'Team',
-          'our': 'OUR',
-          'modProjects': 'Mod Projects',
-          'selectProject': 'To learn more, select the desired project.',
-          'moreInfo': 'LEARN MORE',
-          'aboutAnniversary': 'ABOUT THE ANNIVERSARY EDITION',
-          'goal': 'What is the goal?',
-          'description': 'The Anniversary Edition is a series of non-commercial fan projects that aims to expand the Gothic world with new quests, characters, stories and ideas – without losing sight of the original character of the games.',
-          'viewProjects': 'VIEW PROJECTS',
-          'gothic1Desc': 'Welcome to the colony, baby!',
-          'gothic2Desc': 'A single prisoner changed the fate of hundreds...',
-          'secretDesc': 'A secret project is in progress...',
-          'secretQuestion': 'What do we have here?',
-          'footer1': 'ANNIVERSARY EDITION',
-          'footer2': 'Non-commercial fan projects'
-        },
-        'pl': {
-          'projects': 'Projekty',
-          'about': 'O projekcie',
-          'team': 'Zespół',
-          'our': 'NASZE',
-          'modProjects': 'Projekty modów',
-          'selectProject': 'Aby dowiedzieć się więcej, wybierz żądany projekt.',
-          'moreInfo': 'DOWIEDZ SIĘ WIĘCEJ',
-          'aboutAnniversary': 'O EDYCJI ROCZNICY',
-          'goal': 'Jaki jest cel?',
-          'description': 'Edycja Rocznicy to seria niekomercyjnych projektów fanowskich, które mają na celu rozszerzenie świata Gothic o nowe zadania, postacie, historie i pomysły – nie tracąc z oczu oryginalnego charakteru gier.',
-          'viewProjects': 'ZOBACZ PROJEKTY',
-          'gothic1Desc': 'Witaj w kolonii, dziecko!',
-          'gothic2Desc': 'Pojedynczy więzień zmienił los setek...',
-          'secretDesc': 'Tajny projekt jest w trakcie...',
-          'secretQuestion': 'Co mamy tutaj?',
-          'footer1': 'EDYCJA ROCZNICY',
-          'footer2': 'Niekomercyjne projekty fanowskie'
-        },
-        'ru': {
-          'projects': 'Проекты',
-          'about': 'О проекте',
-          'team': 'Команда',
-          'our': 'НАШИ',
-          'modProjects': 'Мод-проекты',
-          'selectProject': 'Чтобы узнать больше, выберите желаемый проект.',
-          'moreInfo': 'УЗНАТЬ БОЛЬШЕ',
-          'aboutAnniversary': 'О ЮБИЛЕЙНОМ ИЗДАНИИ',
-          'goal': 'Какова цель?',
-          'description': 'Юбилейное издание — это серия некоммерческих фанатских проектов, направленных на расширение мира Gothic новыми квестами, персонажами, историями и идеями, не теряя при этом оригинального характера игр.',
-          'viewProjects': 'СМОТРЕТЬ ПРОЕКТЫ',
-          'gothic1Desc': 'Добро пожаловать в колонию, малыш!',
-          'gothic2Desc': 'Один заключенный изменил судьбу сотен...',
-          'secretDesc': 'Секретный проект в разработке...',
-          'secretQuestion': 'Что у нас тут?',
-          'footer1': 'ЮБИЛЕЙНОЕ ИЗДАНИЕ',
-          'footer2': 'Некоммерческие фанатские проекты'
-        }
-      };
-
-      const t = translations[lang];
-      if (t) {
-        document.querySelector('.nav-links a[href="#projects"]').textContent = t.projects;
-        document.querySelector('.nav-links a[href="#about"]').textContent = t.about;
-        document.querySelector('.nav-links a[href="#team"]').textContent = t.team;
-        document.querySelector('.section-heading .eyebrow').textContent = t.our;
-        document.querySelector('.section-heading h2').textContent = t.modProjects;
-        document.querySelector('.section-heading p:last-child').textContent = t.selectProject;
-        document.querySelectorAll('.button').forEach(btn => {
-          if (btn.textContent.includes('→')) {
-            btn.childNodes[0].textContent = t.moreInfo + ' ';
-          }
-        });
-        document.querySelector('.about-section .eyebrow').textContent = t.aboutAnniversary;
-        document.querySelector('.about-section h2').textContent = t.goal;
-        document.querySelector('.about-section p').textContent = t.description;
-        document.querySelector('.scroll-button').childNodes[0].textContent = t.viewProjects + ' ';
-
-        // Card descriptions
-        document.querySelector('.gothic1 .card-description').textContent = t.gothic1Desc;
-        document.querySelector('.gothic2 .card-description').textContent = t.gothic2Desc;
-        document.querySelector('.secret .card-description').textContent = t.secretDesc;
-        document.querySelector('.secret .question').textContent = t.secretQuestion;
-
-        // Footer
-        document.querySelector('footer div:first-child').textContent = t.footer1;
-        document.querySelector('footer div:last-child').textContent = t.footer2;
-      }
-    }
-  </script>
 
 </body>
 </html>

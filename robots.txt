@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://crygreg.github.io/sitemap.xml

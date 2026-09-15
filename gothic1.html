@@ -1,90 +1,98 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gothic I – Anniversary Edition</title>
-<link rel="stylesheet" href="style.css">
-<style>
-.detail-hero {
-  min-height: 70vh;
-  background: linear-gradient(90deg, rgba(0,0,0,.88), rgba(0,0,0,.45), rgba(0,0,0,.88)),
-              url('images/g1-wallpaper.jpg') center/cover no-repeat;
-  display:flex; align-items:flex-end; padding: 8vw 6vw;
-  border-bottom:1px solid var(--line);
-}
-.detail-content { max-width:850px; }
-.detail-logo img {
-  max-width: 400px;
-  height: auto;
-}
-.detail-body { max-width:850px; padding:90px 6vw 120px; }
-.detail-body h2 { font-size:30px; margin: 40px 0 20px; }
-.detail-body p { color:var(--muted); line-height:2; }
-.feature-list {
-  color: var(--muted);
-  line-height: 1.8;
-  padding-left: 20px;
-}
-.feature-list li {
-  margin-bottom: 10px;
-}
-.media-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin: 30px 0;
-}
-.media-placeholder {
-  height: 200px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  font-size: 14px;
-}
-.download { margin-top:35px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gothic I – Anniversary Edition</title>
+
+  <meta name="description" content="Gothic I – Anniversary Edition: Fan-Erweiterung des ersten Gothic-Abenteuers mit neuen Quests, Charakteren und Geschichten.">
+  <meta name="theme-color" content="#070707">
+
+  <meta property="og:title" content="Gothic I – Anniversary Edition">
+  <meta property="og:description" content="Fan-Erweiterung des ersten Gothic-Abenteuers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://crygreg.github.io/gothic1.html">
+  <meta property="og:image" content="https://crygreg.github.io/images/G1AE-fulllogo.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preload" href="fonts/Anniversary.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js" defer></script>
 </head>
+
 <body>
-<header class="nav">
-<a class="brand" href="index.html"><br><span></span></a>
-<div class="nav-links"><a href="index.html#projects">← Projekte</a></div>
-</header>
-<section class="detail-hero">
-<div class="detail-content">
-<p class="eyebrow"> </p>
-<div class="detail-logo">
-<img src="images/G1AE-fulllogo.png" alt="Gothic I Anniversary Edition Logo">
-</div>
-</div>
-</section>
-<main class="detail-body">
-<p class="eyebrow">ÜBERSICHT</p>
-<h2>Über die Modifikation</h2>
-<p>Eine Erweiterung des ersten Gothic-Abenteuers.</p>
 
-<h2>Features</h2>
-<ul class="feature-list">
-  <li>Neue Quests und Storylines</li>
-  <li>Verbesserte Grafik und Texturen</li>
-  <li>Erweiterte Charakterentwicklung</li>
-  <li>Neue Items und Ausrüstung</li>
-</ul>
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
 
-<h2>Mediensammlung</h2>
-<div class="media-gallery">
-  <div class="media-placeholder">Screenshot 1</div>
-  <div class="media-placeholder">Screenshot 2</div>
-  <div class="media-placeholder">Screenshot 3</div>
-</div>
+  <header class="nav" data-i18n-aria="aria_nav" aria-label="Hauptnavigation">
 
-<h2>Download</h2>
-<p>Hier kann später der finale Download, ein GitHub-Release oder ein externer Download-Link eingetragen werden.</p>
-<a class="button download" href="#" onclick="alert('Download-Link noch nicht hinterlegt.'); return false;">DOWNLOAD <span>↓</span></a>
-</main>
-<footer><div>ANNIVERSARY EDITION</div><div><a href="index.html">Zurück zur Startseite</a></div></footer>
+    <a class="brand" href="index.html" data-i18n-aria="aria_home" aria-label="Zur Startseite"></a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-i18n-aria="aria_menu" aria-label="Menü">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links" id="nav-links">
+      <a href="index.html#projects" data-i18n="nav_back">← Projekte</a>
+      <div class="lang-selector">
+        <select id="lang-select" data-i18n-aria="aria_lang" aria-label="Sprache wählen">
+          <option value="de">DE</option>
+          <option value="en">EN</option>
+          <option value="pl">PL</option>
+          <option value="ru">RU</option>
+        </select>
+      </div>
+    </div>
+
+  </header>
+
+  <section class="detail-hero detail-g1">
+    <div class="detail-content">
+      <div class="detail-logo">
+        <img src="images/G1AE-fulllogo.png" alt="Gothic I Anniversary Edition Logo" width="800" height="400">
+      </div>
+    </div>
+  </section>
+
+  <main class="detail-body" id="main">
+
+    <p class="eyebrow" data-i18n="overview">ÜBERSICHT</p>
+    <h2 data-i18n="about_mod">Über die Modifikation</h2>
+    <p data-i18n="g1_overview">Eine Erweiterung des ersten Gothic-Abenteuers.</p>
+
+    <h2 data-i18n="features">Features</h2>
+    <ul class="feature-list">
+      <li data-i18n="g1_f1">Neue Quests und Storylines</li>
+      <li data-i18n="g1_f2">Verbesserte Grafik und Texturen</li>
+      <li data-i18n="g1_f3">Erweiterte Charakterentwicklung</li>
+      <li data-i18n="g1_f4">Neue Items und Ausrüstung</li>
+    </ul>
+
+    <h2 data-i18n="media">Mediensammlung</h2>
+    <div class="media-gallery">
+      <div class="media-placeholder"><span data-i18n="screenshot">Screenshot</span> 1</div>
+      <div class="media-placeholder"><span data-i18n="screenshot">Screenshot</span> 2</div>
+      <div class="media-placeholder"><span data-i18n="screenshot">Screenshot</span> 3</div>
+    </div>
+
+    <h2 data-i18n="download_h">Download</h2>
+    <p data-i18n="download_note">Hier kann später der finale Download, ein GitHub-Release oder ein externer Download-Link eingetragen werden.</p>
+    <a class="button download" href="#" aria-disabled="true">
+      <span data-i18n="download_btn">DOWNLOAD</span>
+      <span class="arrow" aria-hidden="true">↓</span>
+    </a>
+    <p class="download-msg" data-i18n="download_soon" hidden>Der Download ist noch nicht verfügbar.</p>
+
+  </main>
+
+  <footer>
+    <div data-i18n="footer1">ANNIVERSARY EDITION</div>
+    <div><a href="index.html" data-i18n="footer_back">Zurück zur Startseite</a></div>
+  </footer>
+
 </body>
 </html>
