@@ -25,7 +25,7 @@
       projects_title: 'Mod-Projekte',
       projects_intro: 'Um mehr zu erfahren, wähle das gewünschte Projekt aus.',
       g1_desc: 'Willkommen in der Kolonie, Baby!',
-      g2_desc: 'Ein einzelner Gefangener veränderte das Schicksal von Hunderten …',
+      g2_desc: 'Ein einzelner Gefangener hatte das Schicksal von Hunderten geändert ...',
       secret_desc: 'Ein geheimes Projekt ist in Arbeit...',
       secret_question: 'Was haben wir denn da?',
       more_info: 'MEHR ERFAHREN',
