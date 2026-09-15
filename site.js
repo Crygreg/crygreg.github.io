@@ -587,6 +587,19 @@
       var capKey = a.getAttribute('data-cap');
       cap.innerHTML = capKey ? t(capKey) : alt;
       cap.style.display = cap.innerHTML ? '' : 'none';
+      fitMedia();
+    }
+    /* Medium so gross wie moeglich, ohne dass die Caption aus dem
+       Viewport gedraengt wird: Hoehe = Viewport - Caption - Padding. */
+    function fitMedia() {
+      var vw = window.innerWidth;
+      var h = Math.max(160, window.innerHeight - 48 - (cap.offsetHeight || 0) - 12);
+      img.style.maxHeight = h + 'px';
+      if (vid.classList.contains('portrait')) {
+        vid.style.width = Math.min(vw * 0.92, h * 9 / 16) + 'px';
+      } else {
+        vid.style.width = Math.min(vw * 0.92, h * 16 / 9) + 'px';
+      }
     }
     function showVideo(a) {
       box.classList.add('video');
@@ -606,6 +619,7 @@
       var capKey = a.getAttribute('data-cap');
       cap.innerHTML = capKey ? t(capKey) : f.title;
       cap.style.display = cap.innerHTML ? '' : 'none';
+      fitMedia();
     }
     /* Seite hinter dem Dialog fuer Tastatur/Screenreader sperren (inert),
        statt Fokus manuell zu trappen. */
@@ -662,6 +676,9 @@
     box.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
     box.addEventListener('click', function (e) {
       if (e.target === box) close();
+    });
+    window.addEventListener('resize', function () {
+      if (box.classList.contains('open')) fitMedia();
     });
     document.addEventListener('keydown', function (e) {
       if (!box.classList.contains('open')) return;

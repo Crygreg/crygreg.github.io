@@ -1347,7 +1347,7 @@ details.media-entry {
   align-items: center;
   flex-direction: column;
 
-  max-width: min(92vw, 1100px);
+  max-width: 92vw;
 }
 
 .lightbox img {
