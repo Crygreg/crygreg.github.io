@@ -42,7 +42,9 @@ abfragen lässt.
 ## Bilder austauschen
 
 - Hintergründe: `images/g1-wallpaper.jpg`, `g2-wallpaper.jpg`, `secret-wallpaper.jpg`
-- Logos: `G1AE-logo.png`, `G1AE-fulllogo.png`, `G2AE-logo.png`, `G2AE-fulllogo.png`, `gothic-logo.png`
+- Logos: `G1AE-logo.png`, `G1AE-fulllogo.png` (+ `G1AE-cardlogo.png` als
+  kleinere Variante für die Projekt-Karten), analog für `G2AE-*`,
+  `gothic-logo.png`, `favicon.png`, `apple-touch-icon.png`
 - Karten-Hintergründe werden in `style.css` über `.gothic1`, `.gothic2`, `.secret`
   bzw. `.detail-g1`, `.detail-g2`, `.detail-secret` gesetzt.
 
