@@ -38,8 +38,8 @@ standardmäßig eingeklappt. Header: Datum, Typ · Autor, Titel. Inhalt je nach 
   `data-src` wird erst beim Aufklappen nach `src` kopiert, damit YouTube vorher
   keine Daten bekommt (youtube-nocookie). Darunter optional ein Fallback-Link.
 - **Dev-Post + Galerie:** Text über `data-i18n-html`, danach
-  `.media-gallery` mit Links auf `images/G2AE/full/*.jpg` und Thumbs aus
-  `images/G2AE/thumbs/*.jpg`. Klick öffnet die Lightbox (Pfeiltasten, Esc,
+  `.media-gallery` mit Links auf `images/G2AE/full/*.webp` und Thumbs aus
+  `images/G2AE/thumbs/*.webp`. Klick öffnet die Lightbox (Pfeiltasten, Esc,
   ohne JS: neuer Tab).
 
 Original-PNGs in `images/G2AE/` bleiben im Repo als Archiv, werden aber beim
@@ -77,10 +77,12 @@ Neue Mitglieder: User-ID in `USER_IDS` im Skript + `data-discord-id` am
 
 ## Bilder austauschen
 
-- Hintergründe: `images/g1-wallpaper.jpg`, `g2-wallpaper.jpg`, `secret-wallpaper.jpg`
-- Logos: `G1AE-logo.png`, `G1AE-fulllogo.png` (+ `G1AE-cardlogo.png` als
-  kleinere Variante für die Projekt-Karten), analog für `G2AE-*`,
-  `gothic-logo.png`, `favicon.png`, `apple-touch-icon.png`
+- Hintergründe: `images/g1-wallpaper.webp`, `g2-wallpaper.webp`, `secret-wallpaper.webp`
+  (die JPG-Versionen existieren weiterhin nur fuer `og:image`-Crawler ohne WebP-Support)
+- Logos: `G1AE-fulllogo.webp` (+ `G1AE-cardlogo.webp` als kleinere Variante
+  für die Projekt-Karten), analog für `G2AE-*`, `gothic-logo.webp`.
+  Die PNG-Originale bleiben als `og:image`-Quellen und Archiv erhalten;
+  `favicon.png`/`apple-touch-icon.png` bleiben PNG (Plattform-Anforderung).
 - Karten-Hintergründe werden in `style.css` über `.gothic1`, `.gothic2`, `.secret`
   bzw. `.detail-g1`, `.detail-g2`, `.detail-secret` gesetzt.
 

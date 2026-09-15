@@ -34,7 +34,7 @@ jobs:
       - name: Cache-bust assets with commit SHA
         run: |
           V="${GITHUB_SHA:0:8}"
-          sed -i -E "s/\.(css|js|png|jpg|woff2)([\"')]| [0-9]+w)/.\1?v=$V\2/g" ./_site/*.html ./_site/style.css ./_site/fonts.css
+          sed -i -E "s/\.(css|js|png|jpg|webp|woff2)([\"')]| [0-9]+w)/.\1?v=$V\2/g" ./_site/*.html ./_site/style.css ./_site/fonts.css
           sed -i "s|</head>|  <meta name=\"build\" content=\"$GITHUB_SHA\">\n</head>|" ./_site/*.html
           sed -i "s|</loc>|</loc><lastmod>$(date -u +%Y-%m-%d)</lastmod>|g" ./_site/sitemap.xml
       - name: Verify local asset references

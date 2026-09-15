@@ -106,7 +106,7 @@ select:focus-visible {
       rgba(0, 0, 0, .52) 50%,
       rgba(0, 0, 0, .84) 100%
     ),
-    url("images/g1-wallpaper.jpg")
+    url("images/g1-wallpaper.webp")
     center / cover no-repeat;
 }
 
@@ -561,19 +561,19 @@ h1 span {
 
 /* Gothic I */
 .gothic1 .card-image {
-  background-image: url("images/g1-wallpaper.jpg");
+  background-image: url("images/g1-wallpaper.webp");
 }
 
 
 /* Gothic II */
 .gothic2 .card-image {
-  background-image: url("images/g2-wallpaper.jpg");
+  background-image: url("images/g2-wallpaper.webp");
 }
 
 
 /* Geheimprojekt */
 .secret .card-image {
-  background-image: url("images/secret-wallpaper.jpg");
+  background-image: url("images/secret-wallpaper.webp");
   filter: blur(8px) saturate(.75);
 }
 
@@ -933,19 +933,19 @@ footer {
 .detail-g1 {
   background-image:
     linear-gradient(90deg, rgba(0, 0, 0, .88), rgba(0, 0, 0, .45), rgba(0, 0, 0, .88)),
-    url("images/g1-wallpaper.jpg");
+    url("images/g1-wallpaper.webp");
 }
 
 .detail-g2 {
   background-image:
     linear-gradient(90deg, rgba(0, 0, 0, .88), rgba(0, 0, 0, .45), rgba(0, 0, 0, .88)),
-    url("images/g2-wallpaper.jpg");
+    url("images/g2-wallpaper.webp");
 }
 
 .detail-secret {
   background-image:
     linear-gradient(90deg, rgba(0, 0, 0, .88), rgba(0, 0, 0, .45), rgba(0, 0, 0, .88)),
-    url("images/secret-wallpaper.jpg");
+    url("images/secret-wallpaper.webp");
 }
 
 .detail-content {

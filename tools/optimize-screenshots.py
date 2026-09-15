@@ -4,8 +4,8 @@ Legt PNGs (oder JPGs) in images/G2AE/ ab und fuehrt das Skript aus:
 
     python tools/optimize-screenshots.py
 
-- images/G2AE/thumbs/<name>.jpg  (800 px breit, Galerie-Thumbnails)
-- images/G2AE/full/<name>.jpg    (1920 px breit, Lightbox-Vollbild)
+- images/G2AE/thumbs/<name>.webp  (800 px breit, Galerie-Thumbnails)
+- images/G2AE/full/<name>.webp    (1920 px breit, Lightbox-Vollbild)
 
 Bereits vorhandene Varianten werden uebersprungen (nur neue Dateien
 werden erzeugt). Die Roh-Dateien selbst bleiben als Archiv im Repo,
@@ -36,7 +36,7 @@ def convert(src: Path, dst: Path, max_w: int) -> bool:
         if im.width > max_w:
             h = round(im.height * max_w / im.width)
             im = im.resize((max_w, h), Image.LANCZOS)
-        im.save(dst, "JPEG", quality=QUALITY, optimize=True)
+        im.save(dst, "WEBP", quality=QUALITY, method=6)
     return True
 
 
@@ -48,11 +48,11 @@ def main() -> None:
         if png.suffix.lower() not in (".png", ".jpg", ".jpeg") or png.parent != SRC:
             continue
         stem = png.stem
-        if convert(png, THUMBS / f"{stem}.jpg", THUMB_W):
+        if convert(png, THUMBS / f"{stem}.webp", THUMB_W):
             made += 1
-        if convert(png, FULL / f"{stem}.jpg", FULL_W):
+        if convert(png, FULL / f"{stem}.webp", FULL_W):
             made += 1
-        if (THUMBS / f"{stem}.jpg").exists() or (FULL / f"{stem}.jpg").exists():
+        if (THUMBS / f"{stem}.webp").exists() or (FULL / f"{stem}.webp").exists():
             pass
     print(f"Fertig – {made} neue Varianten erzeugt.")
 
