@@ -1329,12 +1329,37 @@ details.media-entry {
   pointer-events: auto;
 }
 
+.lightbox .lb-stage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  max-width: min(92vw, 1100px);
+}
+
 .lightbox img {
   max-width: 100%;
-  max-height: 92vh;
+  max-height: 74vh;
 
   border: 1px solid rgba(201, 162, 75, .3);
   box-shadow: 0 10px 70px rgba(0, 0, 0, .8);
+}
+
+.lightbox .lb-caption {
+  max-width: 720px;
+  max-height: 16vh;
+
+  margin-top: 14px;
+  overflow: auto;
+
+  color: #ddd;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.lightbox .lb-caption p {
+  margin: 0 0 6px;
 }
 
 .lightbox button {
@@ -1373,7 +1398,7 @@ details.media-entry {
 .lightbox .lb-video {
   display: none;
 
-  width: min(92vw, 1100px);
+  width: 100%;
 
   aspect-ratio: 16/9;
 }

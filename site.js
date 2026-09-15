@@ -65,6 +65,7 @@
       g2_m2_title: 'Lobarts Farm: Original vs. Neu',
       g2_m2_post: 'Fühlte mich süß, hab den ersten Vergleichs-Short gedroppt 💅 👀',
       g2_m3_title: '11 neue Screenshots',
+      g2_m3_cap: 'Lobarts Farm – erste Release-Version, Vegetations-Experimente (W.I.P.)',
       media_post: 'Entwicklungsupdate',
       g2_post_author: 'Crygreg',
       g2_post_title: 'Lobarts Farm & Patreon',
@@ -168,6 +169,7 @@
       g2_m2_title: "Lobart's Farm: Original vs. New",
       g2_m2_post: 'Felt cute, dropped a first comparison short 💅 👀',
       g2_m3_title: '11 new screenshots',
+      g2_m3_cap: "Lobart's Farm – first release version, vegetation experiments (W.I.P.)",
       media_post: 'Dev update',
       g2_post_author: 'Crygreg',
       g2_post_title: 'Lobart’s farm & Patreon',
@@ -271,6 +273,7 @@
       g2_m2_title: 'Farma Lobarta: oryginał kontra nowa wersja',
       g2_m2_post: 'Słodki nastrój, więc wleciał pierwszy short porównawczy 💅 👀',
       g2_m3_title: '11 nowych zrzutów ekranu',
+      g2_m3_cap: 'Farma Lobarta – pierwsza wersja wydania, eksperymenty z roślinnością (W.I.P.)',
       media_post: 'Aktualizacja deweloperska',
       g2_post_author: 'Crygreg',
       g2_post_title: 'Farma Lobarta i Patreon',
@@ -374,6 +377,7 @@
       g2_m2_title: 'Ферма Лобарта: оригинал и новая версия',
       g2_m2_post: 'В милом настроении — первый шорт со сравнением 💅 👀',
       g2_m3_title: '11 новых скриншотов',
+      g2_m3_cap: 'Ферма Лобарта – первая версия релиза, эксперименты с растительностью (W.I.P.)',
       media_post: 'Обновление разработки',
       g2_post_author: 'Crygreg',
       g2_post_title: 'Ферма Лобарта и Patreon',
@@ -552,14 +556,16 @@
     box.innerHTML =
       '<button type="button" class="lb-close" data-i18n-aria="lb_close" aria-label="Schließen">&times;</button>' +
       '<button type="button" class="lb-prev" data-i18n-aria="lb_prev" aria-label="Vorheriges Bild">&lsaquo;</button>' +
-      '<img alt="" aria-live="polite">' +
+      '<div class="lb-stage"><img alt="" aria-live="polite">' +
       '<div class="lb-video"></div>' +
+      '<div class="lb-caption"></div></div>' +
       '<button type="button" class="lb-next" data-i18n-aria="lb_next" aria-label="Nächstes Bild">&rsaquo;</button>';
     box.setAttribute('aria-label', 'Bildvorschau');
     box.setAttribute('data-i18n-aria', 'lb_label');
     document.body.appendChild(box);
     var img = box.querySelector('img');
     var vid = box.querySelector('.lb-video');
+    var cap = box.querySelector('.lb-caption');
     var current = 0;
     var lastFocus = null;
     function t(key) {
@@ -576,7 +582,11 @@
       vid.innerHTML = '';
       img.src = a.getAttribute('href');
       var thumb = a.querySelector('img');
-      img.alt = thumb ? thumb.alt : a.textContent.trim();
+      var alt = thumb ? thumb.alt : a.textContent.trim();
+      img.alt = alt;
+      var capKey = a.getAttribute('data-cap');
+      cap.innerHTML = capKey ? t(capKey) : alt;
+      cap.style.display = cap.innerHTML ? '' : 'none';
     }
     function showVideo(a) {
       box.classList.add('video');
@@ -592,6 +602,9 @@
       f.allowFullscreen = true;
       vid.innerHTML = '';
       vid.appendChild(f);
+      var capKey = a.getAttribute('data-cap');
+      cap.innerHTML = capKey ? t(capKey) : f.title;
+      cap.style.display = cap.innerHTML ? '' : 'none';
     }
     /* Seite hinter dem Dialog fuer Tastatur/Screenreader sperren (inert),
        statt Fokus manuell zu trappen. */
@@ -624,6 +637,7 @@
       document.body.style.overflow = '';
       setPageInert(false);
       vid.innerHTML = '';
+      cap.innerHTML = '';
       img.removeAttribute('src');
       if (lastFocus) lastFocus.focus();
     }
