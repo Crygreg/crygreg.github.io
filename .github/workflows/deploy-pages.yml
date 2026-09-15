@@ -77,6 +77,14 @@ jobs:
           if (sizes.size > 1) { console.error('::error::language dicts have different key counts'); fail = true; }
           process.exit(fail ? 1 : 0);
           EOF
+      # STOPGAP: Solange die Pages-Quelle auf "Deploy from a branch" (legacy)
+      # steht, baut GitHub zusaetzlich einen eigenen pages-build-deployment-
+      # Lauf (~45s), der diesen Cache-Bust-Build ueberschreibt, weil er
+      # spaeter fertig wird. Diese Wartezeit sorgt dafuer, dass unser
+      # Deployment immer als letztes landet und somit live geht.
+      # ENTFERNEN, sobald Settings -> Pages -> Source = "GitHub Actions".
+      - name: Wait for legacy branch deploy
+        run: sleep 75
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
