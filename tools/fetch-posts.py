@@ -146,9 +146,14 @@ def main():
             continue
         content = (m.get("content") or "").strip()
         atts = m.get("attachments") or []
-        print("  [{}] type={} author={} content={}chars atts={} embeds={}".format(
+        print("  [{}] type={} author={} content={}chars atts={} embeds={} keys={}".format(
             m["id"], m.get("type"), m["author"]["username"],
-            len(content), len(atts), len(m.get("embeds") or [])))
+            len(content), len(atts), len(m.get("embeds") or []),
+            ",".join(sorted(k for k in m.keys()
+                            if k not in ("id", "channel_id", "author", "type",
+                                         "timestamp", "edited_timestamp",
+                                         "flags", "mentions", "mention_roles",
+                                         "pinned", "tts", "mention_everyone")))))
         yt = [m2.group(1) for m2 in YT_RE.finditer(content)]
         # interessant = Text, Bilder oder Links; leere System-Posts raus
         if not content and not atts:
