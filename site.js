@@ -545,14 +545,15 @@
      Deshalb Kette runtergehen, bis ein echtes Bild kommt. */
   function initVideoThumbs() {
     document.querySelectorAll('.media-video img').forEach(function (im) {
-      var m = /vi\/([A-Za-z0-9_-]+)\//.exec(im.getAttribute('src') || '');
+      var card = im.closest('.media-video');
+      var m = /(?:v=|shorts\/)([A-Za-z0-9_-]+)/.exec(card ? card.getAttribute('href') : '')
+            || /vi\/([A-Za-z0-9_-]+)\//.exec(im.getAttribute('src') || '');
       if (!m) return;
       var base = 'https://i.ytimg.com/vi/' + m[1] + '/';
       var tiers = im.closest('.media-video-short')
         ? ['oar2.jpg', 'maxresdefault.jpg', 'sddefault.jpg', 'hqdefault.jpg', 'mqdefault.jpg']
         : ['maxresdefault.jpg', 'sddefault.jpg', 'hqdefault.jpg', 'mqdefault.jpg'];
-      var i = tiers.indexOf(im.getAttribute('src').split('/').pop());
-      if (i < 0) i = 0;
+      var i = tiers.indexOf((im.getAttribute('src') || '').split('/').pop());
       function next() {
         if (i + 1 < tiers.length) { i++; im.src = base + tiers[i]; }
         else { im.closest('.media-video').classList.add('no-thumb'); }
