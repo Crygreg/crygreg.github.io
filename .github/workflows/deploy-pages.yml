@@ -24,17 +24,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build site
+        run: |
+          mkdir _site
+          cp ./*.html ./style.css ./fonts.css ./site.js ./sitemap.xml ./robots.txt _site/
+          cp -r ./images ./fonts _site/
       - name: Cache-bust assets with commit SHA
         run: |
           V="${GITHUB_SHA:0:8}"
-          sed -i -E "s/\.(css|js|png|jpg|woff2)([\"')])/.\1?v=$V\2/g" ./*.html ./style.css ./fonts.css
-          sed -i "s|</head>|  <meta name=\"build\" content=\"$GITHUB_SHA\">\n</head>|" ./*.html
+          sed -i -E "s/\.(css|js|png|jpg|woff2)([\"')])/.\1?v=$V\2/g" ./_site/*.html ./_site/style.css ./_site/fonts.css
+          sed -i "s|</head>|  <meta name=\"build\" content=\"$GITHUB_SHA\">\n</head>|" ./_site/*.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
