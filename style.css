@@ -400,6 +400,13 @@ h1 span {
   min-height: 92px;
 }
 
+.secret .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 290px;
+}
+
 
 /* =========================================================
    GEHEIMPROJEKT
