@@ -1419,6 +1419,17 @@ details.media-entry {
   display: none;
 }
 
+.lightbox .lb-count {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  z-index: 1;
+
+  color: #999;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
 .lightbox button {
   position: absolute;
   z-index: 1;

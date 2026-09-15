@@ -592,6 +592,7 @@
       '<div class="lb-stage"><img alt="" aria-live="polite" draggable="false">' +
       '<div class="lb-video"></div>' +
       '<div class="lb-caption"></div></div>' +
+      '<div class="lb-count" aria-hidden="true"></div>' +
       '<button type="button" class="lb-next" data-i18n-aria="lb_next" aria-label="Nächstes Bild">&rsaquo;</button>';
     box.setAttribute('aria-label', 'Bildvorschau');
     box.setAttribute('data-i18n-aria', 'lb_label');
@@ -599,6 +600,7 @@
     var img = box.querySelector('img');
     var vid = box.querySelector('.lb-video');
     var cap = box.querySelector('.lb-caption');
+    var count = box.querySelector('.lb-count');
     var items = [];
     var current = 0;
     var lastFocus = null;
@@ -636,9 +638,10 @@
     img.addEventListener('dblclick', function (e) {
       if (zoom.s > 1) resetZoom(); else zoomAt(e.clientX, e.clientY, 2.5);
     });
-    var pts = {}, dragDist = 0, dragMid = null;
+    var pts = {}, downs = {}, dragDist = 0, dragMid = null;
     img.addEventListener('pointerdown', function (e) {
       pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      downs[e.pointerId] = { x: e.clientX, y: e.clientY };
       img.setPointerCapture(e.pointerId);
       img.classList.add('dragging');
       var keys = Object.keys(pts);
@@ -677,8 +680,17 @@
       }
     });
     function endPointer(e) {
+      var down = downs[e.pointerId];
       delete pts[e.pointerId];
+      delete downs[e.pointerId];
       dragDist = 0;
+      /* Wischen ohne Zoom blättert (Touch & Maus-Drag). */
+      if (down && zoom.s === 1 && Object.keys(pts).length === 0) {
+        var dx = e.clientX - down.x, dy = e.clientY - down.y;
+        if (Math.abs(dx) >= 70 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          nav(dx > 0 ? -1 : 1);
+        }
+      }
       if (!Object.keys(pts).length) {
         img.classList.remove('dragging');
         dragMid = null;
@@ -746,6 +758,7 @@
     function renderItem() {
       var a = items[current];
       if (a.hasAttribute('data-embed')) showVideo(a); else show(a);
+      count.textContent = items.length > 1 ? (current + 1) + ' / ' + items.length : '';
     }
     function nav(d) {
       if (items.length < 2) return;
