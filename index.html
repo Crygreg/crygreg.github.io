@@ -208,5 +208,79 @@
 
   </footer>
 
+  <script>
+    function changeLanguage() {
+      const lang = document.getElementById('lang-select').value;
+      const translations = {
+        'de': {
+          'projects': 'Projekte',
+          'about': 'Über das Projekt',
+          'our': 'UNSERE',
+          'modProjects': 'Mod-Projekte',
+          'selectProject': 'Um mehr zu erfahren, wähle das gewünschte Projekt aus.',
+          'moreInfo': 'MEHR ERFAHREN',
+          'aboutAnniversary': 'ÜBER DIE ANNIVERSARY EDITION',
+          'goal': 'Was ist das Ziel?',
+          'description': 'Die Anniversary Edition ist eine Reihe nichtkommerzieller Fanprojekte, die die Gothic-Welt mit neuen Quests, Charakteren, Geschichten und Ideen erweitern möchte – ohne den ursprünglichen Charakter der Spiele aus den Augen zu verlieren.',
+          'viewProjects': 'PROJEKTE ANSEHEN'
+        },
+        'en': {
+          'projects': 'Projects',
+          'about': 'About',
+          'our': 'OUR',
+          'modProjects': 'Mod Projects',
+          'selectProject': 'To learn more, select the desired project.',
+          'moreInfo': 'LEARN MORE',
+          'aboutAnniversary': 'ABOUT THE ANNIVERSARY EDITION',
+          'goal': 'What is the goal?',
+          'description': 'The Anniversary Edition is a series of non-commercial fan projects that aims to expand the Gothic world with new quests, characters, stories and ideas – without losing sight of the original character of the games.',
+          'viewProjects': 'VIEW PROJECTS'
+        },
+        'pl': {
+          'projects': 'Projekty',
+          'about': 'O projekcie',
+          'our': 'NASZE',
+          'modProjects': 'Projekty modów',
+          'selectProject': 'Aby dowiedzieć się więcej, wybierz żądany projekt.',
+          'moreInfo': 'DOWIEDZ SIĘ WIĘCEJ',
+          'aboutAnniversary': 'O EDYCJI ROCZNICY',
+          'goal': 'Jaki jest cel?',
+          'description': 'Edycja Rocznicy to seria niekomercyjnych projektów fanowskich, które mają na celu rozszerzenie świata Gothic o nowe zadania, postacie, historie i pomysły – nie tracąc z oczu oryginalnego charakteru gier.',
+          'viewProjects': 'ZOBACZ PROJEKTY'
+        },
+        'ru': {
+          'projects': 'Проекты',
+          'about': 'О проекте',
+          'our': 'НАШИ',
+          'modProjects': 'Мод-проекты',
+          'selectProject': 'Чтобы узнать больше, выберите желаемый проект.',
+          'moreInfo': 'УЗНАТЬ БОЛЬШЕ',
+          'aboutAnniversary': 'О ЮБИЛЕЙНОМ ИЗДАНИИ',
+          'goal': 'Какова цель?',
+          'description': 'Юбилейное издание — это серия некоммерческих фанатских проектов, направленных на расширение мира Gothic новыми квестами, персонажами, историями и идеями, не теряя при этом оригинального характера игр.',
+          'viewProjects': 'СМОТРЕТЬ ПРОЕКТЫ'
+        }
+      };
+
+      const t = translations[lang];
+      if (t) {
+        document.querySelector('.nav-links a[href="#projects"]').textContent = t.projects;
+        document.querySelector('.nav-links a[href="#about"]').textContent = t.about;
+        document.querySelector('.section-heading .eyebrow').textContent = t.our;
+        document.querySelector('.section-heading h2').textContent = t.modProjects;
+        document.querySelector('.section-heading p:last-child').textContent = t.selectProject;
+        document.querySelectorAll('.button').forEach(btn => {
+          if (btn.textContent.includes('→')) {
+            btn.childNodes[0].textContent = t.moreInfo + ' ';
+          }
+        });
+        document.querySelector('.about-section .eyebrow').textContent = t.aboutAnniversary;
+        document.querySelector('.about-section h2').textContent = t.goal;
+        document.querySelector('.about-section p').textContent = t.description;
+        document.querySelector('.scroll-button').childNodes[0].textContent = t.viewProjects + ' ';
+      }
+    }
+  </script>
+
 </body>
 </html>
