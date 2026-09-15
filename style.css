@@ -752,6 +752,40 @@ h1 span {
 }
 
 
+.join-note {
+  max-width: 880px;
+
+  margin: 55px auto 0;
+  padding: 30px 34px;
+
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+}
+
+.join-note .eyebrow {
+  margin: 0 0 10px;
+}
+
+.join-note h3 {
+  margin: 0 0 12px;
+
+  font-size: 24px;
+}
+
+.join-note p:last-child {
+  margin: 0;
+
+  color: var(--muted);
+
+  line-height: 1.9;
+}
+
+.join-note a {
+  color: var(--accent-light);
+}
+
+
 /* =========================================================
    FOOTER
    ========================================================= */
@@ -909,6 +943,17 @@ footer {
   max-width: 850px;
 
   padding: 90px 6vw 120px;
+}
+
+.detail-body.wide {
+  max-width: 1400px;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.detail-body.wide > p,
+.detail-body.wide > .feature-list {
+  max-width: 880px;
 }
 
 .detail-body h2 {
