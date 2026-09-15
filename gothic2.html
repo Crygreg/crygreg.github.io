@@ -10,10 +10,20 @@
   min-height: 70vh;
   background: linear-gradient(90deg, rgba(0,0,0,.88), rgba(0,0,0,.45), rgba(0,0,0,.88)),
               url('images/G2-wallpaper.jpg') center/cover no-repeat;
-  display:flex; align-items:flex-end; padding: 8vw 6vw;
+  display:flex; flex-direction: column; align-items:center; padding: 6vw 6vw 8vw;
   border-bottom:1px solid var(--line);
 }
-.detail-content { max-width:850px; }
+.detail-thumbnail {
+  height: 300px;
+  width: 100%;
+  max-width: 850px;
+  background-image: url('images/g2-wallpaper.jpg');
+  background-position: center;
+  background-size: cover;
+  filter: saturate(.75);
+  margin-bottom: 30px;
+}
+.detail-content { max-width:850px; text-align: center; }
 .detail-logo img {
   max-width: 400px;
   height: auto;
@@ -31,10 +41,11 @@
 <div class="nav-links"><a href="index.html#projects">← Projekte</a></div>
 </header>
 <section class="detail-hero">
+<div class="detail-thumbnail"></div>
 <div class="detail-content">
 <p class="eyebrow">GOTHIC II</p>
 <div class="detail-logo">
-<img src="images/G2AE-logo.jpg" alt="Gothic II Anniversary Edition Logo">
+<img src="images/G2AE-fulllogo.png" alt="Gothic II Anniversary Edition Logo">
 </div>
 </div>
 </section>
