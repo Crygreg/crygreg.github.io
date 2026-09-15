@@ -283,6 +283,8 @@ select:focus-visible {
 .hero-logo img {
   max-width: 400px;
   height: auto;
+
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .65));
 }
 
 .hero-logo:hover img {
@@ -540,6 +542,13 @@ h1 span {
   transform: scale(1.04);
 
   filter: saturate(1);
+}
+
+.card-content .button::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
 }
 
 
@@ -892,6 +901,8 @@ footer {
 .detail-logo img {
   max-width: 400px;
   height: auto;
+
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .65));
 }
 
 .detail-body {
