@@ -54,6 +54,13 @@ Der Workflow `.github/workflows/deploy-pages.yml` lädt die Seite bei jedem Push
 auf `main` automatisch als statisches Artifact zu GitHub Pages hoch. Voraussetzung:
 **Settings → Pages → Source: „GitHub Actions"**.
 
+Solange die Quelle noch auf „Deploy from a branch" (legacy) steht, baut GitHub
+zusaetzlich einen eigenen `pages-build-deployment`-Lauf, der dieses Artifact
+ueberschreiben wuerde, weil er spaeter fertig wird. Der Workflow wartet deshalb
+75 s vor dem Deploy (`Wait for legacy branch deploy`), damit der cache-busted
+Build immer zuletzt landet und live geht. **Dieser Schritt kann entfernt werden,
+sobald die Quelle auf „GitHub Actions" umgestellt ist.**
+
 ### Cache-Busting
 
 Der Workflow hängt beim Deploy an alle lokalen Asset-URLs (CSS, JS, Fonts,
