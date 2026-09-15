@@ -19,8 +19,32 @@
   height: auto;
 }
 .detail-body { max-width:850px; padding:90px 6vw 120px; }
-.detail-body h2 { font-size:30px; }
+.detail-body h2 { font-size:30px; margin: 40px 0 20px; }
 .detail-body p { color:var(--muted); line-height:2; }
+.feature-list {
+  color: var(--muted);
+  line-height: 1.8;
+  padding-left: 20px;
+}
+.feature-list li {
+  margin-bottom: 10px;
+}
+.media-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 30px 0;
+}
+.media-placeholder {
+  height: 200px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 14px;
+}
 .download { margin-top:35px; }
 </style>
 </head>
@@ -41,6 +65,22 @@
 <p class="eyebrow">ÜBERSICHT</p>
 <h2>Über die Modifikation</h2>
 <p>Eine Erweiterung des ersten Gothic-Abenteuers.</p>
+
+<h2>Features</h2>
+<ul class="feature-list">
+  <li>Neue Quests und Storylines</li>
+  <li>Verbesserte Grafik und Texturen</li>
+  <li>Erweiterte Charakterentwicklung</li>
+  <li>Neue Items und Ausrüstung</li>
+</ul>
+
+<h2>Mediensammlung</h2>
+<div class="media-gallery">
+  <div class="media-placeholder">Screenshot 1</div>
+  <div class="media-placeholder">Screenshot 2</div>
+  <div class="media-placeholder">Screenshot 3</div>
+</div>
+
 <h2>Download</h2>
 <p>Hier kann später der finale Download, ein GitHub-Release oder ein externer Download-Link eingetragen werden.</p>
 <a class="button download" href="#" onclick="alert('Download-Link noch nicht hinterlegt.'); return false;">DOWNLOAD <span>↓</span></a>

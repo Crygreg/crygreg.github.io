@@ -172,11 +172,17 @@ a {
 
 .hero-logo {
   margin-bottom: 20px;
+  display: inline-block;
 }
 
 .hero-logo img {
   max-width: 400px;
   height: auto;
+}
+
+.hero-logo:hover img {
+  opacity: 0.8;
+  transition: opacity 0.25s;
 }
 
 .eyebrow {
@@ -453,6 +459,62 @@ h1 span {
   border-bottom: 1px solid rgba(255, 255, 255, .05);
 
   padding: 100px 6vw;
+}
+
+
+/* =========================================================
+   TEAM
+   ========================================================= */
+
+.team-section {
+  padding: 100px 6vw;
+}
+
+.team-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+}
+
+.team-member {
+  background: var(--panel);
+
+  border: 1px solid rgba(255, 255, 255, .08);
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+.member-avatar {
+  width: 120px;
+  height: 120px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  background: var(--panel2);
+
+  border: 2px solid var(--line);
+}
+
+.team-member h3 {
+  font-size: 18px;
+
+  margin: 0 0 10px;
+
+  color: var(--text);
+}
+
+.team-member p {
+  color: var(--muted);
+
+  font-size: 14px;
+
+  margin: 0;
 }
 
 .about-inner {

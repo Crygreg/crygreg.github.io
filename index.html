@@ -31,6 +31,7 @@
       <div class="nav-links">
         <a href="#projects">Projekte</a>
         <a href="#about">Über das Projekt</a>
+        <a href="#team">Team</a>
         <div class="lang-selector">
           <select id="lang-select" onchange="changeLanguage()">
             <option value="de">DE</option>
@@ -46,9 +47,9 @@
 
     <div class="hero-content">
 
-      <div class="hero-logo">
+      <a class="hero-logo" href="https://crygreg.github.io/">
         <img src="images/gothic-logo.png" alt="GOTHIC Logo">
-      </div>
+      </a>
 
       <h1>
         <span>REVAMPED</span>
@@ -195,6 +196,46 @@
 
     </section>
 
+
+    <!-- TEAM -->
+    <section class="team-section" id="team">
+
+      <div class="section-heading">
+
+        <p class="eyebrow">UNSER</p>
+
+        <h2>Team</h2>
+
+        <p>
+          Die kreativen Köpfe hinter den Projekten.
+        </p>
+
+      </div>
+
+      <div class="team-grid">
+
+        <div class="team-member">
+          <div class="member-avatar"></div>
+          <h3>Projektleitung</h3>
+          <p>Name hier eintragen</p>
+        </div>
+
+        <div class="team-member">
+          <div class="member-avatar"></div>
+          <h3>Modeller</h3>
+          <p>Name hier eintragen</p>
+        </div>
+
+        <div class="team-member">
+          <div class="member-avatar"></div>
+          <h3>Scripter</h3>
+          <p>Name hier eintragen</p>
+        </div>
+
+      </div>
+
+    </section>
+
   </main>
 
 
@@ -217,6 +258,7 @@
         'de': {
           'projects': 'Projekte',
           'about': 'Über das Projekt',
+          'team': 'Team',
           'our': 'UNSERE',
           'modProjects': 'Mod-Projekte',
           'selectProject': 'Um mehr zu erfahren, wähle das gewünschte Projekt aus.',
@@ -235,6 +277,7 @@
         'en': {
           'projects': 'Projects',
           'about': 'About',
+          'team': 'Team',
           'our': 'OUR',
           'modProjects': 'Mod Projects',
           'selectProject': 'To learn more, select the desired project.',
@@ -253,6 +296,7 @@
         'pl': {
           'projects': 'Projekty',
           'about': 'O projekcie',
+          'team': 'Zespół',
           'our': 'NASZE',
           'modProjects': 'Projekty modów',
           'selectProject': 'Aby dowiedzieć się więcej, wybierz żądany projekt.',
@@ -271,6 +315,7 @@
         'ru': {
           'projects': 'Проекты',
           'about': 'О проекте',
+          'team': 'Команда',
           'our': 'НАШИ',
           'modProjects': 'Мод-проекты',
           'selectProject': 'Чтобы узнать больше, выберите желаемый проект.',
@@ -292,6 +337,7 @@
       if (t) {
         document.querySelector('.nav-links a[href="#projects"]').textContent = t.projects;
         document.querySelector('.nav-links a[href="#about"]').textContent = t.about;
+        document.querySelector('.nav-links a[href="#team"]').textContent = t.team;
         document.querySelector('.section-heading .eyebrow').textContent = t.our;
         document.querySelector('.section-heading h2').textContent = t.modProjects;
         document.querySelector('.section-heading p:last-child').textContent = t.selectProject;
