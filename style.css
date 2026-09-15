@@ -722,6 +722,22 @@ h1 span {
   background: var(--panel2);
 
   border: 2px solid var(--line);
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.member-avatar img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+
+  object-fit: cover;
 }
 
 .member-avatar::before {
