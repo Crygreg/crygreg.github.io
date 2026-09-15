@@ -716,13 +716,15 @@
       e.preventDefault();
       zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.3 : 1 / 1.3);
     }, { passive: false });
-    /* Einzelklick zoomt auf die Stelle: Ziel = native Pixel (1:1), bei
-       bereits gezoomtem Bild zurueck auf 1. */
+    /* Einzelklick zoomt auf die Stelle: Ziel = mindestens 3x der
+       Einpassungsgroesse (bzw. native Pixel, wenn hoeher), damit auch
+       niedriger aufgeloeste Bilder spuerbar herankommen. Bei bereits
+       gezoomtem Bild zurueck auf 1. */
     function clickZoom(cx, cy) {
       if (zoom.s > 1) { resetZoom(); return; }
       var w0 = img.getBoundingClientRect().width;
       var s2 = img.naturalWidth ? img.naturalWidth / w0 : 2.5;
-      zoomTo(cx, cy, Math.min(Math.max(s2, 1.15), 4));
+      zoomTo(cx, cy, Math.min(Math.max(3, s2), 6));
     }
     var pts = {}, downs = {}, dragDist = 0, dragMid = null, multi = false;
     img.addEventListener('pointerdown', function (e) {
