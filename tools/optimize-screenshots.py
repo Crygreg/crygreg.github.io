@@ -27,7 +27,7 @@ SRC = Path(__file__).resolve().parent.parent / "images" / "G2AE"
 THUMBS = SRC / "thumbs"
 MID = SRC / "mid"
 FULL = SRC / "full"
-THUMB_W, MID_W, FULL_W, QUALITY = 800, 1600, 3840, 90
+THUMB_W, MID_W, FULL_W, QUALITY = 800, 1600, 3840, 95
 
 
 def convert(src: Path, dst: Path, max_w: int) -> bool:
