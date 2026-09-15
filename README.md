@@ -5,12 +5,15 @@ gehostet über GitHub Pages unter <https://crygreg.github.io/>.
 
 ## Struktur
 
-- `index.html` – Startseite (Projekte, Über das Projekt, Team)
-- `gothic1.html`, `gothic2.html`, `secret.html` – Projekt-Detailseiten
-- `404.html` – Fehlerseite für ungültige URLs
+- `index.html` – Startseite (Projekte, Über das Projekt, Team, Mitmachen,
+  Unterstützen; Discord im Hero und Footer)
+- `gothic1.html`, `gothic2.html`, `secret.html` – Projekt-Detailseiten;
+  gothic2 enthält die Mediensammlung (Dev-Updates, YouTube-Shorts, Screenshots)
+- `404.html` – Fehlerseite für ungültige URLs (`noindex`)
 - `style.css` – gemeinsames Stylesheet für alle Seiten
 - `site.js` – Übersetzungen (DE/EN/PL/RU), Sprachwahl, mobile Navigation,
-  Scroll-Reveal-Animationen und Download-Hinweise
+  Scroll-Reveal-Animationen, Scrollspy, Lazy-Loading der YouTube-Embeds,
+  Bild-Lightbox und Download-Hinweise
 - `images/` – Logos, Hintergrundbilder, Favicon
 - `fonts/` – Schriftarten (Cormorant für Überschriften, Lora für Fließtext,
   jeweils mit Latin-, Latin-Ext- und Cyrillic-Subsets für DE/EN/PL/RU)
@@ -19,10 +22,28 @@ gehostet über GitHub Pages unter <https://crygreg.github.io/>.
 ## Sprachen
 
 Übersetzte Texte werden in `site.js` gepflegt und im HTML über
-`data-i18n="schlüssel"` (Text) bzw. `data-i18n-aria="schlüssel"` (Aria-Label)
+`data-i18n="schlüssel"` (Text), `data-i18n-aria="schlüssel"` (Aria-Label) bzw.
+`data-i18n-html="schlüssel"` (HTML-Fragmente mit Links, z. B. Dev-Posts)
 gebunden. Die gewählte Sprache wird im Browser gespeichert und auf allen Seiten
 übernommen. Neue Texte: Schlüssel in allen vier Sprachen in `site.js` anlegen
-und das Attribut im HTML setzen.
+und das Attribut im HTML setzen. Der Deploy-Workflow bricht ab, wenn ein
+verwendeter Schlüssel in einer Sprache fehlt oder die Dicts auseinanderlaufen.
+
+## Mediensammlung (gothic2.html)
+
+Einträge sind `<details class="media-entry media-post">`-Blöcke – neueste zuerst,
+standardmäßig eingeklappt. Header: Datum, Typ · Autor, Titel. Inhalt je nach Typ:
+
+- **Shorts/Videos:** `<div class="media-embed media-embed-short|-video"><iframe data-src="…">` –
+  `data-src` wird erst beim Aufklappen nach `src` kopiert, damit YouTube vorher
+  keine Daten bekommt (youtube-nocookie). Darunter optional ein Fallback-Link.
+- **Dev-Post + Galerie:** Text über `data-i18n-html`, danach
+  `.media-gallery` mit Links auf `images/G2AE/full/*.jpg` und Thumbs aus
+  `images/G2AE/thumbs/*.jpg`. Klick öffnet die Lightbox (Pfeiltasten, Esc,
+  ohne JS: neuer Tab).
+
+Original-PNGs in `images/G2AE/` bleiben im Repo als Archiv, werden aber beim
+Deploy ausgeschlossen.
 
 ## Deployment
 
