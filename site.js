@@ -288,18 +288,31 @@
       els.forEach(function (el) { el.classList.add('in'); });
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
+    // Hysterese: "in" braucht einen tieferen Viewport-Eintritt als "out" -
+    // sonst retriggered die translateY-Bewegung der Animation den Observer
+    // und Elemente flackern an den Raendern endlos hin und her.
+    var inObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.remove('out');
           entry.target.classList.add('in');
-        } else if (entry.target.classList.contains('in')) {
+        }
+      });
+    }, { threshold: 0, rootMargin: '-15% 0px -15% 0px' });
+
+    var outObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting && entry.target.classList.contains('in')) {
           entry.target.classList.remove('in');
           entry.target.classList.add('out');
         }
       });
-    }, { threshold: 0, rootMargin: '-12% 0px -18% 0px' });
-    els.forEach(function (el) { io.observe(el); });
+    }, { threshold: 0, rootMargin: '-8% 0px -6% 0px' });
+
+    els.forEach(function (el) {
+      inObserver.observe(el);
+      outObserver.observe(el);
+    });
   }
 
   function initDownloads() {
