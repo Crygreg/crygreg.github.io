@@ -48,6 +48,13 @@ jobs:
           [ "${{ inputs.mode }}" = "list" ] && ARGS="--list-channels"
           python tools/fetch-posts.py $ARGS
 
+      - uses: actions/upload-artifact@v4
+        if: inputs.mode != 'list'
+        with:
+          name: post-drafts
+          path: tools/posts-out/drafts.txt
+          if-no-files-found: ignore
+
       - name: Commit new images
         run: |
           if [ -z "$(git status --porcelain images/G2AE)" ]; then
