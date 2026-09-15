@@ -92,6 +92,7 @@
       download_btn: 'DOWNLOAD',
       download_soon: 'Der Download ist noch nicht verfügbar.',
       lb_label: 'Bildvorschau',
+      lb_video_label: 'Videovorschau',
       lb_close: 'Schließen',
       lb_prev: 'Vorheriges Bild',
       lb_next: 'Nächstes Bild',
@@ -194,6 +195,7 @@
       download_btn: 'DOWNLOAD',
       download_soon: 'The download is not available yet.',
       lb_label: 'Image preview',
+      lb_video_label: 'Video preview',
       lb_close: 'Close',
       lb_prev: 'Previous image',
       lb_next: 'Next image',
@@ -296,6 +298,7 @@
       download_btn: 'POBIERZ',
       download_soon: 'Pobieranie nie jest jeszcze dostępne.',
       lb_label: 'Podgląd obrazu',
+      lb_video_label: 'Podgląd wideo',
       lb_close: 'Zamknij',
       lb_prev: 'Poprzedni obraz',
       lb_next: 'Następny obraz',
@@ -398,6 +401,7 @@
       download_btn: 'СКАЧАТЬ',
       download_soon: 'Скачивание пока недоступно.',
       lb_label: 'Просмотр изображения',
+      lb_video_label: 'Просмотр видео',
       lb_close: 'Закрыть',
       lb_prev: 'Предыдущее изображение',
       lb_next: 'Следующее изображение',
@@ -528,19 +532,6 @@
     });
   }
 
-  /* YouTube-Embeds erst beim Aufklappen laden - sonst wuerde YouTube
-     schon beim Seitenaufruf Daten bekommen. */
-  function initMediaEmbeds() {
-    document.querySelectorAll('details.media-post').forEach(function (d) {
-      d.addEventListener('toggle', function () {
-        if (!d.open) return;
-        d.querySelectorAll('iframe[data-src]').forEach(function (f) {
-          if (!f.src) f.src = f.getAttribute('data-src');
-        });
-      });
-    });
-  }
-
   /* Lightbox fuer Bild-Links (Galerie + Artwork im Post): grosses Vorschaubild
      direkt auf der Seite. Delegierter Click-Handler, damit per data-i18n-html
      neu gesetzte Post-Links ohne Re-Bind funktionieren.
@@ -562,20 +553,45 @@
       '<button type="button" class="lb-close" data-i18n-aria="lb_close" aria-label="Schließen">&times;</button>' +
       '<button type="button" class="lb-prev" data-i18n-aria="lb_prev" aria-label="Vorheriges Bild">&lsaquo;</button>' +
       '<img alt="" aria-live="polite">' +
+      '<div class="lb-video"></div>' +
       '<button type="button" class="lb-next" data-i18n-aria="lb_next" aria-label="Nächstes Bild">&rsaquo;</button>';
     box.setAttribute('aria-label', 'Bildvorschau');
     box.setAttribute('data-i18n-aria', 'lb_label');
     document.body.appendChild(box);
     var img = box.querySelector('img');
+    var vid = box.querySelector('.lb-video');
     var current = 0;
     var lastFocus = null;
+    function t(key) {
+      var lang = document.documentElement.lang;
+      var dict = translations[lang] || translations[DEFAULT_LANG];
+      return dict[key];
+    }
     function show(i) {
       var links = getLinks();
       current = (i + links.length) % links.length;
       var a = links[current];
+      box.classList.remove('video');
+      box.setAttribute('aria-label', t('lb_label'));
+      vid.innerHTML = '';
       img.src = a.getAttribute('href');
       var thumb = a.querySelector('img');
       img.alt = thumb ? thumb.alt : a.textContent.trim();
+    }
+    function showVideo(a) {
+      box.classList.add('video');
+      box.setAttribute('aria-label', t('lb_video_label'));
+      img.removeAttribute('src');
+      var f = document.createElement('iframe');
+      f.src = a.getAttribute('data-embed');
+      var title = a.querySelector('.media-video-title');
+      var thumb = a.querySelector('img');
+      f.title = title ? title.textContent.trim() : (thumb ? thumb.alt : a.href);
+      f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      f.allowFullscreen = true;
+      vid.innerHTML = '';
+      vid.appendChild(f);
     }
     /* Seite hinter dem Dialog fuer Tastatur/Screenreader sperren (inert),
        statt Fokus manuell zu trappen. */
@@ -594,16 +610,32 @@
       setPageInert(true);
       box.querySelector('.lb-close').focus();
     }
+    function openVideo(a) {
+      lastFocus = document.activeElement;
+      showVideo(a);
+      box.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setPageInert(true);
+      box.querySelector('.lb-close').focus();
+    }
     function close() {
       box.classList.remove('open');
+      box.classList.remove('video');
       document.body.style.overflow = '';
       setPageInert(false);
+      vid.innerHTML = '';
       img.removeAttribute('src');
       if (lastFocus) lastFocus.focus();
     }
     document.addEventListener('click', function (e) {
       var a = e.target.closest ? e.target.closest('a[href]') : null;
-      if (!a || !imgRe.test(a.getAttribute('href'))) return;
+      if (!a) return;
+      if (a.hasAttribute('data-embed') && a.closest('.media-post-body')) {
+        e.preventDefault();
+        openVideo(a);
+        return;
+      }
+      if (!imgRe.test(a.getAttribute('href'))) return;
       if (!a.closest('.media-gallery') && !a.closest('.media-post-body')) return;
       var i = getLinks().indexOf(a);
       if (i === -1) return;
@@ -619,6 +651,7 @@
     document.addEventListener('keydown', function (e) {
       if (!box.classList.contains('open')) return;
       if (e.key === 'Escape') close();
+      else if (box.classList.contains('video')) return;
       else if (e.key === 'ArrowLeft') show(current - 1);
       else if (e.key === 'ArrowRight') show(current + 1);
     });
@@ -697,6 +730,5 @@
     initDownloads();
     initReveal();
     initScrollSpy();
-    initMediaEmbeds();
   });
 })();
