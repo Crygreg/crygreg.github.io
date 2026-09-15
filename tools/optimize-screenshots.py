@@ -52,8 +52,6 @@ def main() -> None:
             made += 1
         if convert(png, FULL / f"{stem}.webp", FULL_W):
             made += 1
-        if (THUMBS / f"{stem}.webp").exists() or (FULL / f"{stem}.webp").exists():
-            pass
     print(f"Fertig – {made} neue Varianten erzeugt.")
 
 
