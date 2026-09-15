@@ -445,6 +445,10 @@
       var value = t[el.getAttribute('data-i18n-aria')];
       if (value !== undefined) el.setAttribute('aria-label', value);
     });
+    document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+      var value = t[el.getAttribute('data-i18n-alt')];
+      if (value !== undefined) el.setAttribute('alt', value);
+    });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
       var value = t[el.getAttribute('data-i18n-html')];
       if (value !== undefined) el.innerHTML = value;

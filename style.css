@@ -918,7 +918,8 @@ footer {
     padding-right: 5vw;
   }
 
-  .media-gallery {
+  .media-gallery,
+  .media-videolist {
     grid-template-columns: 1fr;
   }
 
@@ -1274,6 +1275,21 @@ details.media-entry {
 .media-video:hover .media-video-play {
   background: rgba(201, 162, 75, .25);
   border-color: var(--accent-light);
+}
+
+/* Mehrere Videos nebeneinander wie die Screenshot-Galerie. */
+.media-videolist {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 18px;
+}
+
+.media-videolist .media-video {
+  margin-top: 0;
 }
 
 /* Shorts sind hochkant - schmales Hochformat statt Breitbild. */
