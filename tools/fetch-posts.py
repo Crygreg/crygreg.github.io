@@ -130,6 +130,11 @@ def main():
         since_ts = datetime.strptime(args.since, "%Y-%m-%d") \
             .replace(tzinfo=timezone.utc).timestamp()
 
+    if os.environ.get("DEBUG_DUMP"):
+        ch = json.loads(get("{}/channels/{}".format(API, args.channel), token))
+        print("channel: name={} type={} parent={}".format(
+            ch.get("name"), ch.get("type"), ch.get("parent_id")))
+
     msgs = fetch_messages(args.channel, token)
     print("{} messages fetched".format(len(msgs)))
     if msgs and os.environ.get("DEBUG_DUMP"):
