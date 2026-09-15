@@ -5,7 +5,8 @@ Legt PNGs (oder JPGs) in images/G2AE/ ab und fuehrt das Skript aus:
     python tools/optimize-screenshots.py
 
 - images/G2AE/thumbs/<name>.webp  (800 px breit, Galerie-Thumbnails)
-- images/G2AE/full/<name>.webp    (1920 px breit, Lightbox-Vollbild)
+- images/G2AE/mid/<name>.webp     (1600 px breit, Inline-Bilder in Posts)
+- images/G2AE/full/<name>.webp    (native Aufloesung bis 3840 px, Lightbox)
 
 Bereits vorhandene Varianten werden uebersprungen (nur neue Dateien
 werden erzeugt). Die Roh-Dateien selbst bleiben als Archiv im Repo,
@@ -24,8 +25,9 @@ except ImportError:
 
 SRC = Path(__file__).resolve().parent.parent / "images" / "G2AE"
 THUMBS = SRC / "thumbs"
+MID = SRC / "mid"
 FULL = SRC / "full"
-THUMB_W, FULL_W, QUALITY = 800, 3840, 90
+THUMB_W, MID_W, FULL_W, QUALITY = 800, 1600, 3840, 90
 
 
 def convert(src: Path, dst: Path, max_w: int) -> bool:
@@ -42,6 +44,7 @@ def convert(src: Path, dst: Path, max_w: int) -> bool:
 
 def main() -> None:
     THUMBS.mkdir(exist_ok=True)
+    MID.mkdir(exist_ok=True)
     FULL.mkdir(exist_ok=True)
     made = 0
     for png in sorted(SRC.glob("*")):
@@ -49,6 +52,8 @@ def main() -> None:
             continue
         stem = png.stem
         if convert(png, THUMBS / f"{stem}.webp", THUMB_W):
+            made += 1
+        if convert(png, MID / f"{stem}.webp", MID_W):
             made += 1
         if convert(png, FULL / f"{stem}.webp", FULL_W):
             made += 1
