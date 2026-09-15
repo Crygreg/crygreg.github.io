@@ -146,6 +146,9 @@ def main():
             continue
         content = (m.get("content") or "").strip()
         atts = m.get("attachments") or []
+        print("  [{}] type={} author={} content={}chars atts={} embeds={}".format(
+            m["id"], m.get("type"), m["author"]["username"],
+            len(content), len(atts), len(m.get("embeds") or [])))
         yt = [m2.group(1) for m2 in YT_RE.finditer(content)]
         # interessant = Text, Bilder oder Links; leere System-Posts raus
         if not content and not atts:
