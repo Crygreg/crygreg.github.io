@@ -43,7 +43,10 @@ standardmäßig eingeklappt. Header: Datum, Typ · Autor, Titel. Inhalt je nach 
   ohne JS: neuer Tab).
 
 Original-PNGs in `images/G2AE/` bleiben im Repo als Archiv, werden aber beim
-Deploy ausgeschlossen.
+Deploy ausgeschlossen. Neue Rohbilder in `images/G2AE/` ablegen und
+`python tools/optimize-screenshots.py` ausführen – das Skript erzeugt fehlende
+thumbs/full-Varianten (800/1920 px JPG); danach die `<a>`-Zeilen in der
+`.media-gallery` ergänzen.
 
 ## Deployment
 
