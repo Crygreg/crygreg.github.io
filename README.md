@@ -63,6 +63,18 @@ Cache-Header. Zusätzlich wird `<meta name="build" content="<sha>">` in den
 `<head>` jeder Seite geschrieben, damit sich die deployte Version im Seitenquelltext
 abfragen lässt.
 
+## Team-Avatare (Discord)
+
+Die Profilbilder der Team-Mitglieder werden taeglich vom Workflow
+`.github/workflows/update-avatars.yml` ueber `tools/fetch-avatars.py`
+synchronisiert (Discord REST API, `GET /users/{id}` — der Bot muss sich auf
+keinem Server befinden). Dateien landen in `images/avatars/<user-id>.<png|gif>`
+plus `manifest.json`. Benoetigt das Repository-Secret `DISCORD_BOT_TOKEN`
+(Discord Developer Portal → Application → Bot → Reset Token).
+Fallback-Kette im Frontend: lokale Datei → Lanyard-API → Initialen.
+Neue Mitglieder: User-ID in `USER_IDS` im Skript + `data-discord-id` am
+`.member-avatar`-Element in `index.html` ergaenzen.
+
 ## Bilder austauschen
 
 - Hintergründe: `images/g1-wallpaper.jpg`, `g2-wallpaper.jpg`, `secret-wallpaper.jpg`

@@ -531,28 +531,52 @@
     });
   }
 
-  /* Discord-Avatare ueber die Lanyard-API: liefert oeffentliche Profil-Daten
-     fuer Mitglieder, die dem Lanyard-Server (discord.gg/lanyard) beigetreten
-     sind. Bei Fehler oder nicht ueberwachtem Nutzer bleiben die Initialen. */
+  /* Discord-Avatare, dreistufig:
+     1. lokale Datei aus images/avatars/ (vom Bot-Workflow taeglich syncronisiert)
+     2. Lanyard-API (live, wenn Mitglied dem Lanyard-Server beigetreten ist)
+     3. Initialen als Fallback bei Fehler/fehlendem Avatar */
   function initAvatars() {
-    document.querySelectorAll('.member-avatar[data-discord-id]').forEach(function (el) {
-      var id = el.getAttribute('data-discord-id');
-      if (!id) return;
+    var els = Array.prototype.slice.call(
+      document.querySelectorAll('.member-avatar[data-discord-id]')
+    );
+    if (!els.length) return;
+
+    function addImg(el, src) {
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      el.appendChild(img);
+    }
+
+    function lanyard(el, id) {
       fetch('https://api.lanyard.rest/v1/users/' + id)
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (d) {
           var u = d && d.data && d.data.discord_user;
           if (!u || !u.avatar) return;
-          var img = document.createElement('img');
-          img.src = 'https://cdn.discordapp.com/avatars/' + id + '/' + u.avatar +
-            (u.avatar.indexOf('a_') === 0 ? '.gif' : '.png') + '?size=256';
-          img.alt = '';
-          img.loading = 'lazy';
-          img.decoding = 'async';
-          el.appendChild(img);
+          addImg(el, 'https://cdn.discordapp.com/avatars/' + id + '/' + u.avatar +
+            (u.avatar.indexOf('a_') === 0 ? '.gif' : '.png') + '?size=256');
         })
         .catch(function () {});
-    });
+    }
+
+    fetch('images/avatars/manifest.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (manifest) {
+        els.forEach(function (el) {
+          var id = el.getAttribute('data-discord-id');
+          var file = manifest && manifest[id];
+          if (file) addImg(el, 'images/avatars/' + file);
+          else lanyard(el, id);
+        });
+      })
+      .catch(function () {
+        els.forEach(function (el) {
+          lanyard(el, el.getAttribute('data-discord-id'));
+        });
+      });
   }
 
   function initDownloads() {
