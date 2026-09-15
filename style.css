@@ -1376,8 +1376,25 @@ details.media-entry {
   max-width: 100%;
   max-height: 78vh;
 
+  cursor: zoom-in;
+
   border: 1px solid rgba(201, 162, 75, .3);
   box-shadow: 0 10px 70px rgba(0, 0, 0, .8);
+
+  touch-action: none;
+  user-select: none;
+}
+
+.lightbox img:not(.dragging) {
+  transition: transform .12s ease-out;
+}
+
+.lightbox img.zoomed {
+  cursor: grab;
+}
+
+.lightbox img.zoomed.dragging {
+  cursor: grabbing;
 }
 
 .lightbox .lb-caption {
