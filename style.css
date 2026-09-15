@@ -1108,6 +1108,12 @@ footer {
   margin-bottom: 4px;
 }
 
+/* Screenshot-Posts sind leichtere Beitraege als echte Dev-Updates -
+   dezentere Type-Farbe, Gold bleibt den Entwicklungsupdates vorbehalten. */
+.media-shot .media-type {
+  color: var(--muted);
+}
+
 .media-title {
   font-size: 14px;
   line-height: 1.5;
