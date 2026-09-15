@@ -24,6 +24,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache-bust assets with commit SHA
+        run: |
+          V="${GITHUB_SHA:0:8}"
+          sed -i -E "s/\.(css|js|png|jpg|woff2)([\"')])/.\1?v=$V\2/g" ./*.html ./style.css ./fonts.css
+          sed -i "s|</head>|  <meta name=\"build\" content=\"$GITHUB_SHA\">\n</head>|" ./*.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

@@ -30,6 +30,15 @@ Der Workflow `.github/workflows/deploy-pages.yml` lädt die Seite bei jedem Push
 auf `main` automatisch als statisches Artifact zu GitHub Pages hoch. Voraussetzung:
 **Settings → Pages → Source: „GitHub Actions"**.
 
+### Cache-Busting
+
+Der Workflow hängt beim Deploy an alle lokalen Asset-URLs (CSS, JS, Fonts,
+Bilder) automatisch `?v=<commit-sha>` an. Dadurch bekommen Besucher nach jedem
+Push garantiert die neuen Dateien – GitHub Pages selbst erlaubt keine eigenen
+Cache-Header. Zusätzlich wird `<meta name="build" content="<sha>">` in den
+`<head>` jeder Seite geschrieben, damit sich die部署te Version im Seitenquelltext
+abfragen lässt.
+
 ## Bilder austauschen
 
 - Hintergründe: `images/g1-wallpaper.jpg`, `g2-wallpaper.jpg`, `secret-wallpaper.jpg`
