@@ -1093,6 +1093,53 @@ details.media-entry {
   flex-wrap: wrap;
 }
 
+.media-embed {
+  margin: 0 0 12px;
+}
+
+.media-embed iframe {
+  display: block;
+
+  width: 100%;
+
+  background: #000;
+  border: 1px solid var(--line);
+}
+
+.media-embed-video iframe {
+  aspect-ratio: 16/9;
+}
+
+.media-embed-short {
+  max-width: 400px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.media-embed-short iframe {
+  aspect-ratio: 9/16;
+
+  max-height: 80vh;
+}
+
+.media-outlink {
+  margin: 0;
+
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.media-gallery-caption {
+  color: var(--accent-light);
+
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  margin: 18px 0 12px;
+}
+
 .download {
   margin-top: 35px;
 }

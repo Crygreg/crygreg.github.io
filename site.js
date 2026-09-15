@@ -53,6 +53,7 @@
       g2_m1_date: '24.08.2026',
       g2_m2_date: '09.08.2026',
       g2_m3_date: '30.07.2026',
+      media_open: 'Auf YouTube öffnen',
       g2_m1_title: 'Die YouTube-Version des neuesten Bigfarm-Showcases!',
       g2_m2_title: 'Fühlte mich süß, hab den ersten Vergleichs-Short gedroppt 💅 👀',
       g2_m3_title: '11 neue Screenshots',
@@ -127,6 +128,7 @@
       g2_m1_date: 'Aug 24, 2026',
       g2_m2_date: 'Aug 9, 2026',
       g2_m3_date: 'Jul 30, 2026',
+      media_open: 'Open on YouTube',
       g2_m1_title: 'The YouTube version of the newest Bigfarm showcase!',
       g2_m2_title: 'Felt cute, dropped a first comparison short 💅 👀',
       g2_m3_title: '11 new screenshots',
@@ -201,6 +203,7 @@
       g2_m1_date: '24.08.2026',
       g2_m2_date: '09.08.2026',
       g2_m3_date: '30.07.2026',
+      media_open: 'Otwórz na YouTube',
       g2_m1_title: 'Wersja YouTube najnowszej prezentacji Bigfarm!',
       g2_m2_title: 'Słodki nastrój, więc wleciał pierwszy short porównawczy 💅 👀',
       g2_m3_title: '11 nowych zrzutów ekranu',
@@ -275,6 +278,7 @@
       g2_m1_date: '24.08.2026',
       g2_m2_date: '09.08.2026',
       g2_m3_date: '30.07.2026',
+      media_open: 'Открыть на YouTube',
       g2_m1_title: 'YouTube-версия новейшего шоукейса Bigfarm!',
       g2_m2_title: 'В милом настроении — первый шорт со сравнением 💅 👀',
       g2_m3_title: '11 новых скриншотов',
@@ -416,6 +420,19 @@
     });
   }
 
+  /* YouTube-Embeds erst beim Aufklappen laden - sonst wuerde YouTube
+     schon beim Seitenaufruf Daten bekommen. */
+  function initMediaEmbeds() {
+    document.querySelectorAll('details.media-post').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (!d.open) return;
+        d.querySelectorAll('iframe[data-src]').forEach(function (f) {
+          if (!f.src) f.src = f.getAttribute('data-src');
+        });
+      });
+    });
+  }
+
   function initDownloads() {
     document.querySelectorAll('.button.download[aria-disabled="true"]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
@@ -438,5 +455,6 @@
     initDownloads();
     initReveal();
     initScrollSpy();
+    initMediaEmbeds();
   });
 })();
