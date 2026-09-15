@@ -514,7 +514,7 @@
     box.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
     box.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
     box.addEventListener('click', function (e) {
-      if (e.target === box || e.target === img) close();
+      if (e.target === box) close();
     });
     document.addEventListener('keydown', function (e) {
       if (!box.classList.contains('open')) return;

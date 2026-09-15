@@ -1074,6 +1074,8 @@ footer {
 
   overflow: hidden;
 
+  cursor: zoom-in;
+
   border: 1px solid var(--line);
 }
 
