@@ -1228,6 +1228,7 @@ details.media-entry {
   display: block;
 
   width: 100%;
+  height: auto;
 
   aspect-ratio: 16/9;
   object-fit: cover;
@@ -1351,7 +1352,7 @@ details.media-entry {
 
 .lightbox img {
   max-width: 100%;
-  max-height: 74vh;
+  max-height: 78vh;
 
   border: 1px solid rgba(201, 162, 75, .3);
   box-shadow: 0 10px 70px rgba(0, 0, 0, .8);
@@ -1359,9 +1360,9 @@ details.media-entry {
 
 .lightbox .lb-caption {
   max-width: 720px;
-  max-height: 16vh;
+  max-height: 14vh;
 
-  margin-top: 14px;
+  margin-top: 12px;
   overflow: auto;
 
   color: #ddd;
@@ -1410,7 +1411,7 @@ details.media-entry {
 .lightbox .lb-video {
   display: none;
 
-  width: 100%;
+  width: min(92vw, calc(78vh * 16 / 9));
 
   aspect-ratio: 16/9;
 }
@@ -1433,7 +1434,7 @@ details.media-entry {
 /* Shorts hochkant statt letterboxed. */
 .lightbox .lb-video.portrait {
   width: auto;
-  height: min(74vh, 720px);
+  height: 78vh;
 
   aspect-ratio: 9/16;
 }
