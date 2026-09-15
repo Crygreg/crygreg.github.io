@@ -294,7 +294,7 @@
           entry.target.classList.add('out');
         }
       });
-    }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0, rootMargin: '-12% 0px -18% 0px' });
     els.forEach(function (el) { io.observe(el); });
   }
 

@@ -994,7 +994,7 @@ footer {
 .js [data-reveal].out,
 .js .detail-content.out,
 .js .detail-body > .out {
-  animation: sink .5s ease both;
+  animation: sink .8s ease both;
 }
 
 .project-grid [data-reveal]:nth-child(2).in {
