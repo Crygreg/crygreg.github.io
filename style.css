@@ -1007,6 +1007,15 @@ footer {
   margin: 40px 0 20px;
 }
 
+.detail-body h3 {
+  margin: 34px 0 12px;
+
+  color: var(--accent-light);
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .detail-body p {
   color: var(--muted);
 
