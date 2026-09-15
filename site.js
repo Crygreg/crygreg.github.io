@@ -531,6 +531,30 @@
     });
   }
 
+  /* Discord-Avatare ueber die Lanyard-API: liefert oeffentliche Profil-Daten
+     fuer Mitglieder, die dem Lanyard-Server (discord.gg/lanyard) beigetreten
+     sind. Bei Fehler oder nicht ueberwachtem Nutzer bleiben die Initialen. */
+  function initAvatars() {
+    document.querySelectorAll('.member-avatar[data-discord-id]').forEach(function (el) {
+      var id = el.getAttribute('data-discord-id');
+      if (!id) return;
+      fetch('https://api.lanyard.rest/v1/users/' + id)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          var u = d && d.data && d.data.discord_user;
+          if (!u || !u.avatar) return;
+          var img = document.createElement('img');
+          img.src = 'https://cdn.discordapp.com/avatars/' + id + '/' + u.avatar +
+            (u.avatar.indexOf('a_') === 0 ? '.gif' : '.png') + '?size=256';
+          img.alt = '';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          el.appendChild(img);
+        })
+        .catch(function () {});
+    });
+  }
+
   function initDownloads() {
     document.querySelectorAll('.button.download[aria-disabled="true"]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
@@ -549,6 +573,7 @@
       });
     }
     initLightbox();
+    initAvatars();
     applyLanguage(getInitialLang());
     initNav();
     initDownloads();
