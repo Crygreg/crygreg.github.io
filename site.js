@@ -461,12 +461,19 @@
     });
   }
 
-  /* Lightbox fuer Galerie-Bilder: grosses Vorschaubild direkt auf der Seite,
+  /* Lightbox fuer Bild-Links (Galerie + Artwork im Post): grosses Vorschaubild
+     direkt auf der Seite. Delegierter Click-Handler, damit per data-i18n-html
+     neu gesetzte Post-Links ohne Re-Bind funktionieren.
      Pfeiltasten/Buttons zum Blaettern, Esc oder Klick auf den Hintergrund
      schliesst. Ohne JS funktionieren die Links weiterhin (neuer Tab). */
   function initLightbox() {
-    var links = document.querySelectorAll('.media-gallery a');
-    if (!links.length) return;
+    var imgRe = /\.(jpe?g|png|webp|gif|avif)($|\?)/i;
+    function getLinks() {
+      return Array.prototype.slice.call(
+        document.querySelectorAll('.media-gallery a[href], .media-post-body a[href]')
+      ).filter(function (a) { return imgRe.test(a.getAttribute('href')); });
+    }
+    if (!getLinks().length) return;
     var box = document.createElement('div');
     box.className = 'lightbox';
     box.setAttribute('role', 'dialog');
@@ -481,11 +488,12 @@
     var current = 0;
     var lastFocus = null;
     function show(i) {
+      var links = getLinks();
       current = (i + links.length) % links.length;
       var a = links[current];
       img.src = a.getAttribute('href');
       var thumb = a.querySelector('img');
-      img.alt = thumb ? thumb.alt : '';
+      img.alt = thumb ? thumb.alt : a.textContent.trim();
     }
     function openAt(i) {
       lastFocus = document.activeElement;
@@ -500,11 +508,14 @@
       img.removeAttribute('src');
       if (lastFocus) lastFocus.focus();
     }
-    links.forEach(function (a, i) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        openAt(i);
-      });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || !imgRe.test(a.getAttribute('href'))) return;
+      if (!a.closest('.media-gallery') && !a.closest('.media-post-body')) return;
+      var i = getLinks().indexOf(a);
+      if (i === -1) return;
+      e.preventDefault();
+      openAt(i);
     });
     box.querySelector('.lb-close').addEventListener('click', close);
     box.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
