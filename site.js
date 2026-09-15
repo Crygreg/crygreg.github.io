@@ -56,6 +56,12 @@
       g2_m1_title: 'Die YouTube-Version des neuesten Bigfarm-Showcases!',
       g2_m2_title: 'Fühlte mich süß, hab den ersten Vergleichs-Short gedroppt 💅 👀',
       g2_m3_title: '11 neue Screenshots',
+      media_post: 'Entwicklungsupdate',
+      g2_post_author: 'Crygreg',
+      g2_post_title: 'Lobarts Farm & Patreon',
+      g2_m3_post: '<p>Die erste Release-Version von Lobarts Farm wird finalisiert – dazu wird mit neuer Vegetation experimentiert. Wie immer W.I.P.: Die Farben des Grases können sich noch leicht ändern.</p><p>Als Inspiration diente <a href="https://sun6-19.userapi.com/c851024/v851024127/1d58a8/9lS_SZUcqLY.jpg" target="_blank" rel="noopener noreferrer">dieses fantastische Artwork</a> – Credits gehen an Martin Nawaz!</p><p>Wie kürzlich angekündigt habe ich der Empfehlung folgend ein <a href="https://patreon.com/Crygreg/" target="_blank" rel="noopener noreferrer">Patreon</a> eröffnet, auf dem ich ausführlichere Entwicklungs-Updates teile, Umfragen erstelle und Meinungen einhole – oder unterstützt uns über <a href="https://ko-fi.com/crygreg" target="_blank" rel="noopener noreferrer">Ko-Fi</a>! Hinweis: Es gibt KEINE weiteren Vorteile – das Projekt bleibt nichtkommerziell, keine exklusiven Pre-Release-Builds. Patreon und Ko-Fi sind schlicht Wege, dieses und zukünftige Projekte zu unterstützen; fast alles Geld fließt ohnehin in die Mod. Jede Unterstützung – finanziell oder nicht – wird sehr geschätzt! Wir arbeiten weiter an der ersten spielbaren Version – hoffentlich noch dieses Jahr.</p>',
+      support_h: 'Unterstützen',
+      support_note: 'Das Projekt bleibt nichtkommerziell – Patreon und Ko-Fi sind freiwillige Wege, die Entwicklung zu unterstützen.',
       screenshot: 'Screenshot',
       download_h: 'Download',
       download_note: 'Hier kann später der finale Download, ein GitHub-Release oder ein externer Download-Link eingetragen werden.',
@@ -124,6 +130,12 @@
       g2_m1_title: 'The YouTube version of the newest Bigfarm showcase!',
       g2_m2_title: 'Felt cute, dropped a first comparison short 💅 👀',
       g2_m3_title: '11 new screenshots',
+      media_post: 'Dev update',
+      g2_post_author: 'Crygreg',
+      g2_post_title: 'Lobart’s farm & Patreon',
+      g2_m3_post: '<p>Finalizing the first release version of Lobart’s farm. Experimenting with some new vegetation – as always, it’s W.I.P., we may still alter the colors of the grass slightly.</p><p>We used <a href="https://sun6-19.userapi.com/c851024/v851024127/1d58a8/9lS_SZUcqLY.jpg" target="_blank" rel="noopener noreferrer">this fantastic artwork</a> as sort of an inspiration for it – credits go to Martin Nawaz!</p><p>Additionally, as recently announced, I followed the recommendation and opened up a <a href="https://patreon.com/Crygreg/" target="_blank" rel="noopener noreferrer">Patreon</a> where I’ll also be sharing more in-depth development updates, create polls and ask for opinions – or consider supporting us through <a href="https://ko-fi.com/crygreg" target="_blank" rel="noopener noreferrer">Ko-Fi</a>! Disclaimer: There will be NO other benefits tied to it – the project stays non-commercial, no exclusive pre-release builds. Patreon and Ko-Fi are simply ways to support this and future projects; almost all of the money is spent on the mod anyway. Any support, financial or not, is deeply appreciated! We’re still working on making the first playable release ready – hopefully at the end of this year.</p>',
+      support_h: 'Support',
+      support_note: 'The project stays non-commercial – Patreon and Ko-Fi are voluntary ways to support development.',
       screenshot: 'Screenshot',
       download_h: 'Download',
       download_note: 'The final download, a GitHub release or an external download link can be added here later.',
@@ -192,6 +204,12 @@
       g2_m1_title: 'Wersja YouTube najnowszej prezentacji Bigfarm!',
       g2_m2_title: 'Słodki nastrój, więc wleciał pierwszy short porównawczy 💅 👀',
       g2_m3_title: '11 nowych zrzutów ekranu',
+      media_post: 'Aktualizacja deweloperska',
+      g2_post_author: 'Crygreg',
+      g2_post_title: 'Farma Lobarta i Patreon',
+      g2_m3_post: '<p>Finalizujemy pierwszą wydaniową wersję farmy Lobarta. Eksperymentujemy z nową roślinnością – jak zawsze W.I.P., kolory trawy mogą się jeszcze lekko zmienić.</p><p>Jako inspiracji użyliśmy <a href="https://sun6-19.userapi.com/c851024/v851024127/1d58a8/9lS_SZUcqLY.jpg" target="_blank" rel="noopener noreferrer">tej fantastycznej grafiki</a> – uznanie dla Martina Nawaza!</p><p>Ponadto, jak niedawno ogłoszono, poszedłem za radą i otworzyłem <a href="https://patreon.com/Crygreg/" target="_blank" rel="noopener noreferrer">Patreon</a>, gdzie będę dzielić się bardziej szczegółowymi aktualizacjami, tworzyć ankiety i pytać o opinie – albo wesprzyj nas przez <a href="https://ko-fi.com/crygreg" target="_blank" rel="noopener noreferrer">Ko-Fi</a>! Zastrzeżenie: NIE wiąże się to z żadnymi innymi korzyściami – projekt pozostaje niekomercyjny, bez ekskluzywnych wersji przedpremierowych. Patreon i Ko-Fi to po prostu sposoby wsparcia tego i przyszłych projektów; prawie wszystkie pieniądze i tak idą na moda. Każde wsparcie – finansowe czy nie – jest głęboko doceniane! Wciąż pracujemy nad pierwszą grywalną wersją – miejmy nadzieję, do końca tego roku.</p>',
+      support_h: 'Wesprzyj',
+      support_note: 'Projekt pozostaje niekomercyjny – Patreon i Ko-Fi to dobrowolne sposoby wsparcia rozwoju.',
       screenshot: 'Zrzut ekranu',
       download_h: 'Pobieranie',
       download_note: 'Ostateczny link do pobrania, wydanie na GitHubie lub zewnętrzny link można dodać tutaj później.',
@@ -260,6 +278,12 @@
       g2_m1_title: 'YouTube-версия новейшего шоукейса Bigfarm!',
       g2_m2_title: 'В милом настроении — первый шорт со сравнением 💅 👀',
       g2_m3_title: '11 новых скриншотов',
+      media_post: 'Обновление разработки',
+      g2_post_author: 'Crygreg',
+      g2_post_title: 'Ферма Лобарта и Patreon',
+      g2_m3_post: '<p>Завершаем первую релизную версию фермы Лобарта. Экспериментируем с новой растительностью — как всегда, W.I.P., цвета травы ещё могут немного измениться.</p><p>В качестве вдохновения использовался <a href="https://sun6-19.userapi.com/c851024/v851024127/1d58a8/9lS_SZUcqLY.jpg" target="_blank" rel="noopener noreferrer">этот фантастический арт</a> — спасибо Мартину Навазу!</p><p>Кроме того, как было объявлено недавно, я последовал рекомендации и открыл <a href="https://patreon.com/Crygreg/" target="_blank" rel="noopener noreferrer">Patreon</a>, где буду делиться более подробными обновлениями разработки, проводить опросы и спрашивать мнения — или поддержите нас через <a href="https://ko-fi.com/crygreg" target="_blank" rel="noopener noreferrer">Ko-Fi</a>! Дисклеймер: это НЕ даёт никаких других преимуществ — проект остаётся некоммерческим, никаких эксклюзивных пре-релизных сборок. Patreon и Ko-Fi — просто способы поддержать этот и будущие проекты; почти все деньги всё равно идут на мод. Любая поддержка — финансовая или нет — очень ценится! Мы продолжаем работать над первой играбельной версией — надеемся, к концу этого года.</p>',
+      support_h: 'Поддержка',
+      support_note: 'Проект остаётся некоммерческим — Patreon и Ko-Fi лишь добровольные способы поддержать разработку.',
       screenshot: 'Скриншот',
       download_h: 'Скачивание',
       download_note: 'Финальная ссылка на скачивание, релиз на GitHub или внешняя ссылка могут быть добавлены здесь позже.',
@@ -300,6 +324,10 @@
     document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
       var value = t[el.getAttribute('data-i18n-aria')];
       if (value !== undefined) el.setAttribute('aria-label', value);
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var value = t[el.getAttribute('data-i18n-html')];
+      if (value !== undefined) el.innerHTML = value;
     });
     var select = document.getElementById('lang-select');
     if (select) select.value = lang;
