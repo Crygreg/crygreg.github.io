@@ -52,6 +52,31 @@ jobs:
             fi
           done
           exit $status
+      - name: Verify i18n key coverage
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const files = fs.readdirSync('.').filter(f => f.endsWith('.html'));
+          const used = new Set();
+          const scan = f => {
+            for (const m of fs.readFileSync(f, 'utf8').matchAll(/data-i18n(?:-aria|-html)?="([^"]+)"/g))
+              used.add(m[1]);
+          };
+          files.forEach(scan);
+          scan('site.js'); // lightbox buttons are created via innerHTML
+          const src = fs.readFileSync('site.js', 'utf8');
+          const langs = {};
+          for (const m of src.matchAll(/^    (de|en|pl|ru): \{([\s\S]*?)\n    \}/gm))
+            langs[m[1]] = new Set([...m[2].matchAll(/^      (\w+):/gm)].map(x => x[1]));
+          let fail = false;
+          for (const [lang, keys] of Object.entries(langs)) {
+            const missing = [...used].filter(k => !keys.has(k));
+            if (missing.length) { console.error(`::error::${lang} missing keys: ${missing.join(', ')}`); fail = true; }
+          }
+          const sizes = new Set(Object.values(langs).map(s => s.size));
+          if (sizes.size > 1) { console.error('::error::language dicts have different key counts'); fail = true; }
+          process.exit(fail ? 1 : 0);
+          EOF
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

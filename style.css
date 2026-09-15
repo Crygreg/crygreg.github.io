@@ -725,11 +725,12 @@ h1 span {
 }
 
 .member-avatar::before {
-  content: "✦";
+  content: attr(data-initials);
 
   color: var(--accent-light);
 
-  font-size: 34px;
+  font-size: 30px;
+  letter-spacing: 3px;
 
   opacity: .8;
 }
