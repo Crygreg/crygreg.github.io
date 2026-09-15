@@ -70,6 +70,9 @@
       download_note: 'Hier kann später der finale Download, ein GitHub-Release oder ein externer Download-Link eingetragen werden.',
       download_btn: 'DOWNLOAD',
       download_soon: 'Der Download ist noch nicht verfügbar.',
+      lb_close: 'Schließen',
+      lb_prev: 'Vorheriges Bild',
+      lb_next: 'Nächstes Bild',
       g1_overview: 'Eine Erweiterung des ersten Gothic-Abenteuers.',
       g1_f1: 'Neue Quests und Storylines',
       g1_f2: 'Verbesserte Grafik und Texturen',
@@ -147,6 +150,9 @@
       download_note: 'The final download, a GitHub release or an external download link can be added here later.',
       download_btn: 'DOWNLOAD',
       download_soon: 'The download is not available yet.',
+      lb_close: 'Close',
+      lb_prev: 'Previous image',
+      lb_next: 'Next image',
       g1_overview: 'An expansion of the first Gothic adventure.',
       g1_f1: 'New quests and storylines',
       g1_f2: 'Improved graphics and textures',
@@ -224,6 +230,9 @@
       download_note: 'Ostateczny link do pobrania, wydanie na GitHubie lub zewnętrzny link można dodać tutaj później.',
       download_btn: 'POBIERZ',
       download_soon: 'Pobieranie nie jest jeszcze dostępne.',
+      lb_close: 'Zamknij',
+      lb_prev: 'Poprzedni obraz',
+      lb_next: 'Następny obraz',
       g1_overview: 'Rozszerzenie pierwszej przygody Gothic.',
       g1_f1: 'Nowe zadania i wątki fabularne',
       g1_f2: 'Ulepszona grafika i tekstury',
@@ -301,6 +310,9 @@
       download_note: 'Финальная ссылка на скачивание, релиз на GitHub или внешняя ссылка могут быть добавлены здесь позже.',
       download_btn: 'СКАЧАТЬ',
       download_soon: 'Скачивание пока недоступно.',
+      lb_close: 'Закрыть',
+      lb_prev: 'Предыдущее изображение',
+      lb_next: 'Следующее изображение',
       g1_overview: 'Расширение первого приключения Gothic.',
       g1_f1: 'Новые квесты и сюжетные линии',
       g1_f2: 'Улучшенная графика и текстуры',
@@ -441,6 +453,65 @@
     });
   }
 
+  /* Lightbox fuer Galerie-Bilder: grosses Vorschaubild direkt auf der Seite,
+     Pfeiltasten/Buttons zum Blaettern, Esc oder Klick auf den Hintergrund
+     schliesst. Ohne JS funktionieren die Links weiterhin (neuer Tab). */
+  function initLightbox() {
+    var links = document.querySelectorAll('.media-gallery a');
+    if (!links.length) return;
+    var box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.innerHTML =
+      '<button type="button" class="lb-close" data-i18n-aria="lb_close" aria-label="Schließen">&times;</button>' +
+      '<button type="button" class="lb-prev" data-i18n-aria="lb_prev" aria-label="Vorheriges Bild">&lsaquo;</button>' +
+      '<img alt="">' +
+      '<button type="button" class="lb-next" data-i18n-aria="lb_next" aria-label="Nächstes Bild">&rsaquo;</button>';
+    document.body.appendChild(box);
+    var img = box.querySelector('img');
+    var current = 0;
+    var lastFocus = null;
+    function show(i) {
+      current = (i + links.length) % links.length;
+      var a = links[current];
+      img.src = a.getAttribute('href');
+      var thumb = a.querySelector('img');
+      img.alt = thumb ? thumb.alt : '';
+    }
+    function openAt(i) {
+      lastFocus = document.activeElement;
+      show(i);
+      box.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      box.querySelector('.lb-close').focus();
+    }
+    function close() {
+      box.classList.remove('open');
+      document.body.style.overflow = '';
+      img.removeAttribute('src');
+      if (lastFocus) lastFocus.focus();
+    }
+    links.forEach(function (a, i) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        openAt(i);
+      });
+    });
+    box.querySelector('.lb-close').addEventListener('click', close);
+    box.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
+    box.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
+    box.addEventListener('click', function (e) {
+      if (e.target === box || e.target === img) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!box.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(current - 1);
+      else if (e.key === 'ArrowRight') show(current + 1);
+    });
+  }
+
   function initDownloads() {
     document.querySelectorAll('.button.download[aria-disabled="true"]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
@@ -458,6 +529,7 @@
         applyLanguage(select.value);
       });
     }
+    initLightbox();
     applyLanguage(getInitialLang());
     initNav();
     initDownloads();
