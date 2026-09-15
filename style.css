@@ -1177,40 +1177,13 @@ details.media-entry {
   letter-spacing: 1px;
 }
 
-.media-subdetails > summary {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
+.media-gallery-caption {
   margin: 22px 0 14px;
-
-  cursor: pointer;
-  list-style: none;
 
   color: var(--accent-light);
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-
-  transition: color .3s;
-}
-
-.media-subdetails > summary:hover {
-  color: #fff;
-}
-
-.media-subdetails > summary::-webkit-details-marker {
-  display: none;
-}
-
-.media-subdetails > summary .arrow {
-  color: var(--accent);
-
-  transition: transform .3s;
-}
-
-.media-subdetails[open] > summary .arrow {
-  transform: rotate(180deg);
 }
 
 .lightbox {
