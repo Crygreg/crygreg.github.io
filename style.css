@@ -1375,14 +1375,14 @@ details.media-entry {
 }
 
 .lightbox .lb-caption {
-  max-width: 720px;
+  max-width: 840px;
   max-height: 14vh;
 
   margin-top: 12px;
   overflow: auto;
 
   color: #ddd;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.6;
   text-align: center;
 }
