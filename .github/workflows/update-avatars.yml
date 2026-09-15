@@ -19,6 +19,9 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install Pillow
+        run: pip install pillow
+
       - name: Fetch avatars
         id: fetch
         env:

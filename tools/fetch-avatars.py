@@ -10,10 +10,13 @@ manifest.json (user-id -> Dateiname), damit die Seite die richtige
 Endung (png/gif) kennt. Nur geaenderte Dateien werden neu geschrieben,
 damit der Workflow bedingt committen kann.
 """
+import io
 import json
 import os
 import sys
 import urllib.request
+
+from PIL import Image
 
 API = "https://discord.com/api/v10"
 CDN = "https://cdn.discordapp.com"
@@ -33,6 +36,13 @@ def get(url, token=None):
         req.add_header("Authorization", "Bot " + token)
     with urllib.request.urlopen(req, timeout=20) as r:
         return r.read()
+
+
+def to_webp(png_bytes):
+    img = Image.open(io.BytesIO(png_bytes)).convert("RGBA")
+    buf = io.BytesIO()
+    img.save(buf, "WEBP", quality=82, method=6)
+    return buf.getvalue()
 
 
 def write_if_changed(path, data):
@@ -67,7 +77,7 @@ def main():
         if not avatar:
             print("{}: no custom avatar, skipping".format(uid))
             continue
-        ext = "gif" if avatar.startswith("a_") else "png"
+        ext = "gif" if avatar.startswith("a_") else "webp"
         fname = "{}.{}".format(uid, ext)
         path = os.path.join(OUT, fname)
         old = old_manifest.get(uid) or {}
@@ -78,7 +88,10 @@ def main():
                 and os.path.exists(path):
             print("{}: unchanged (hash match)".format(uid))
         else:
-            data = get("{}/avatars/{}/{}.{}?size=256".format(CDN, uid, avatar, ext))
+            raw = get("{}/avatars/{}/{}.{}?size=256".format(
+                CDN, uid, avatar, "gif" if ext == "gif" else "png"))
+            # Statische Avatare als WebP (~85% kleiner), animierte bleiben GIF
+            data = raw if ext == "gif" else to_webp(raw)
             if write_if_changed(path, data):
                 changed = True
                 print("{}: updated {} ({} bytes)".format(uid, fname, len(data)))

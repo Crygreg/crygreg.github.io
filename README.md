@@ -68,7 +68,7 @@ abfragen lässt.
 Die Profilbilder der Team-Mitglieder werden taeglich vom Workflow
 `.github/workflows/update-avatars.yml` ueber `tools/fetch-avatars.py`
 synchronisiert (Discord REST API, `GET /users/{id}` — der Bot muss sich auf
-keinem Server befinden). Dateien landen in `images/avatars/<user-id>.<png|gif>`
+keinem Server befinden). Dateien landen in `images/avatars/<user-id>.<webp|gif>`
 plus `manifest.json`. Benoetigt das Repository-Secret `DISCORD_BOT_TOKEN`
 (Discord Developer Portal → Application → Bot → Reset Token).
 Fallback-Kette im Frontend: lokale Datei → Lanyard-API → Initialen.
