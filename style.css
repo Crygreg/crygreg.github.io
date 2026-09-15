@@ -1178,6 +1178,31 @@ details.media-entry {
   color: var(--accent-light);
 }
 
+.media-post-image {
+  display: block;
+
+  margin-top: 18px;
+
+  overflow: hidden;
+
+  cursor: zoom-in;
+
+  border: 1px solid var(--line);
+}
+
+.media-post-image img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  transition: .4s;
+}
+
+.media-post-image:hover img {
+  transform: scale(1.03);
+}
+
 .support-links {
   display: flex;
 
