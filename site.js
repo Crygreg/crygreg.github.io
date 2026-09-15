@@ -590,6 +590,7 @@
     }
     function showVideo(a) {
       box.classList.add('video');
+      vid.classList.toggle('portrait', a.classList.contains('media-video-short'));
       box.setAttribute('aria-label', t('lb_video_label'));
       img.removeAttribute('src');
       var f = document.createElement('iframe');

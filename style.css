@@ -1275,6 +1275,18 @@ details.media-entry {
   border-color: var(--accent-light);
 }
 
+/* Shorts sind hochkant - schmales Hochformat statt Breitbild. */
+.media-video-short {
+  max-width: 340px;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.media-video-short img {
+  aspect-ratio: 4/5;
+}
+
 .media-video-title {
   position: absolute;
   right: 0;
@@ -1416,6 +1428,14 @@ details.media-entry {
 
 .lightbox.video .lb-video {
   display: block;
+}
+
+/* Shorts hochkant statt letterboxed. */
+.lightbox .lb-video.portrait {
+  width: auto;
+  height: min(74vh, 720px);
+
+  aspect-ratio: 9/16;
 }
 
 .lightbox.video img,
