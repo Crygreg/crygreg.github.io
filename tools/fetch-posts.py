@@ -108,6 +108,8 @@ def main():
     ap.add_argument("--since", help="YYYY-MM-DD – aeltere Posts ignorieren")
     ap.add_argument("--all", action="store_true",
                     help="State ignorieren, alles im Fenster neu ausgeben")
+    ap.add_argument("--list-channels", action="store_true",
+                    help="Alle Channels des Servers auflisten und beenden")
     args = ap.parse_args()
 
     token = os.environ.get("DISCORD_BOT_TOKEN")
@@ -130,10 +132,18 @@ def main():
         since_ts = datetime.strptime(args.since, "%Y-%m-%d") \
             .replace(tzinfo=timezone.utc).timestamp()
 
-    if os.environ.get("DEBUG_DUMP"):
-        ch = json.loads(get("{}/channels/{}".format(API, args.channel), token))
-        print("channel: name={} type={} parent={}".format(
-            ch.get("name"), ch.get("type"), ch.get("parent_id")))
+    ch = json.loads(get("{}/channels/{}".format(API, args.channel), token))
+    print("channel: name={} type={} guild={}".format(
+        ch.get("name"), ch.get("type"), ch.get("guild_id")))
+
+    if args.list_channels:
+        chans = json.loads(get("{}/guilds/{}/channels".format(
+            API, ch["guild_id"]), token))
+        for c in sorted(chans, key=lambda c: (c.get("parent_id") or "",
+                                              c.get("position", 0))):
+            print("  {:>20}  type={:<3} {}".format(
+                c["id"], c.get("type"), c.get("name")))
+        return
 
     msgs = fetch_messages(args.channel, token)
     print("{} messages fetched".format(len(msgs)))
