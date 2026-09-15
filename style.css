@@ -1,214 +1,208 @@
-@font-face {
-    font-family: "Anniversary";
-    src: url("fonts/anniversary.tff") format("tff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-:root {
-  --bg: #070707;
-  --panel: #101010;
-  --panel2: #151515;
-  --text: #e7e0d2;
-  --muted: #999187;
-  --accent: #b87532;
-  --accent-light: #d99a55;
-  --line: rgba(205, 160, 102, .25);
-}
+  <title>Gothic Revamped</title>
 
-* { box-sizing: border-box; }
+  <meta
+    name="description"
+    content="Fan-Modifikationen für die Gothic-Reihe."
+  >
 
-html { scroll-behavior: smooth; }
+  <link rel="stylesheet" href="style.css">
+</head>
 
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Anniversary', Georgia, serif;
-}
+<body>
 
-a { color: inherit; text-decoration: none; }
+  <!-- STARTSEITE -->
+  <header class="hero" id="home">
 
-.hero {
-  position: relative;
-  min-height: 88vh;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.52) 50%, rgba(0,0,0,.84) 100%),
-    url('images/g1-wallpaper.jpg') center/cover no-repeat;
-  border-bottom: 1px solid var(--line);
-}
+    <div class="hero-overlay"></div>
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 65% 45%, transparent 0 15%, rgba(0,0,0,.35) 65%, rgba(0,0,0,.75));
-  pointer-events: none;
-}
+    <nav class="nav">
 
-.nav {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 6vw;
-}
+      <a class="brand" href="#home">
+        ANNIVERSARY<br>
+        <span>EDITION</span>
+      </a>
 
-.brand {
-  font-family: Cinzel, serif;
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  line-height: 1.05;
-  text-shadow: 0 2px 12px #000;
-}
+      <div class="nav-links">
+        <a href="#projects">Projekte</a>
+        <a href="#about">Über das Projekt</a>
+      </div>
 
-.brand span { color: var(--accent-light); font-size: 11px; letter-spacing: 5px; }
+    </nav>
 
-.nav-links { display: flex; gap: 35px; font-family: Cinzel, serif; font-size: 12px; letter-spacing: 2px; }
-.nav-links a { opacity: .75; transition: .25s; }
-.nav-links a:hover { opacity: 1; color: var(--accent-light); }
+    <div class="hero-content">
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 760px;
-  padding: 15vh 6vw 12vh;
-}
+      <p class="eyebrow">GOTHIC</p>
 
-.eyebrow {
-  color: var(--accent-light);
-  font-family: Cinzel, serif;
-  font-size: 11px;
-  letter-spacing: 4px;
-  margin: 0 0 18px;
-}
+      <h1>
+        Anniversary<br>
+        <span>Edition</span>
+      </h1>
 
-h1, h2, h3, h4 { font-family: Cinzel, Georgia, serif; }
+      <p class="intro">
+        <!-- Hier kannst du später einen kurzen Einführungstext einfügen -->
+      </p>
 
-h1 {
-  font-size: clamp(58px, 9vw, 130px);
-  line-height: .86;
-  margin: 0;
-  letter-spacing: -2px;
-  text-shadow: 0 5px 30px #000;
-}
+      <a class="scroll-button" href="#projects">
+        PROJEKTE ANSEHEN
+        <span>↓</span>
+      </a>
 
-h1 span { color: var(--accent-light); }
+    </div>
 
-.intro {
-  max-width: 500px;
-  color: #c0b8aa;
-  font-size: 17px;
-  line-height: 1.8;
-  margin: 35px 0;
-}
+  </header>
 
-.scroll-button, .button {
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
-  border: 1px solid var(--accent);
-  padding: 15px 20px;
-  font-family: Cinzel, serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  transition: .25s;
-}
 
-.scroll-button:hover, .button:hover {
-  background: var(--accent);
-  color: #090705;
-}
+  <main>
 
-.projects-section { padding: 110px 6vw 130px; }
+    <!-- PROJEKTE -->
+    <section class="projects-section" id="projects">
 
-.section-heading { max-width: 680px; margin-bottom: 55px; }
-.section-heading h2, .about-inner h2 { font-size: clamp(34px, 5vw, 58px); margin: 0 0 20px; }
-.section-heading p:last-child, .about-inner p:last-child { color: var(--muted); line-height: 1.9; }
+      <div class="section-heading">
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
+        <p class="eyebrow">UNSERE</p>
 
-.project-card {
-  min-height: 590px;
-  position: relative;
-  overflow: hidden;
-  background: var(--panel);
-  border: 1px solid rgba(255,255,255,.08);
-  transition: transform .35s, border-color .35s;
-}
+        <h2>Mod-Projekte</h2>
 
-.project-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--accent);
-}
+        <p>
+          Um mehr zu erfahren, wähle das gewünschte Projekt aus.
+        </p>
 
-.card-image {
-  height: 300px;
-  background-position: center;
-  background-size: cover;
-  filter: saturate(.75);
-  transition: transform .5s, filter .5s;
-}
+      </div>
 
-.project-card:hover .card-image { transform: scale(1.04); filter: saturate(1); }
 
-.gothic1 .card-image { background-image: url('images/g1-wallpaper.jpg'); }
-.gothic2 .card-image { background-image: url('images/g2-wallpaper.jpg'); }
-.gothic3 .card-image { background-image: url('images/secret-wallpaper.jpg'); }
+      <div class="project-grid">
 
-.card-content { padding: 28px 30px 32px; }
-.game-number { color: var(--accent-light); font-family: Cinzel, serif; margin: 0 0 7px; font-size: 12px; letter-spacing: 3px; }
-.card-content h3 { font-size: 28px; margin: 0; }
-.card-content h4 { color: var(--accent-light); font-size: 14px; margin: 5px 0 18px; letter-spacing: 1px; }
-.card-content p:not(.game-number) { color: var(--muted); font-size: 13px; line-height: 1.8; min-height: 92px; }
-.question { font-size: 24px; margin-left: 5px; }
 
-.button { margin-top: 8px; padding: 12px 14px; }
-.button span { color: var(--accent-light); }
+        <!-- GOTHIC I -->
+        <article class="project-card gothic1">
 
-.about-section {
-  background: #0c0c0c;
-  border-top: 1px solid rgba(255,255,255,.05);
-  border-bottom: 1px solid rgba(255,255,255,.05);
-  padding: 100px 6vw;
-}
+          <div class="card-image"></div>
 
-.about-inner { max-width: 780px; }
-.about-inner h2 { margin-top: 0; }
+          <div class="card-content">
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 30px 6vw;
-  color: #625e57;
-  font-family: Cinzel, serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-}
+            <p class="game-number">I</p>
 
-@media (max-width: 900px) {
-  .project-grid { grid-template-columns: 1fr; }
-  .project-card { min-height: auto; }
-  .card-content p:not(.game-number) { min-height: 0; }
-}
+            <h3>Gothic I</h3>
 
-@media (max-width: 600px) {
-  .nav-links { display: none; }
-  .hero-content { padding-top: 18vh; }
-  .projects-section, .about-section { padding-left: 5vw; padding-right: 5vw; }
-  footer { flex-direction: column; gap: 12px; }
-}
+            <h4>Anniversary Edition</h4>
 
-.mystery-title {
-  font-size: 88px !important;
-  line-height: .8;
-  margin: 12px 0 14px !important;
-  color: var(--accent-light);
-  text-shadow: 0 4px 25px #000;
-}
+            <p>
+              Willkommen in der Kolonie, Baby!
+            </p>
+
+            <a class="button" href="gothic1.html">
+              MEHR ERFAHREN
+              <span>→</span>
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- GOTHIC II -->
+        <article class="project-card gothic2">
+
+          <div class="card-image"></div>
+
+          <div class="card-content">
+
+            <p class="game-number">II</p>
+
+            <h3>Gothic II</h3>
+
+            <h4>Anniversary Edition</h4>
+
+            <p>
+              Ein einzelner Gefangener hatte das Schicksal von Hunderten geändert ...
+            </p>
+
+            <a class="button" href="gothic2.html">
+              MEHR ERFAHREN
+              <span>→</span>
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- GEHEIMES PROJEKT -->
+        <article class="project-card secret">
+
+          <div class="card-image"></div>
+
+          <div class="card-content">
+
+            <p class="game-number">?</p>
+
+            <h3 class="mystery-title">?</h3>
+
+            <h4>
+              <span class="question">
+                Was haben wir denn da?
+              </span>
+            </h4>
+
+            <p></p>
+
+            <a class="button" href="secret.html">
+              MEHR ERFAHREN
+              <span>→</span>
+            </a>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ÜBER DAS PROJEKT -->
+    <section class="about-section" id="about">
+
+      <div class="about-inner">
+
+        <p class="eyebrow">
+          ÜBER DIE ANNIVERSARY EDITION
+        </p>
+
+        <h2>Was ist das Ziel?</h2>
+
+        <p>
+          Die Anniversary Edition ist eine Reihe nichtkommerzieller Fanprojekte,
+          die die Gothic-Welt mit neuen Quests, Charakteren, Geschichten und Ideen
+          erweitern möchte – ohne den ursprünglichen Charakter der Spiele aus den
+          Augen zu verlieren.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div>
+      ANNIVERSARY EDITION
+    </div>
+
+    <div>
+      Nichtkommerzielle Fanprojekte
+    </div>
+
+  </footer>
+
+</body>
+</html>
