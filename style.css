@@ -42,7 +42,7 @@ body {
   background: var(--bg);
   color: var(--text);
 
-  font-family: "Anniversary", Georgia, serif;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 a {
@@ -260,7 +260,18 @@ select:focus-visible {
 h1,
 h2,
 h3,
-h4 {
+h4,
+.nav,
+.eyebrow,
+.scroll-button,
+.button,
+.card-description,
+.mystery-title,
+.question,
+.lang-selector select,
+.team-member p,
+.download-msg,
+footer {
   font-family: "Anniversary", Georgia, serif;
 }
 
