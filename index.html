@@ -21,7 +21,8 @@
   <link rel="preload" href="fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="style.css">
-  <script src="i18n.js" defer></script>
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="site.js" defer></script>
 </head>
 
 <body>
@@ -35,7 +36,7 @@
 
     <nav class="nav" data-i18n-aria="aria_nav" aria-label="Hauptnavigation">
 
-      <a class="brand" href="#home" data-i18n-aria="aria_home" aria-label="Zur Startseite"></a>
+      <a class="brand" href="#home" data-i18n-aria="aria_home" aria-label="Zur Startseite">GOTHIC <span>REVAMPED</span></a>
 
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-i18n-aria="aria_menu" aria-label="Menü">
         <span></span>
@@ -62,6 +63,8 @@
 
     <div class="hero-content">
 
+      <p class="eyebrow" data-i18n="hero_kicker">FAN-MODIFIKATIONEN</p>
+
       <a class="hero-logo" href="https://crygreg.github.io/">
         <img src="images/gothic-logo.png" alt="GOTHIC Logo" width="730" height="256" fetchpriority="high">
       </a>
@@ -69,6 +72,10 @@
       <h1>
         <span>REVAMPED</span>
       </h1>
+
+      <p class="intro" data-i18n="hero_intro">
+        Neue Quests, neue Charaktere, neue Geschichten – dieselbe Welt.
+      </p>
 
       <a class="scroll-button" href="#projects">
         <span data-i18n="view_projects">PROJEKTE ANSEHEN</span>
@@ -85,7 +92,7 @@
     <!-- PROJEKTE -->
     <section class="projects-section" id="projects">
 
-      <div class="section-heading">
+      <div class="section-heading" data-reveal>
 
         <p class="eyebrow" data-i18n="eyebrow_projects">UNSERE</p>
 
@@ -102,7 +109,7 @@
 
 
         <!-- GOTHIC I -->
-        <article class="project-card gothic1">
+        <article class="project-card gothic1" data-reveal>
 
           <div class="card-image"></div>
 
@@ -127,7 +134,7 @@
 
 
         <!-- GOTHIC II -->
-        <article class="project-card gothic2">
+        <article class="project-card gothic2" data-reveal>
 
           <div class="card-image"></div>
 
@@ -152,7 +159,7 @@
 
 
         <!-- GEHEIMES PROJEKT -->
-        <article class="project-card secret">
+        <article class="project-card secret" data-reveal>
 
           <div class="card-image"></div>
 
@@ -188,7 +195,7 @@
     <!-- ÜBER DAS PROJEKT -->
     <section class="about-section" id="about">
 
-      <div class="about-inner">
+      <div class="about-inner" data-reveal>
 
         <p class="eyebrow" data-i18n="eyebrow_about">
           ÜBER DIE ANNIVERSARY EDITION
@@ -211,7 +218,7 @@
     <!-- TEAM -->
     <section class="team-section" id="team">
 
-      <div class="section-heading">
+      <div class="section-heading" data-reveal>
 
         <p class="eyebrow" data-i18n="eyebrow_team">UNSER</p>
 
@@ -223,7 +230,7 @@
 
       </div>
 
-      <div class="team-grid">
+      <div class="team-grid" data-reveal>
 
         <div class="team-member">
           <div class="member-avatar"></div>

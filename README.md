@@ -9,7 +9,8 @@ gehostet über GitHub Pages unter <https://crygreg.github.io/>.
 - `gothic1.html`, `gothic2.html`, `secret.html` – Projekt-Detailseiten
 - `404.html` – Fehlerseite für ungültige URLs
 - `style.css` – gemeinsames Stylesheet für alle Seiten
-- `i18n.js` – Übersetzungen (DE/EN/PL/RU), Sprachwahl und mobile Navigation
+- `site.js` – Übersetzungen (DE/EN/PL/RU), Sprachwahl, mobile Navigation,
+  Scroll-Reveal-Animationen und Download-Hinweise
 - `images/` – Logos, Hintergrundbilder, Favicon
 - `fonts/` – Schriftarten (Cormorant für Überschriften, Lora für Fließtext,
   jeweils mit Latin-, Latin-Ext- und Cyrillic-Subsets für DE/EN/PL/RU)
@@ -17,10 +18,10 @@ gehostet über GitHub Pages unter <https://crygreg.github.io/>.
 
 ## Sprachen
 
-Übersetzte Texte werden in `i18n.js` gepflegt und im HTML über
+Übersetzte Texte werden in `site.js` gepflegt und im HTML über
 `data-i18n="schlüssel"` (Text) bzw. `data-i18n-aria="schlüssel"` (Aria-Label)
 gebunden. Die gewählte Sprache wird im Browser gespeichert und auf allen Seiten
-übernommen. Neue Texte: Schlüssel in allen vier Sprachen in `i18n.js` anlegen
+übernommen. Neue Texte: Schlüssel in allen vier Sprachen in `site.js` anlegen
 und das Attribut im HTML setzen.
 
 ## Deployment

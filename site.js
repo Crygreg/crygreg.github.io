@@ -18,6 +18,8 @@
       nav_team: 'Team',
       nav_back: '← Projekte',
       view_projects: 'PROJEKTE ANSEHEN',
+      hero_kicker: 'FAN-MODIFIKATIONEN',
+      hero_intro: 'Neue Quests, neue Charaktere, neue Geschichten – dieselbe Welt.',
       eyebrow_projects: 'UNSERE',
       projects_title: 'Mod-Projekte',
       projects_intro: 'Um mehr zu erfahren, wähle das gewünschte Projekt aus.',
@@ -73,6 +75,8 @@
       nav_team: 'Team',
       nav_back: '← Projects',
       view_projects: 'VIEW PROJECTS',
+      hero_kicker: 'FAN MODIFICATIONS',
+      hero_intro: 'New quests, new characters, new stories – the same world.',
       eyebrow_projects: 'OUR',
       projects_title: 'Mod Projects',
       projects_intro: 'To learn more, select the desired project.',
@@ -128,6 +132,8 @@
       nav_team: 'Zespół',
       nav_back: '← Projekty',
       view_projects: 'ZOBACZ PROJEKTY',
+      hero_kicker: 'MODYFIKACJE FANOWSKIE',
+      hero_intro: 'Nowe zadania, nowe postacie, nowe historie – ten sam świat.',
       eyebrow_projects: 'NASZE',
       projects_title: 'Projekty modów',
       projects_intro: 'Aby dowiedzieć się więcej, wybierz żądany projekt.',
@@ -183,6 +189,8 @@
       nav_team: 'Команда',
       nav_back: '← Проекты',
       view_projects: 'СМОТРЕТЬ ПРОЕКТЫ',
+      hero_kicker: 'ФАНАТСКИЕ МОДИФИКАЦИИ',
+      hero_intro: 'Новые квесты, новые персонажи, новые истории — тот же мир.',
       eyebrow_projects: 'НАШИ',
       projects_title: 'Мод-проекты',
       projects_intro: 'Чтобы узнать больше, выберите желаемый проект.',
@@ -270,6 +278,23 @@
     });
   }
 
+  function initReveal() {
+    var els = document.querySelectorAll('[data-reveal], .detail-content, .detail-body > *');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  }
+
   function initDownloads() {
     document.querySelectorAll('.button.download[aria-disabled="true"]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
@@ -290,5 +315,6 @@
     applyLanguage(getInitialLang());
     initNav();
     initDownloads();
+    initReveal();
   });
 })();
