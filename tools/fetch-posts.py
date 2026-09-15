@@ -43,12 +43,11 @@ DISCORD_EMOJI = re.compile(r"<a?:[A-Za-z0-9_]+:\d+>")   # <:name:id>
 TEXT_EMOJI = re.compile(r":[A-Za-z0-9_]+:")             # :milten: etc.
 
 
-def get(url, token):
-    req = urllib.request.Request(url, headers={
-        "User-Agent": "ae-post-sync",
-        "Authorization": "Bot " + token,
-    })
-    with urllib.request.urlopen(req, timeout=30) as r:
+def get(url, token=None):
+    req = urllib.request.Request(url, headers={"User-Agent": "ae-post-sync"})
+    if token:
+        req.add_header("Authorization", "Bot " + token)
+    with urllib.request.urlopen(req, timeout=60) as r:
         return r.read()
 
 
