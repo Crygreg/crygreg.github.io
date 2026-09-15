@@ -132,6 +132,8 @@ def main():
 
     msgs = fetch_messages(args.channel, token)
     print("{} messages fetched".format(len(msgs)))
+    if msgs and os.environ.get("DEBUG_DUMP"):
+        print(json.dumps(msgs[0], ensure_ascii=False, indent=1)[:4000])
 
     drafts = []
     for m in msgs:
