@@ -1055,3 +1055,14 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
 }
+
+@keyframes sink {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
