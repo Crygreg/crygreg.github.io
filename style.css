@@ -1292,6 +1292,12 @@ details.media-entry {
   margin-top: 0;
 }
 
+/* Kein brauchbares YT-Thumbnail: dunkle Karte + Play-Button statt
+   YouTube-Platzhalter oder Broken-Image-Icon. */
+.media-video.no-thumb img {
+  visibility: hidden;
+}
+
 /* Shorts sind hochkant - schmales Hochformat statt Breitbild. */
 .media-video-short {
   max-width: 340px;

@@ -553,8 +553,11 @@
         : ['maxresdefault.jpg', 'sddefault.jpg', 'hqdefault.jpg', 'mqdefault.jpg'];
       var i = tiers.indexOf(im.getAttribute('src').split('/').pop());
       if (i < 0) i = 0;
-      function next() { if (i + 1 < tiers.length) { i++; im.src = base + tiers[i]; } }
-      function check() { if (im.naturalWidth && im.naturalWidth <= 120) next(); }
+      function next() {
+        if (i + 1 < tiers.length) { i++; im.src = base + tiers[i]; }
+        else { im.closest('.media-video').classList.add('no-thumb'); }
+      }
+      function check() { if (im.naturalWidth <= 120) next(); }
       im.addEventListener('error', next);
       im.addEventListener('load', check);
       if (im.complete) check();
