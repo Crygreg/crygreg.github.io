@@ -87,6 +87,26 @@ select:focus-visible {
 }
 
 
+.noscript-note {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+
+  margin: 0;
+  padding: 10px 6vw;
+
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-align: center;
+
+  color: var(--muted);
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+}
+
+
 /* =========================================================
    HERO / STARTSEITE
    ========================================================= */
