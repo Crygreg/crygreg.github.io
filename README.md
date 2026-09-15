@@ -34,13 +34,20 @@ verwendeter Schlüssel in einer Sprache fehlt oder die Dicts auseinanderlaufen.
 Einträge sind `<details class="media-entry media-post">`-Blöcke – neueste zuerst,
 standardmäßig eingeklappt. Header: Datum, Typ · Autor, Titel. Inhalt je nach Typ:
 
-- **Shorts/Videos:** `<div class="media-embed media-embed-short|-video"><iframe data-src="…">` –
-  `data-src` wird erst beim Aufklappen nach `src` kopiert, damit YouTube vorher
-  keine Daten bekommt (youtube-nocookie). Darunter optional ein Fallback-Link.
+- **Shorts/Videos:** `<a class="media-video">`-Karte mit lokalem Thumbnail
+  `images/yt/<video-id>.jpg` (vom CDN gezogen + committet – YouTube sieht damit
+  bis zum Klick gar nichts) plus `data-embed="…youtube-nocookie…"`. Klick öffnet
+  das Video in der Lightbox; ohne JS geht der Link direkt zu YouTube.
+  `.media-video-short` = Hochformat-Karte, `.media-videolist` = 3-spaltiges Grid
+  für mehrere Videos in einem Eintrag. Fällt ein lokaler Thumb aus, probiert
+  `site.js` automatisch die i.ytimg.com-Tiers durch.
 - **Dev-Post + Galerie:** Text über `data-i18n-html`, danach
   `.media-gallery` mit Links auf `images/G2AE/full/*.webp` und Thumbs aus
-  `images/G2AE/thumbs/*.webp`. Klick öffnet die Lightbox (Pfeiltasten, Esc,
-  ohne JS: neuer Tab).
+  `images/G2AE/thumbs|mid/*.webp`. Einzelbilder als `<a class="media-post-image">`.
+- **Lightbox:** alle Medien eines Eintrags (Bilder + Videos gemischt) bilden
+  eine Sequenz – Pfeile/←→/Wischen blättern, Zähler unten links, Rad/
+  Doppelklick/Pinch zoomen, Ziehen verschiebt, `data-cap`-Captions darunter,
+  Nachbarbilder werden vorgeladen. Ohne JS: neue Tabs.
 
 Original-PNGs in `images/G2AE/` bleiben im Repo als Archiv, werden aber beim
 Deploy ausgeschlossen. Neue Rohbilder in `images/G2AE/` ablegen und
@@ -49,7 +56,7 @@ thumbs/mid/full-Varianten (800/1600 px bzw. native Quellauflösung bis 3840 px
 WebP, q90); danach die `<a>`-Zeilen in der `.media-gallery` ergänzen.
 
 Hinweis: Inline-Bilder nutzen `srcset` mit allen drei Varianten und einem
-`sizes`-Attribut – der Browser lädt selbst die passende Größe (Galerie ~577 px,
+`sizes`-Attribut – der Browser lädt selbst die passende Größe (Galerie ~375 px,
 Post-Bilder ~1140 px, Retina/Zoom bekommt `full/`). Der `<a href>` bzw. die
 Lightbox zeigt immer `full/` in Originalauflösung.
 
