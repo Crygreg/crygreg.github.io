@@ -85,13 +85,15 @@
 
       <p class="eyebrow" data-i18n="hero_kicker">FAN-MODIFIKATIONEN</p>
 
-      <a class="hero-logo" href="index.html">
-        <img src="images/gothic-logo.webp" alt="GOTHIC Logo" width="730" height="256" fetchpriority="high">
-      </a>
+      <div class="hero-mark">
+        <a class="hero-logo" href="index.html">
+          <img src="images/gothic-logo.webp" alt="GOTHIC Logo" width="730" height="256" fetchpriority="high">
+        </a>
 
-      <h1>
-        <span>REVAMPED</span>
-      </h1>
+        <h1>
+          <span>REVAMPED</span>
+        </h1>
+      </div>
 
       <p class="intro" data-i18n="hero_intro">
         Neue Quests, neue Charaktere, neue Orte – eine vertraute Welt, die weiterwächst.
@@ -349,5 +351,13 @@
   <noscript>
     <p class="noscript-note">Ohne JavaScript ist nur die deutsche Version verfuegbar.</p>
   </noscript>
+
+  <!-- Verwitterte Kanten fuer das REVAMPED-Schriftzeichen (CSS filter: url(#gothic-rough)) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="gothic-rough">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/>
+    </filter>
+  </svg>
 </body>
 </html>

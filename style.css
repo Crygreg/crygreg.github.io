@@ -364,11 +364,33 @@ h1 span {
   color: var(--wordmark);
 }
 
-/* REVAMPED unter dem Logo: kleineres Schriftzeichen mit
-   weiterer Laufweite statt Display-Groesse. */
+/* REVAMPED-Wortmarke unter dem Logo: auf die Logo-Breite
+   zentriert, Metallverlauf + verwitterte Kanten wie das
+   GOTHIC-Logo selbst. */
+.hero-mark {
+  display: inline-block;
+  text-align: center;
+}
+
 .hero-content h1 {
-  font-size: clamp(24px, 4vw, 48px);
-  letter-spacing: 4px;
+  font-size: clamp(26px, 4.5vw, 52px);
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-content h1 span {
+    background: linear-gradient(180deg,
+      #efeada 0%, #cfccc0 14%, #78766d 30%,
+      #24261f 46%, #141511 54%,
+      #6d6c64 68%, #b3afa0 86%, #e3dfcd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: none;
+    filter: url(#gothic-rough) drop-shadow(0 4px 10px rgba(0, 0, 0, .8));
+  }
 }
 
 .intro {
