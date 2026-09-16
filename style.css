@@ -388,9 +388,9 @@ h1 span {
        gruen-schwarze Vertiefung, heller Grat unten –
        angelehnt an das GOTHIC-Logo */
     background: linear-gradient(180deg,
-      #f4efe0 0%, #d9d5c6 9%, #7d7b6e 22%,
+      #faf8ee 0%, #e2ddcb 9%, #848176 22%,
       #2b2e26 36%, #0c0e0a 50%, #181a14 60%,
-      #54564c 74%, #8f8c7a 88%, #e6e1cb 100%);
+      #54564c 74%, #8f8c7a 88%, #e9e4d0 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
