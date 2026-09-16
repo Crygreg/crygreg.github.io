@@ -185,6 +185,7 @@ select:focus-visible {
   align-items: center;
 
   padding: 16px 6vw;
+  padding-top: max(16px, env(safe-area-inset-top, 0px));
 
   background: rgba(7, 7, 7, .55);
 
@@ -750,7 +751,7 @@ h1 span {
 .team-grid {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
   gap: 30px;
 }
@@ -917,6 +918,10 @@ footer {
     min-height: 0;
   }
 
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }
 
 
@@ -964,6 +969,10 @@ footer {
   .about-section {
     padding-left: 5vw;
     padding-right: 5vw;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
   }
 
   .media-gallery,
