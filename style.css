@@ -396,7 +396,7 @@ h1 span {
     -webkit-text-fill-color: transparent;
     color: transparent;
     text-shadow: none;
-    filter: url(#gothic-rough) drop-shadow(0 5px 12px rgba(0, 0, 0, .85));
+    filter: url(#gothic-metal) drop-shadow(0 5px 12px rgba(0, 0, 0, .85));
   }
 }
 

@@ -353,11 +353,32 @@
     <p class="noscript-note">Ohne JavaScript ist nur die deutsche Version verfuegbar.</p>
   </noscript>
 
-  <!-- Verwitterte Kanten fuer das REVAMPED-Schriftzeichen (CSS filter: url(#gothic-rough)) -->
+  <!-- Metall-Look fuer das REVAMPED-Schriftzeichen: Korn-Textur
+       in den Glyphen, Lichtkante (Bevel), verwitterte Kontur -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <filter id="gothic-rough">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/>
+    <filter id="gothic-metal" x="-15%" y="-25%" width="130%" height="160%"
+            color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3"
+                    seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" result="texA"
+        values="0 0 0 0 .62
+                0 0 0 0 .62
+                0 0 0 0 .56
+                .8 .8 .8 0 0"/>
+      <feComposite in="texA" in2="SourceAlpha" operator="in" result="tex"/>
+      <feBlend in="SourceGraphic" in2="tex" mode="multiply" result="body"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.3" result="b"/>
+      <feSpecularLighting in="b" surfaceScale="2.8" specularConstant="1"
+                          specularExponent="22" lighting-color="#efe8d2"
+                          result="spec">
+        <feDistantLight azimuth="235" elevation="58"/>
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"/>
+      <feComposite in="body" in2="specIn" operator="arithmetic"
+                   k2="1" k3=".65" result="lit"/>
+      <feTurbulence type="turbulence" baseFrequency="0.9" numOctaves="2"
+                    seed="7" result="edge"/>
+      <feDisplacementMap in="lit" in2="edge" scale="2.8"/>
     </filter>
   </svg>
 </body>
