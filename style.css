@@ -395,6 +395,9 @@ h1 span {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+    /* helle Konturlinie um jede Glyphe – wie der grelle
+       Rand um die Logo-Buchstaben */
+    -webkit-text-stroke: .6px rgba(238, 242, 240, .55);
     text-shadow: none;
     filter: url(#gothic-metal) drop-shadow(0 5px 12px rgba(0, 0, 0, .85));
   }
