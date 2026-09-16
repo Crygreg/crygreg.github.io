@@ -389,15 +389,15 @@ h1 span {
        angelehnt an das GOTHIC-Logo */
     background: linear-gradient(180deg,
       #eef1f2 0%, #d2d6d4 9%, #8b8e87 22%,
-      #30362d 36%, #0d0f0c 50%, #1a1d18 60%,
-      #5c605a 74%, #9b9d93 88%, #e2e3d7 100%);
+      #272c25 36%, #080a07 50%, #141712 60%,
+      #4d5249 74%, #92958a 88%, #e2e3d7 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    /* helle Konturlinie um jede Glyphe – wie der grelle
-       Rand um die Logo-Buchstaben */
-    -webkit-text-stroke: .6px rgba(238, 242, 240, .55);
+    /* hauchduenne Kontur fuer Schaerfe – das Logo hat keinen
+       gleichmaessigen Umriss, also nur minimal ansetzen */
+    -webkit-text-stroke: .4px rgba(240, 244, 242, .28);
     text-shadow: none;
     filter: url(#gothic-metal) drop-shadow(0 5px 12px rgba(0, 0, 0, .85));
   }
