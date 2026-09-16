@@ -1,2 +1,5 @@
 tools/posts-out/*
 !tools/posts-out/state.json
+
+__pycache__/
+*.pyc
