@@ -373,23 +373,27 @@ h1 span {
 }
 
 .hero-content h1 {
-  font-size: clamp(26px, 4.5vw, 52px);
-  font-weight: 600;
-  letter-spacing: 3px;
+  font-family: "Cinzel", "Cormorant", Georgia, serif;
+  font-size: clamp(28px, 4.5vw, 54px);
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .hero-content h1 span {
+    /* vertikaler Metallverlauf: helle Oberkante, dunkle
+       gruen-schwarze Vertiefung, heller Grat unten –
+       angelehnt an das GOTHIC-Logo */
     background: linear-gradient(180deg,
-      #efeada 0%, #cfccc0 14%, #78766d 30%,
-      #24261f 46%, #141511 54%,
-      #6d6c64 68%, #b3afa0 86%, #e3dfcd 100%);
+      #f2eedd 0%, #d9d5c6 10%, #8f8d80 24%,
+      #3a3d33 38%, #12140f 50%, #1c1f18 58%,
+      #585a50 72%, #96937f 88%, #e6e1cb 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
     text-shadow: none;
-    filter: url(#gothic-rough) drop-shadow(0 4px 10px rgba(0, 0, 0, .8));
+    filter: url(#gothic-rough) drop-shadow(0 5px 12px rgba(0, 0, 0, .85));
   }
 }
 
