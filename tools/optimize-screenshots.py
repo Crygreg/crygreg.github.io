@@ -13,7 +13,7 @@ werden erzeugt). Die Roh-Dateien selbst bleiben als Archiv im Repo,
 werden aber nicht deployed (siehe deploy-pages.yml).
 
 Danach die neuen <a>/<img>-Zeilen in der .media-gallery in
-gothic2.html eintragen (siehe README, Abschnitt Mediensammlung).
+gothic2.html eintragen (siehe README, Abschnitt Neuigkeiten).
 """
 import sys
 from pathlib import Path

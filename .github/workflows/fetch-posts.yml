@@ -36,6 +36,8 @@ jobs:
         with:
           python-version: '3.x'
 
+      - run: python -m pip install Pillow
+
       - name: Fetch posts
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -48,6 +50,23 @@ jobs:
           [ "${{ inputs.mode }}" = "list" ] && ARGS="--list-channels"
           python tools/fetch-posts.py $ARGS
 
+      - name: Generate WebP variants
+        if: inputs.mode != 'list'
+        run: python tools/optimize-screenshots.py
+
+      - name: Fetch YouTube thumbnails
+        if: inputs.mode != 'list'
+        run: |
+          IDS=$(python -c "import re,os
+          ids=set()
+          p='tools/posts-out/drafts.txt'
+          if os.path.exists(p):
+              for l in open(p,encoding='utf-8'):
+                  if l.startswith('youtube-ids:'):
+                      ids.update(i.strip() for i in l.split(':',1)[1].split(',') if i.strip())
+          print(' '.join(sorted(ids)))")
+          [ -n "$IDS" ] && python tools/fetch-yt-thumbs.py $IDS || true
+
       - uses: actions/upload-artifact@v4
         if: inputs.mode != 'list'
         with:
@@ -57,13 +76,13 @@ jobs:
 
       - name: Commit new images
         run: |
-          if [ -z "$(git status --porcelain images/G2AE tools/posts-out/state.json)" ]; then
+          if [ -z "$(git status --porcelain images tools/posts-out/state.json)" ]; then
             echo "no new images"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add images/G2AE tools/posts-out/state.json
+          git add images tools/posts-out/state.json
           git commit -m "chore: fetch discord post attachments"
           git pull --rebase origin main
           git push

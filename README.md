@@ -8,7 +8,7 @@ gehostet über GitHub Pages unter <https://crygreg.github.io/>.
 - `index.html` – Startseite (Projekte, Über das Projekt, Team, Mitmachen,
   Unterstützen; Discord im Hero und Footer)
 - `gothic1.html`, `gothic2.html`, `secret.html` – Projekt-Detailseiten;
-  gothic2 enthält die Mediensammlung (Dev-Updates, YouTube-Shorts, Screenshots)
+  gothic2 enthält die Neuigkeiten (Dev-Updates, YouTube-Shorts, Screenshots)
 - `404.html` – Fehlerseite für ungültige URLs (`noindex`)
 - `style.css` – gemeinsames Stylesheet für alle Seiten
 - `site.js` – Übersetzungen (DE/EN/PL/RU), Sprachwahl, mobile Navigation,
@@ -29,7 +29,7 @@ gebunden. Die gewählte Sprache wird im Browser gespeichert und auf allen Seiten
 und das Attribut im HTML setzen. Der Deploy-Workflow bricht ab, wenn ein
 verwendeter Schlüssel in einer Sprache fehlt oder die Dicts auseinanderlaufen.
 
-## Mediensammlung (gothic2.html)
+## Neuigkeiten (gothic2.html)
 
 Einträge sind `<details class="media-entry media-post">`-Blöcke – neueste zuerst,
 standardmäßig eingeklappt. Header: Datum, Typ · Autor, Titel. Inhalt je nach Typ:
@@ -55,12 +55,27 @@ Original-PNGs in `images/G2AE/` bleiben im Repo als Archiv, werden aber beim
 Deploy ausgeschlossen. Neue Rohbilder in `images/G2AE/` ablegen und
 `python tools/optimize-screenshots.py` ausführen – das Skript erzeugt fehlende
 thumbs/mid/full-Varianten (800/1600 px bzw. native Quellauflösung bis 3840 px
-WebP, q90); danach die `<a>`-Zeilen in der `.media-gallery` ergänzen.
+WebP, q95); danach die `<a>`-Zeilen in der `.media-gallery` ergänzen.
 
 Hinweis: Inline-Bilder nutzen `srcset` mit allen drei Varianten und einem
 `sizes`-Attribut – der Browser lädt selbst die passende Größe (Galerie ~375 px,
 Post-Bilder ~1140 px, Retina/Zoom bekommt `full/`). Der `<a href>` bzw. die
 Lightbox zeigt immer `full/` in Originalauflösung.
+
+### Discord-Posts abrufen (Automation)
+
+Der Workflow `.github/workflows/fetch-posts.yml` (manuell, „Run workflow")
+liest den Channel `anniversary-showroom` über `tools/fetch-posts.py` und lädt
+Bild-Attachments als PNG-Master nach `images/G2AE/<DD-MM-YYYY>-N.png`,
+erzeugt die WebP-Varianten und YouTube-Thumbs gleich mit und schreibt
+Rohtexte + Links nach `tools/posts-out/drafts.txt` (als Artifact
+`post-drafts` im Run). `tools/posts-out/state.json` merkt bereits gesehene
+Message-IDs und wird mit-committet – Läufe sind inkrementell. Inputs:
+`since` (Datumsgrenze), `all` (State ignorieren), `mode=list` (Channels
+auflisten). Titel, Übersetzungen und die Verdrahtung in `gothic2.html`/
+`site.js` bleiben manuell – die Drafts sind nur Rohmaterial. Benötigt
+`DISCORD_BOT_TOKEN`; der Bot braucht nur „View Channel" + „Read Message
+History" auf dem Server.
 
 ## Deployment
 
