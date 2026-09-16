@@ -1,4 +1,4 @@
-"""Erzeugt aus Roh-Screenshots die deployten JPG-Varianten.
+"""Erzeugt aus Roh-Screenshots die deployten WebP-Varianten.
 
 Legt PNGs (oder JPGs) in images/G2AE/ ab und fuehrt das Skript aus:
 

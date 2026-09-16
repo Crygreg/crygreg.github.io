@@ -42,7 +42,7 @@ YT_RE = re.compile(
 IMG_EXT = (".png", ".jpg", ".jpeg", ".webp", ".gif")
 DISCORD_EMOJI = re.compile(r"<a?:[A-Za-z0-9_]+:\d+>")   # <:name:id>
 TEXT_EMOJI = re.compile(r":[A-Za-z0-9_]+:")             # :milten: etc.
-MENTION = re.compile(r"<@!?\d+>")
+MENTION = re.compile(r"<@[!&]?\d+>")                    # <@id>, <@!id>, <@&id>
 
 # Bekannte User-IDs -> Anzeigename (synchron mit fetch-avatars.py)
 USER_NAMES = {
@@ -85,7 +85,7 @@ def fetch_messages(channel_id, token, after_id=None, limit=100):
 def clean_text(content):
     """Discord-Markup entfernen: Custom-Emoji, :shortcode:, Mentions."""
     def _mention(mo):
-        uid = mo.group(0).strip("<@!>")
+        uid = mo.group(0).strip("<@!&>")
         return "@" + USER_NAMES.get(uid, "user-" + uid)
 
     text = MENTION.sub(_mention, content)
@@ -99,20 +99,17 @@ def clean_text(content):
     return "".join("<p>{}</p>".format(p) for p in paras)
 
 
-def save_attachment(att, date_str, idx):
+def save_attachment(att, date_str, idx, total):
     """Attachment als PNG-Master speichern. Gibt Basisname zurueck."""
     url = att["url"]
     ctype = att.get("content_type", "")
     if "image" not in ctype and not url.lower().split("?")[0].endswith(IMG_EXT):
         return None
-    name = "{}-{}.png".format(date_str, idx)
-    path = os.path.join(IMG_DIR, name)
-    if os.path.exists(path):
-        print("  {} exists, skipping download".format(name))
-        return name
     raw = get(url, None)
-    # identischer Inhalt unter anderem Namen (z. B. <date>.png) schon da?
     digest = hashlib.md5(raw).hexdigest()
+
+    # Inhalts-Dedupe ueber alle Masters desselben Tages
+    taken = set()
     for fn in sorted(os.listdir(IMG_DIR)):
         fp = os.path.join(IMG_DIR, fn)
         if not fn.startswith(date_str) or not fn.endswith(".png") \
@@ -120,8 +117,22 @@ def save_attachment(att, date_str, idx):
             continue
         with open(fp, "rb") as f:
             if hashlib.md5(f.read()).hexdigest() == digest:
-                print("  {} identical to {}, skipping".format(name, fn))
+                print("  attachment {} identical to {}, skipping".format(
+                    idx, fn))
                 return fn
+        taken.add(fn)
+
+    # Konvention: Einzelbild-Posts -> <date>.png, sonst <date>-<n>.png;
+    # bei Kollision (zweiter Post am selben Tag) Index hochzaehlen.
+    if total == 1 and "{}.png".format(date_str) not in taken:
+        name = "{}.png".format(date_str)
+    else:
+        n = idx
+        while "{}-{}.png".format(date_str, n) in taken:
+            n += 1
+        name = "{}-{}.png".format(date_str, n)
+
+    path = os.path.join(IMG_DIR, name)
     with open(path, "wb") as f:
         f.write(raw)
     print("  saved {} ({} KB)".format(name, len(raw) // 1024))
@@ -172,7 +183,10 @@ def main():
                 c["id"], c.get("type"), c.get("name")))
         return
 
-    msgs = fetch_messages(args.channel, token)
+    after = None
+    if seen and not args.all and not args.author and not args.since:
+        after = max(seen, key=int)  # Snowflake der neuesten bekannten Message
+    msgs = fetch_messages(args.channel, token, after_id=after)
     print("{} messages fetched".format(len(msgs)))
     if msgs and os.environ.get("DEBUG_DUMP"):
         print(json.dumps(msgs[0], ensure_ascii=False, indent=1)[:4000])
@@ -184,26 +198,38 @@ def main():
         if args.author and m["author"]["id"] != args.author:
             continue
         if m.get("type") not in (0, 19, 21):   # nur normale/reply/channel-pin
+            seen.add(m["id"])                # Systempost – dauerhaft uninteressant
             continue
         ts = datetime.fromisoformat(m["timestamp"].replace("Z", "+00:00"))
         if since_ts and ts.timestamp() < since_ts:
             continue
         content = (m.get("content") or "").strip()
         atts = m.get("attachments") or []
+        embeds = m.get("embeds") or []
+        # weitergeleitete Posts: Inhalt/Anhaenge stecken im Snapshot
+        for snap in m.get("message_snapshots") or []:
+            sm = snap.get("message") or {}
+            if not content:
+                content = (sm.get("content") or "").strip()
+            if not atts:
+                atts = sm.get("attachments") or []
+            if not embeds:
+                embeds = sm.get("embeds") or []
         print("  [{}] type={} author={} content={}chars atts={} embeds={}".format(
             m["id"], m.get("type"), m["author"]["username"],
-            len(content), len(atts), len(m.get("embeds") or [])))
+            len(content), len(atts), len(embeds)))
         if os.environ.get("DEBUG_DUMP"):
             print("    >>> " + content.replace("\n", " | "))
         yt = [m2.group(1) for m2 in YT_RE.finditer(content)]
         # interessant = Text, Bilder oder Links; leere System-Posts raus
         if not content and not atts:
+            seen.add(m["id"])   # leer/Systempost – dauerhaft uninteressant
             continue
 
         date_str = ts.strftime("%d-%m-%Y")
         saved = []
         for i, att in enumerate(atts, 1):
-            name = save_attachment(att, date_str, i)
+            name = save_attachment(att, date_str, i, len(atts))
             if name:
                 saved.append(name)
 
@@ -224,6 +250,10 @@ def main():
             "youtube": yt,
             "links": other_links,
         })
+
+    state["seen"] = sorted(seen | {d["id"] for d in drafts}, key=int)
+    with open(STATE, "w", encoding="utf-8") as f:
+        json.dump(state, f, indent=2)
 
     if not drafts:
         print("nothing new")
@@ -247,10 +277,6 @@ def main():
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n\n".join(report))
     print("{} drafts -> {}".format(len(drafts), out_path))
-
-    state["seen"] = sorted(seen | {d["id"] for d in drafts})
-    with open(STATE, "w", encoding="utf-8") as f:
-        json.dump(state, f, indent=2)
 
 
 if __name__ == "__main__":
