@@ -19,9 +19,9 @@
 
   --accent: #b87532;
   --accent-light: #d99a55;
-  /* Entsaettigtes Ziegelrot fuer das REVAMPED-Schriftzeichen –
-     waermer/erdiger als das helle Amber, passt zum Logo. */
-  --brand-red: #c2664e;
+  /* Gediegenes Silber fuer das REVAMPED-Schriftzeichen –
+     neutraler als Amber, passt zum Metall-Look des Logos. */
+  --wordmark: #c0bdb6;
 
   --line: rgba(205, 160, 102, .25);
 }
@@ -204,7 +204,7 @@ select:focus-visible {
 }
 
 .brand span {
-  color: var(--brand-red);
+  color: var(--wordmark);
 }
 
 .nav-links {
@@ -305,7 +305,7 @@ select:focus-visible {
 }
 
 .hero-logo {
-  margin-bottom: 20px;
+  margin-bottom: 6px;
   display: inline-block;
 }
 
@@ -361,7 +361,14 @@ h1 {
 }
 
 h1 span {
-  color: var(--brand-red);
+  color: var(--wordmark);
+}
+
+/* REVAMPED unter dem Logo: kleineres Schriftzeichen mit
+   weiterer Laufweite statt Display-Groesse. */
+.hero-content h1 {
+  font-size: clamp(24px, 4vw, 48px);
+  letter-spacing: 4px;
 }
 
 .intro {
