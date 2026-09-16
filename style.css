@@ -44,6 +44,12 @@ a {
   text-decoration: none;
 }
 
+/* Alt-Text bleibt fuer Screenreader, blitzt aber beim Laden
+   nicht sichtbar auf. */
+img {
+  color: transparent;
+}
+
 
 /* =========================================================
    ZUGÄNGLICHKEIT
