@@ -19,6 +19,9 @@
 
   --accent: #b87532;
   --accent-light: #d99a55;
+  /* Entsaettigtes Ziegelrot fuer das REVAMPED-Schriftzeichen –
+     waermer/erdiger als das helle Amber, passt zum Logo. */
+  --brand-red: #c2664e;
 
   --line: rgba(205, 160, 102, .25);
 }
@@ -201,7 +204,7 @@ select:focus-visible {
 }
 
 .brand span {
-  color: var(--accent-light);
+  color: var(--brand-red);
 }
 
 .nav-links {
@@ -358,7 +361,7 @@ h1 {
 }
 
 h1 span {
-  color: var(--accent-light);
+  color: var(--brand-red);
 }
 
 .intro {
