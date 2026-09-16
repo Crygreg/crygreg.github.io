@@ -18,6 +18,10 @@ on:
         type: choice
         options: [fetch, list]
         default: fetch
+      channel:
+        description: 'Channel-ID (leer = anniversary-showroom)'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -41,7 +45,7 @@ jobs:
       - name: Fetch posts
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          DISCORD_CHANNEL_ID: '1435017209994018947'
+          DISCORD_CHANNEL_ID: ${{ inputs.channel || '1435017209994018947' }}
           DEBUG_DUMP: '1'
         run: |
           ARGS=""
@@ -75,6 +79,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Commit new images
+        if: inputs.mode != 'list'
         run: |
           if [ -z "$(git status --porcelain images tools/posts-out/state.json)" ]; then
             echo "no new images"
