@@ -23,6 +23,7 @@ Aufruf:
   python tools/fetch-posts.py --channel <ID> --author 319521590180184085
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -104,15 +105,26 @@ def save_attachment(att, date_str, idx):
     ctype = att.get("content_type", "")
     if "image" not in ctype and not url.lower().split("?")[0].endswith(IMG_EXT):
         return None
-    raw = get(url, None)
     name = "{}-{}.png".format(date_str, idx)
     path = os.path.join(IMG_DIR, name)
     if os.path.exists(path):
         print("  {} exists, skipping download".format(name))
-    else:
-        with open(path, "wb") as f:
-            f.write(raw)
-        print("  saved {} ({} KB)".format(name, len(raw) // 1024))
+        return name
+    raw = get(url, None)
+    # identischer Inhalt unter anderem Namen (z. B. <date>.png) schon da?
+    digest = hashlib.md5(raw).hexdigest()
+    for fn in sorted(os.listdir(IMG_DIR)):
+        fp = os.path.join(IMG_DIR, fn)
+        if not fn.startswith(date_str) or not fn.endswith(".png") \
+                or not os.path.isfile(fp):
+            continue
+        with open(fp, "rb") as f:
+            if hashlib.md5(f.read()).hexdigest() == digest:
+                print("  {} identical to {}, skipping".format(name, fn))
+                return fn
+    with open(path, "wb") as f:
+        f.write(raw)
+    print("  saved {} ({} KB)".format(name, len(raw) // 1024))
     return name
 
 
