@@ -1397,6 +1397,87 @@ details.media-entry {
   text-transform: uppercase;
 }
 
+/* Credits-Block: eigener aufklappbarer Abschnitt mit den
+   MDB-Asset-Listen. */
+.credits .credits-body {
+  padding: 20px 24px 26px;
+
+  border-top: 1px solid var(--line);
+}
+
+.credits-title {
+  font-size: 20px;
+}
+
+.credits h3 {
+  margin: 22px 0 10px;
+
+  color: var(--accent-light);
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.credits h4 {
+  margin: 16px 0 8px;
+
+  color: #c9c2b4;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.credits-list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  columns: 2;
+  column-gap: 34px;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.credits-list li {
+  margin-bottom: 4px;
+
+  break-inside: avoid;
+}
+
+.credits-name {
+  color: var(--text);
+}
+
+.credits-list li > span:not(.credits-name),
+.credits-list li {
+  color: var(--muted);
+}
+
+.credits-thanks {
+  columns: 1;
+}
+
+.credits-thanks li {
+  margin-bottom: 10px;
+
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.credits a {
+  color: var(--accent-light);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 700px) {
+
+  .credits-list {
+    columns: 1;
+  }
+
+}
+
 .lightbox {
   position: fixed;
   inset: 0;
