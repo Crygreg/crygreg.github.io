@@ -374,9 +374,9 @@ h1 span {
 
 .hero-content h1 {
   font-family: "Cinzel", "Cormorant", Georgia, serif;
-  font-size: clamp(28px, 4.5vw, 54px);
+  font-size: clamp(38px, 6.5vw, 84px);
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
